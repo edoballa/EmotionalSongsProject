@@ -10,10 +10,10 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import object.User;
+import persistence.User_Factory;
 
 /**
- * @author Diana Cantaluppi
- *  Matricola 744457
+ * @author Diana Cantaluppi 744457,
  *  Sede di Como
  */
 
@@ -21,12 +21,13 @@ import object.User;
 public class LoginService {
     private static final Logger logger = Logger.getLogger(String.valueOf(LoginService.class));
     private static LoginService istance = null;
+    private User_Factory userFactory;
     
-    private LoginService(){
-        
+    private LoginService() throws Exception{
+        this.userFactory = User_Factory.getIstance();
     }
     
-    public static LoginService getIstance() {
+    public static LoginService getIstance() throws Exception {
     	if(istance == null)
     		return new LoginService();
     	else return istance;
@@ -45,33 +46,19 @@ public class LoginService {
         return new User(inpUser, inpPass);
     }
 
-    public boolean loginAttempt(User user, String file) {
-        Map<String, String> mapUser = new HashMap<>();
-        getLinesFromFile(file).forEach(l -> {
-            String[] strs = l.split(";");
-            mapUser.put(strs[0], strs[1]);
-        });
-        
-        if (mapUser.containsKey(user.getUsername())) {
-            if(mapUser.get(user.getUsername()).trim().equals(user.getPassword())) {
-                return true;
-            } 
-        }
-        
-        logger.info("user not found");
-        return false;
-        
-    }
-
-    private List<String> getLinesFromFile(String path) {
-        List<String> lines = new ArrayList<>();
-        try {
-            lines = Files.readAllLines(new File(path).toPath());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        logger.info(lines.size() + " lines were read");
-        return lines;
+    public boolean loginAttempt(User user) {
+    	if(user.getUsername().isEmpty() || user.getUsername() == null) {
+    		logger.info("invalid username");
+    		return false;
+    	}
+    	
+    	if(user.getPassword().isEmpty() || user.getPassword() == null) {
+    		logger.info("invalid password");
+    		return false;
+    	}
+    	
+    	logger.info("try login for user " + user.getUsername());
+        return userFactory.existUser(user);
     }
 
 }

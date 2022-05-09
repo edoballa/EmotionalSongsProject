@@ -5,7 +5,6 @@ import object.User;
 
 public class Authenticator {
 	private static final Logger logger = Logger.getLogger(String.valueOf(Authenticator.class));
-    private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
     
 	private LoginService loginService;
 	
@@ -15,7 +14,7 @@ public class Authenticator {
 	
 	public User actionLogin() throws Exception {
 		User paramsUser = loginService.run();
-		if(loginService.loginAttempt(paramsUser, FILEPATH)) {
+		if(loginService.loginAttempt(paramsUser)) {
 			
 		} else {
 			throw new Exception("User not found");
