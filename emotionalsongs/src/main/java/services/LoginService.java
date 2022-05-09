@@ -2,7 +2,6 @@ package services;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,12 +39,14 @@ public class LoginService {
         String inpUser = cmdInput.nextLine();
         System.out.print("Password: ");
         String inpPass = cmdInput.nextLine();
+        
+        cmdInput.close();
 
         return new User(inpUser, inpPass);
     }
 
     public boolean loginAttempt(User user, String file) {
-        Map<String, String> mapUser = new HashMap();
+        Map<String, String> mapUser = new HashMap<>();
         getLinesFromFile(file).forEach(l -> {
             String[] strs = l.split(";");
             mapUser.put(strs[0], strs[1]);
@@ -63,7 +64,7 @@ public class LoginService {
     }
 
     private List<String> getLinesFromFile(String path) {
-        List<String> lines = new ArrayList();
+        List<String> lines = new ArrayList<>();
         try {
             lines = Files.readAllLines(new File(path).toPath());
         } catch (Exception ex) {
