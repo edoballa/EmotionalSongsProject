@@ -8,7 +8,7 @@ public class Authenticator {
     
 	private LoginService loginService;
 	
-	public Authenticator() {
+	public Authenticator() throws Exception {
 		this.loginService = LoginService.getIstance();
 	}
 	
@@ -19,8 +19,6 @@ public class Authenticator {
 		} else {
 			throw new Exception("User not found");
 		}
-		
-		
 		
 		return null;
 	}
