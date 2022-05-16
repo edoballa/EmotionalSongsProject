@@ -13,7 +13,7 @@ import java.util.HashMap;
 import object.Song;
 
 public class Song_Factory implements IGeneric_Factory<Song, Long>{
-	private static final String FILEPATH = System.getProperty("song.dir") + "\\data\\song_data.csv";
+	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\song_data.csv";
     private static Song_Factory istance = null;
     
     private Map<Long, Song> SongList;
@@ -154,9 +154,9 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
             if(strs.length > 0){
                 song.setSongId(Long.valueOf(strs[0]));
                 song.setTitle(strs[1]);
-                song.setAuthor(strs[3]);
-                song.setMusicalGenre(strs[4]);
-                song.setYear(strs[5]);
+                song.setAuthor(strs[2]);
+                song.setMusicalGenre(strs[3]);
+                song.setYear(strs[4]);
                 
                 SongList.putIfAbsent(song.getSongId(), song);
             }
