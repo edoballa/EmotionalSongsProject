@@ -12,6 +12,10 @@ public class Song {
 	private String year;
 	private Map<Emotion, Double> emotionList;
 	
+	public Song() {
+		
+	}
+	
 	public Song(Long songId, String title, String author, String musicalGenre, String year) {
 		this.songId = songId;
 		this.title = title;
@@ -25,6 +29,10 @@ public class Song {
 		for(int i = 0; i < 9; i++) {
 			emotionList.put(emotion.getEmotionsList().get(i), 0.0);
 		}
+	}
+	
+	public void setSongId(Long songId) {
+		this.songId = songId;
 	}
 
 	public Long getSongId() {
