@@ -24,10 +24,8 @@ public class Song {
 		this.year = year;
 		this.emotionList = new HashMap<Emotion, Double>();
 		
-		Emotion emotion = new Emotion();
-		
-		for(int i = 0; i < 9; i++) {
-			emotionList.put(emotion.getEmotionsList().get(i), 0.0);
+		for(int i = 0; i < Emotion.getEmotionsList().size(); i++) {
+			emotionList.put(Emotion.getEmotionsList().get(i), 0.0);
 		}
 	}
 	

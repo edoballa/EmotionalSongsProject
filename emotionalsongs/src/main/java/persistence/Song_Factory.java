@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import object.Emotion;
 import object.Song;
 
 public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\song_data.csv";
     private static Song_Factory istance = null;
+    private EmotionFelt_Factory emotionFeltFactory;
     
     private Map<Long, Song> songList;
     private List<String> lines;
@@ -22,6 +24,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     private Song_Factory() throws Exception {
     	this.songList = new HashMap<>();
         this.lines = new ArrayList<>();
+        this.emotionFeltFactory = EmotionFelt_Factory.getIstance();
         
         fillList();
     }
@@ -102,6 +105,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 		return songs;
 	}
 	
+	
 	private Boolean save() throws Exception{
         prepareDataForWriting();
         
@@ -157,6 +161,15 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
                 song.setAuthor(strs[2]);
                 song.setMusicalGenre(strs[3]);
                 song.setYear(strs[4]);
+                song.setEmotionList(new HashMap<>());
+                
+                Map<Long, Double> emotionsFelt = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(song.getSongId());
+                if(!emotionsFelt.isEmpty()) {
+                	for(int i = 0; i < emotionsFelt.size(); i++) {
+                		song.getEmotionList().put(Emotion.getEmotionsList().get(i), 
+                				emotionsFelt.get(Emotion.getEmotionsList().get(i).getEmotionId(Long.valueOf(i))));
+                	}
+                }
                 
                 songList.putIfAbsent(song.getSongId(), song);
             }

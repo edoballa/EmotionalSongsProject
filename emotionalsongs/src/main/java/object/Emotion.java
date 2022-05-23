@@ -2,6 +2,7 @@ package object;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Emotion {
 	public static final Long STUPORE = 1L;
@@ -17,7 +18,7 @@ public class Emotion {
 	private Long emotionId;
 	private String name;
 	private String description;
-	private List<Emotion> emotionsList;
+	private static List<Emotion> emotionsDetailsList;
 	
 	private Emotion(Long emotionId, String name, String description) {
 		this.emotionId = emotionId;
@@ -25,25 +26,30 @@ public class Emotion {
 		this.description = description;
 	}
 	
-	public Emotion() {
-		this.emotionsList = new ArrayList<>();
+	public static List<Emotion> getEmotionsList() {
+		if(emotionsDetailsList == null) {
+			return new Emotion().emotionsDetailsList;
+		} else {
+			return emotionsDetailsList;
+		}
+	}
+	
+	private Emotion() {
+		this.emotionsDetailsList = new ArrayList<>();
 		
-		this.emotionsList.add(new Emotion(STUPORE, "Stupore", "Sensazione di meraviglia o felicità"));
-		this.emotionsList.add(new Emotion(SOLENNITA, "Solennità", "Sensazione di trascendenza, ispirazione."));
-		this.emotionsList.add(new Emotion(TENEREZZA, "Tenerezza", "Sensualità, affetto, sentimento d'amore"));
-		this.emotionsList.add(new Emotion(NOSTALGIA, "Nostalgia", "Sensazioni sognanti, malinconiche, sentimentali"));
-		this.emotionsList.add(new Emotion(CALMA, "Calma", "Relax, serenità, meditazione"));
-		this.emotionsList.add(new Emotion(POTENZA, "Potenza", "Sentirsi forte, eroico, trionfante, energico"));
-		this.emotionsList.add(new Emotion(GIOIA, "Gioia", "Voglia di ballare, sentirsi animato, divertito, vivo"));
-		this.emotionsList.add(new Emotion(TENSIONE, "Tensione", "Sentirsi nervosi, impazienti, irritati"));
-		this.emotionsList.add(new Emotion(TRISTEZZA, "Tristezza", "Sentirsi depresso, addolorato"));
+		this.emotionsDetailsList.add(new Emotion(STUPORE, "Stupore", "Sensazione di meraviglia o felicità"));
+		this.emotionsDetailsList.add(new Emotion(SOLENNITA, "Solennità", "Sensazione di trascendenza, ispirazione."));
+		this.emotionsDetailsList.add(new Emotion(TENEREZZA, "Tenerezza", "Sensualità, affetto, sentimento d'amore"));
+		this.emotionsDetailsList.add(new Emotion(NOSTALGIA, "Nostalgia", "Sensazioni sognanti, malinconiche, sentimentali"));
+		this.emotionsDetailsList.add(new Emotion(CALMA, "Calma", "Relax, serenità, meditazione"));
+		this.emotionsDetailsList.add(new Emotion(POTENZA, "Potenza", "Sentirsi forte, eroico, trionfante, energico"));
+		this.emotionsDetailsList.add(new Emotion(GIOIA, "Gioia", "Voglia di ballare, sentirsi animato, divertito, vivo"));
+		this.emotionsDetailsList.add(new Emotion(TENSIONE, "Tensione", "Sentirsi nervosi, impazienti, irritati"));
+		this.emotionsDetailsList.add(new Emotion(TRISTEZZA, "Tristezza", "Sentirsi depresso, addolorato"));
 		
 	}
 	
-	public List<Emotion> getEmotionsList(){
-		return this.emotionsList;
+	public Emotion getEmotionId(Long i) {
+		return (Emotion) emotionsDetailsList.stream().filter(e -> e.emotionId == i).collect(Collectors.toSet());
 	}
-	
-	
-	
 }
