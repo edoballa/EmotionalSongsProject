@@ -90,23 +90,25 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 		
 	}
 	
-	public Map<Long, Integer> getEmotionAndRelativeScore() {
+	public Map<Long, Integer> getEmotionAndRelativeScoreBySongId(Long songId) {
 		Map<Long, EmotionScore> songEmotions = new HashMap<>();
 		EmotionScore emotionScore = new EmotionScore();
 		
 		for(EmotionFelt emotionFelt : emotionFeltList.values()) {
-			if(!songEmotions.containsKey(emotionFelt.getEmotionId())) {
-				emotionScore.emotionId = emotionFelt.getEmotionId();
-				emotionScore.counter = 1;
-				emotionScore.scoreSum = emotionFelt.getScore();
-				emotionScore.score = Math.round(emotionScore.scoreSum / emotionScore.counter);
-				songEmotions.put(emotionFelt.getEmotionId(), emotionScore);
-			} else {
-				emotionScore = songEmotions.get(emotionFelt.getEmotionId());
-				emotionScore.counter++;
-				emotionScore.scoreSum += emotionFelt.getScore();
-				emotionScore.score = Math.round(emotionScore.scoreSum / emotionScore.counter);
-				songEmotions.replace(emotionScore.emotionId, emotionScore);
+			if(emotionFelt.getSongId() == songId) {
+				if(!songEmotions.containsKey(emotionFelt.getEmotionId())) {
+					emotionScore.emotionId = emotionFelt.getEmotionId();
+					emotionScore.counter = 1;
+					emotionScore.scoreSum = emotionFelt.getScore();
+					emotionScore.score = Math.round(emotionScore.scoreSum / emotionScore.counter);
+					songEmotions.put(emotionFelt.getEmotionId(), emotionScore);
+				} else {
+					emotionScore = songEmotions.get(emotionFelt.getEmotionId());
+					emotionScore.counter++;
+					emotionScore.scoreSum += emotionFelt.getScore();
+					emotionScore.score = Math.round(emotionScore.scoreSum / emotionScore.counter);
+					songEmotions.replace(emotionScore.emotionId, emotionScore);
+				}
 			}
 		}
 		
