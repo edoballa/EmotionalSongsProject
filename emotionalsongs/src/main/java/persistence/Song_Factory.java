@@ -16,14 +16,14 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\song_data.csv";
     private static Song_Factory istance = null;
     
-    private Map<Long, Song> SongList;
+    private Map<Long, Song> songList;
     private List<String> lines;
     
     private Song_Factory() throws Exception {
-    	this.SongList = new HashMap<>();
+    	this.songList = new HashMap<>();
         this.lines = new ArrayList<>();
         
-        fillSongList();
+        fillList();
     }
     
     public static Song_Factory getIstance() throws Exception {
@@ -34,42 +34,42 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 
 	@Override
 	public void create(Song song) throws Exception, IOException {
-		song.setSongId(Long.valueOf(SongList.size()+1));
-		SongList.putIfAbsent(song.getSongId(), song);
+		song.setSongId(Long.valueOf(songList.size()+1));
+		songList.putIfAbsent(song.getSongId(), song);
 		save();
 	}
 
 	@Override
 	public Song getById(Long id) throws Exception {
-		if(SongList.containsKey(id))
-			return SongList.get(id);
+		if(songList.containsKey(id))
+			return songList.get(id);
 		else return null;
 	}
 
 	@Override
 	public void update(Song song) throws Exception, IOException {
-		SongList.remove(song.getSongId());
-		SongList.put(song.getSongId(), song);
+		songList.remove(song.getSongId());
+		songList.put(song.getSongId(), song);
 		save();
 	}
 
 	@Override
 	public void delete(Song song) throws Exception {
-		if(SongList.containsKey(song.getSongId())) {
-			SongList.remove(song.getSongId());
+		if(songList.containsKey(song.getSongId())) {
+			songList.remove(song.getSongId());
 			save();
 		}	
 	}
 
 	@Override
 	public Map<Long, Song> listAll() {
-		return SongList;
+		return songList;
 	}
 	
 	public List<Song> getSongByString(String string){
 		List<Song> songs = new ArrayList<>();
 		
-		for(Song song : SongList.values()) {
+		for(Song song : songList.values()) {
 			if(song.getTitle().contains(string) || song.getAuthor().contains(string)) {
 				songs.add(song);
 			}
@@ -81,7 +81,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	public List<Song> getByTitle(String title) {
 		List<Song> songs = new ArrayList<>();
 		
-		for(Song song : SongList.values()) {
+		for(Song song : songList.values()) {
 			if(song.getTitle().equals(title) || song.getTitle().contains(title)) {
 				songs.add(song);
 			}
@@ -93,7 +93,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	public List<Song> getByMusicalGenre(String musicalGenre) {
 		List<Song> songs = new ArrayList<>();
 		
-		for(Song song : SongList.values()) {
+		for(Song song : songList.values()) {
 			if(song.getMusicalGenre().equals(musicalGenre)) {
 				songs.add(song);
 			}
@@ -114,8 +114,8 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
             return false;
         }
         
-        SongList.clear();
-        fillSongList();
+        songList.clear();
+        fillList();
         
         return true;
     }
@@ -124,7 +124,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
         lines.clear();
         String line = new String();
         
-        for(Song song : SongList.values()) {
+        for(Song song : songList.values()) {
             
             line = song.getSongId() + ";"
                     + song.getTitle() + ";" 
@@ -136,7 +136,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
         }        
     }
     
-    private void fillSongList() throws Exception{
+    private void fillList() throws Exception{
         lines.clear();
         
         try {
@@ -158,7 +158,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
                 song.setMusicalGenre(strs[3]);
                 song.setYear(strs[4]);
                 
-                SongList.putIfAbsent(song.getSongId(), song);
+                songList.putIfAbsent(song.getSongId(), song);
             }
             song = null; //do this for cache problems
         }    

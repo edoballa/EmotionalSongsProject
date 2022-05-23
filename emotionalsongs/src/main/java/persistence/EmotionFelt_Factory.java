@@ -22,7 +22,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
     	this.emotionFeltList = new HashMap<>();
         this.lines = new ArrayList<>();
         
-        fillEmotionFeltList();
+        fillList();
     }
     
     public static EmotionFelt_Factory getIstance() throws Exception {
@@ -131,7 +131,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
         }
         
         emotionFeltList.clear();
-        fillEmotionFeltList();
+        fillList();
         
         return true;
     }
@@ -152,7 +152,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
         }        
     }
     
-    private void fillEmotionFeltList() throws Exception{
+    private void fillList() throws Exception{
         lines.clear();
         
         try {
