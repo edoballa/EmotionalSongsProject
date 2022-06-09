@@ -76,6 +76,26 @@ public class User_Factory implements IGeneric_Factory<User, Long>{
 		return null;
 	}
 	
+	public User getByFiscalCode(String fiscalCode) {
+		for(User user : UserList.values()) {
+			if(user.getFiscalCode().equals(fiscalCode)) {
+				return user;
+			}
+		}
+		
+		return null;
+	}
+	
+	public User getByEmail(String email) {
+		for(User user : UserList.values()) {
+			if(user.getEmail().equals(email)) {
+				return user;
+			}
+		}
+		
+		return null;
+	}
+	
 	public boolean existUser(User user) {
 		for(User u : UserList.values()) {
 			if(u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
