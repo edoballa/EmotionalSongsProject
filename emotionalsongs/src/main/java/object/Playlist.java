@@ -15,7 +15,6 @@ public class Playlist {
 	}
 
 	public Playlist(Long playlistId, Long userId, String name, List<Song> songs, boolean isPublic) {
-		super();
 		this.playlistId = playlistId;
 		this.userId = userId;
 		this.name = name;

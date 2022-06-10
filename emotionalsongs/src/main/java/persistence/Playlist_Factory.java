@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import object.Playlist;
 import object.Song;
+import object.User;
 
 public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\playlist_data.csv";
@@ -60,6 +61,35 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	@Override
 	public Map<Long, Playlist> listAll() {
 		return playlistList;
+	}
+	
+	public Long getNextId() {
+		Integer nextId = playlistList.size() + 1;
+		return nextId.longValue();
+	}
+	
+	public Playlist getByName(String playlistName, Long userId) {
+		Map<Long, Playlist> userPlaylist = getUserPlaylist(userId);
+		
+		for(Playlist playlist : userPlaylist.values()) {
+			if(playlist.getName().equals(playlistName)) {
+				return playlist;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Map<Long, Playlist> getUserPlaylist(Long userId){
+		Map<Long, Playlist> userPlaylist = new HashMap<>();
+		
+		for(Playlist playlist : playlistList.values()) {
+			if(playlist.getUserId() == userId) {
+				userPlaylist.put(playlist.getPlaylistId(), playlist);
+			}
+		}
+		
+		return userPlaylist;
 	}
 	
 	private Boolean save() throws Exception{
