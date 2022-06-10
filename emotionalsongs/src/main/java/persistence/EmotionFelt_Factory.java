@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import object.Emotion;
 import object.EmotionFelt;
+import object.Song;
 
 public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\emotionFelt_data.csv";
@@ -118,6 +121,13 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 		}
 		
 		return score;
+	}
+	
+	public void updateEmotionsData(Map<Long, Double> emotionsData, Song song) {
+		for(int i = 0; i < emotionsData.size(); i++) {
+			song.getEmotionList().replace(Emotion.getEmotionsList().get(i), emotionsData.get(i));
+		}
+		
 	}
 	
 	private Boolean save() throws Exception{

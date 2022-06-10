@@ -11,22 +11,15 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private Date birthday;
+	private String fiscalCode;
+	private Address address;
 	
 	public User() {
 		
 	}
-	
-	public User(Long userId, String email, String firstName, String lastName, Date birthday) {
-		super();
-		this.userId = userId;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthday = birthday;
-	}
-	
+
 	public User(Long userId, String username, String password, String email, String firstName, String lastName,
-			Date birthday) {
+			Date birthday, String fiscalCode, Address address) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -35,6 +28,8 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
+		this.fiscalCode = fiscalCode;
+		this.address = address;
 	}
 
 	public User(String username, String password) {
@@ -85,6 +80,21 @@ public class User {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+	public String getFiscalCode() {
+		return fiscalCode;
+	}
+
+	public void setFiscalCode(String fiscalCode) {
+		this.fiscalCode = fiscalCode;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	
-	
+
 }

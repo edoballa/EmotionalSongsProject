@@ -8,6 +8,7 @@ public class Address {
     private String province;
     private String region;
     private String country;
+    private boolean valid = false;
 
     public Address() {
     }
@@ -20,6 +21,7 @@ public class Address {
         this.province = province;
         this.region = region;
         this.country = country;
+        this.valid = checkAddressData();
     }
 
     /**
@@ -39,14 +41,14 @@ public class Address {
     /**
      * @return the addressNumber
      */
-    public String getCivico() {
+    public String getAddressNumber() {
         return addressNumber;
     }
 
     /**
      * @param addressNumber the addressNumber to set
      */
-    public void setCivico(String addressNumber) {
+    public void setAddressNumber(String addressNumber) {
         this.addressNumber = addressNumber;
     }
 
@@ -67,56 +69,84 @@ public class Address {
     /**
      * @return the city
      */
-    public String getComune() {
+    public String getCity() {
         return city;
     }
 
     /**
      * @param city the city to set
      */
-    public void setComune(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
     /**
      * @return the province
      */
-    public String getProvincia() {
+    public String getProvince() {
         return province;
     }
 
     /**
      * @param province the province to set
      */
-    public void setProvincia(String province) {
+    public void setProvince(String province) {
         this.province = province;
     }
 
     /**
      * @return the region
      */
-    public String getRegione() {
+    public String getRegion() {
         return region;
     }
 
     /**
      * @param region the region to set
      */
-    public void setRegione(String region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 
     /**
      * @return the country
      */
-    public String getStato() {
+    public String getCountry() {
         return country;
     }
 
     /**
      * @param country the country to set
      */
-    public void setStato(String country) {
+    public void setCountry(String country) {
         this.country = country;
+    }
+    
+    public boolean getValid() {
+        return valid;
+    }
+    
+    public boolean checkAddressData() {
+    	if(this.address.isEmpty() || this.address == null) {
+    		return false;
+    	}
+    	
+    	if(this.addressNumber.isEmpty() || this.addressNumber == null) {
+    		return false;
+    	}
+    	
+    	if(this.cap.isEmpty() || this.cap == null || this.cap.length() > 5) {
+    		return false;
+    	}
+    	
+    	if(this.city.isEmpty() || this.city == null) {
+    		return false;
+    	}
+    	
+    	if(this.province.isEmpty() || this.province == null || this.province.length() > 2) {
+    		return false;
+    	}
+    	
+    	return true;
     }
 }
