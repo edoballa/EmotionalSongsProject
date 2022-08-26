@@ -1,7 +1,8 @@
 package services;
 
 import java.util.logging.Logger;
-import object.User;
+
+import objects.User;
 
 public class Authenticator {
 	private static final Logger logger = Logger.getLogger(String.valueOf(Authenticator.class));

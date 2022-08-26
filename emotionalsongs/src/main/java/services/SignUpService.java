@@ -2,7 +2,7 @@ package services;
 
 import java.io.IOException;
 
-import object.User;
+import objects.User;
 import persistence.User_Factory;
 
 public class SignUpService {

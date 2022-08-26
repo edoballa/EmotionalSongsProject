@@ -1,7 +1,8 @@
-package object;
+package objects;
+
 
 public class Address {
-	private String address;
+    private String address;
     private String addressNumber;
     private String cap;
     private String city;
@@ -121,32 +122,32 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
-    
+
     public boolean getValid() {
         return valid;
     }
-    
+
     public boolean checkAddressData() {
-    	if(this.address.isEmpty() || this.address == null) {
-    		return false;
-    	}
-    	
-    	if(this.addressNumber.isEmpty() || this.addressNumber == null) {
-    		return false;
-    	}
-    	
-    	if(this.cap.isEmpty() || this.cap == null || this.cap.length() > 5) {
-    		return false;
-    	}
-    	
-    	if(this.city.isEmpty() || this.city == null) {
-    		return false;
-    	}
-    	
-    	if(this.province.isEmpty() || this.province == null || this.province.length() > 2) {
-    		return false;
-    	}
-    	
-    	return true;
+        if (this.address.isEmpty() || this.address == null) {
+            return false;
+        }
+
+        if (this.addressNumber.isEmpty() || this.addressNumber == null) {
+            return false;
+        }
+
+        if (this.cap.isEmpty() || this.cap == null || this.cap.length() > 5) {
+            return false;
+        }
+
+        if (this.city.isEmpty() || this.city == null) {
+            return false;
+        }
+
+        if (this.province.isEmpty() || this.province == null || this.province.length() > 2) {
+            return false;
+        }
+
+        return true;
     }
 }

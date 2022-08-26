@@ -6,12 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+
+import objects.Playlist;
+import objects.Song;
+import objects.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import object.Playlist;
-import object.Song;
-import object.User;
 
 public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\playlist_data.csv";
@@ -20,6 +21,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     private Song_Factory songFactory;
     private Map<Long, Playlist> playlistList;
     private List<String> lines;
+    private Long nextKey = null;
     
     private Playlist_Factory() throws Exception {
     	this.playlistList = new HashMap<>();
@@ -27,6 +29,13 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
         this.songFactory = Song_Factory.getIstance();
         
         fillList();
+        
+        if(nextKey == null) {
+        	nextKey = Long.valueOf(playlistList.size());
+        	while(playlistList.containsKey(nextKey)) {
+        		nextKey++;
+        	}
+        }
     }
     
     public static Playlist_Factory getIstance() throws Exception {
@@ -37,6 +46,8 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 
     @Override
 	public void create(Playlist playlist) throws Exception, IOException {
+    	playlist.setPlaylistId(nextKey);
+    	nextKey++;
 		playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
     	save();		
 	}

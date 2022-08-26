@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import object.EmotionFelt;
-import object.Playlist;
-import object.Song;
+import objects.EmotionFelt;
+import objects.Playlist;
+import objects.Song;
 import persistence.EmotionFelt_Factory;
 import persistence.Playlist_Factory;
 import persistence.Song_Factory;

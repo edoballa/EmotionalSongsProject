@@ -6,12 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+
+import objects.Emotion;
+import objects.Emotions;
+import objects.Song;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
-import object.Emotion;
-import object.Song;
 
 public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\song_data.csv";
@@ -20,6 +22,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     
     private Map<Long, Song> songList;
     private List<String> lines;
+    private Long nextKey = null;
     
     private Song_Factory() throws Exception {
     	this.songList = new HashMap<>();
@@ -27,6 +30,13 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
         this.emotionFeltFactory = EmotionFelt_Factory.getIstance();
         
         fillList();
+        
+        if(nextKey == null) {
+        	nextKey = Long.valueOf(songList.size());
+        	while(songList.containsKey(nextKey)) {
+        		nextKey++;
+        	}
+        }
     }
     
     public static Song_Factory getIstance() throws Exception {
@@ -37,7 +47,8 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 
 	@Override
 	public void create(Song song) throws Exception, IOException {
-		song.setSongId(Long.valueOf(songList.size()+1));
+		song.setSongId(nextKey);
+		nextKey++;
 		songList.putIfAbsent(song.getSongId(), song);
 		save();
 	}
@@ -51,8 +62,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 
 	@Override
 	public void update(Song song) throws Exception, IOException {
-		songList.remove(song.getSongId());
-		songList.put(song.getSongId(), song);
+		songList.replace(song.getSongId(), song);
 		save();
 	}
 
@@ -103,8 +113,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 		}
 		
 		return songs;
-	}
-	
+	}	
 	
 	private Boolean save() throws Exception{
         prepareDataForWriting();
@@ -166,8 +175,8 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
                 Map<Long, Double> emotionsFelt = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(song.getSongId());
                 if(!emotionsFelt.isEmpty()) {
                 	for(int i = 0; i < emotionsFelt.size(); i++) {
-                		song.getEmotionList().put(Emotion.getEmotionsList().get(i), 
-                				emotionsFelt.get(Emotion.getEmotionsList().get(i).getEmotionId(Long.valueOf(i))));
+                		song.getEmotionList().put(Emotions.getEmotionById(Long.valueOf(i + 1)), 
+                				emotionsFelt.get(Long.valueOf(i + 1)));
                 	}
                 }
                 

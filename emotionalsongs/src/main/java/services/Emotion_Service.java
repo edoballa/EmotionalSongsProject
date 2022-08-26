@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import object.EmotionFelt;
+import objects.EmotionFelt;
 import persistence.EmotionFelt_Factory;
 import persistence.Song_Factory;
 import persistence.User_Factory;

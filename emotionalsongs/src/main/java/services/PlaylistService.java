@@ -3,8 +3,8 @@ package services;
 import java.io.IOException;
 import java.util.List;
 
-import object.Playlist;
-import object.Song;
+import objects.Playlist;
+import objects.Song;
 import persistence.Playlist_Factory;
 import persistence.User_Factory;
 
@@ -60,8 +60,12 @@ public class PlaylistService {
 		playlistFactory.delete(playlist);
 	}
 	
-	public void updatePlaylistName(String playlistName, String newName) {
+	public Playlist updatePlaylistName(String playlistName, String newName, Long userId) throws IOException, Exception {
+		Playlist playlist = playlistFactory.getByName(playlistName, userId);
+		playlist.setName(newName);
+		playlistFactory.update(playlist);
 		
+		return playlist;
 	}
 	
 }

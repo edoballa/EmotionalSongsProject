@@ -6,13 +6,15 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+
+import objects.Emotion;
+import objects.EmotionFelt;
+import objects.Emotions;
+import objects.Song;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import object.Emotion;
-import object.EmotionFelt;
-import object.Song;
 
 public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String>{
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\emotionFelt_data.csv";
@@ -94,6 +96,10 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	public Map<Long, Double> getEmotionAndRelativeScoreBySongId(Long songId) {
+		if(emotionFeltList.isEmpty()) {
+			return new HashMap<>();
+		}
+		
 		Map<Long, EmotionScore> songEmotions = new HashMap<>();
 		EmotionScore emotionScore = new EmotionScore();
 		
@@ -125,7 +131,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	
 	public void updateEmotionsData(Map<Long, Double> emotionsData, Song song) {
 		for(int i = 0; i < emotionsData.size(); i++) {
-			song.getEmotionList().replace(Emotion.getEmotionsList().get(i), emotionsData.get(i));
+			song.getEmotionList().replace(Emotions.getEmotionById(Long.valueOf(i + 1)), 
+					emotionsData.get(Long.valueOf(i + 1)));
 		}
 		
 	}
@@ -180,11 +187,21 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
             
             String[] strs = line.split(";");
             if(strs.length > 0){
-                emotionFelt.setEmotionId(Long.valueOf(strs[0]));
-                emotionFelt.setScore(Integer.valueOf(strs[1]));
-                emotionFelt.setNote(strs[2]);
-                emotionFelt.setSongId(Long.valueOf(strs[3]));
-                emotionFelt.setUserId(Long.valueOf(strs[4]));
+            	if(strs[0] != "") {
+            		emotionFelt.setEmotionId(Long.valueOf(strs[0]));
+            	}
+            	if(strs[1] != "") {
+            		emotionFelt.setScore(Integer.valueOf(strs[1]));            		
+            	}
+            	
+            	emotionFelt.setNote(strs[2]);            		
+
+            	if(strs[3] != "") {
+            		emotionFelt.setSongId(Long.valueOf(strs[3]));            		
+            	}
+            	if(strs[4] != "") {
+            		emotionFelt.setUserId(Long.valueOf(strs[4]));            		
+            	}
                 
                 emotionFelt.setEmotionFeltId(strs[0] + "_" + strs[3] + "_" + strs[4]);
                 
