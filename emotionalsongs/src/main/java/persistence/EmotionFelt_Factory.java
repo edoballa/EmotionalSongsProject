@@ -187,19 +187,19 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
             
             String[] strs = line.split(";");
             if(strs.length > 0){
-            	if(strs[0] != "") {
+            	if(strs[0] != "" && strs[0] != null) {
             		emotionFelt.setEmotionId(Long.valueOf(strs[0]));
             	}
-            	if(strs[1] != "") {
+            	if(strs[1] != "" && strs[1] != null) {
             		emotionFelt.setScore(Integer.valueOf(strs[1]));            		
             	}
             	
             	emotionFelt.setNote(strs[2]);            		
 
-            	if(strs[3] != "") {
+            	if(strs[3] != "" && strs[3] != null) {
             		emotionFelt.setSongId(Long.valueOf(strs[3]));            		
             	}
-            	if(strs[4] != "") {
+            	if(strs[4] != "" && strs[4] != null) {
             		emotionFelt.setUserId(Long.valueOf(strs[4]));            		
             	}
                 

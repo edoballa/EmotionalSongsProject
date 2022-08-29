@@ -157,7 +157,8 @@ public class EmotionFelt  {
      * @return String the emotionFeltId.
      */
     public String calculateEmotionFeltId() {
-        return this.emotionId + "_" + this.songId + "_" + this.userId;
+    	this.emotionFeltId = this.emotionId + "_" + this.songId + "_" + this.userId;
+        return emotionFeltId;
     }
 }
 

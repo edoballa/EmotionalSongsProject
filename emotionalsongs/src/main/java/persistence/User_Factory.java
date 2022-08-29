@@ -16,7 +16,7 @@ import objects.User;
 
 public class User_Factory implements IGeneric_Factory<User, Long>, Serializable {
 
-    private static final String FILEPATH = System.getProperty("user.home") + "\\Desktop\\EmotionalSongProject\\EmotionalSongs\\data\\user_data.csv";
+    private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
     private static User_Factory istance = null;
 
     private Map<Long, User> UserList;
@@ -27,7 +27,7 @@ public class User_Factory implements IGeneric_Factory<User, Long>, Serializable 
         this.UserList = new HashMap<>();
         this.lines = new ArrayList<>();
         
-        System.out.println(FILEPATH);
+        //System.out.println(FILEPATH);
 
         fillUserList();
         
