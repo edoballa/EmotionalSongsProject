@@ -6,6 +6,7 @@
 */
 package objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist {
@@ -34,6 +35,7 @@ public class Playlist {
      * Playlist default constructor.
      */
     public Playlist() {
+    	this.songs = new ArrayList<>();
     }
 
     /**

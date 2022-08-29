@@ -132,11 +132,12 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
                     + playlist.getUserId() + ";" 
                     + playlist.getName() + ";"; 
             
-            for(Song song : playlist.getSongs()) {
-            	songs += song.getSongId() + ",";
+            if(playlist.getSongs() != null && !playlist.getSongs().isEmpty()) {
+	            for(Song song : playlist.getSongs()) {
+	            	songs += song.getSongId() + ",";
+	            }
+	            //songs = songs.substring(0, songs.length() - 1);
             }
-            
-            songs = songs.substring(songs.length() - 1, songs.length());
             
             line += songs + ";" + playlist.isPublic();
             lines.add(line);
@@ -159,18 +160,17 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
             
             String[] strs = line.split(";");
             if(strs.length > 0){
-            	//(playlistId, userId, nome, List<canzone>, isPublic)
             	playlist.setPlaylistId(Long.valueOf(strs[0]));
             	playlist.setUserId(Long.valueOf(strs[1]));
             	playlist.setName(strs[2]);
             	playlist.setPublic(Boolean.valueOf(strs[4]));
             	playlist.setSongs(new ArrayList<>());
             	
-            	String[] songs = strs[3].split(",");
-            	if(songs.length > 0) {
-            		for(int i = 0; i < songs.length; i++) {
-            			playlist.getSongs().add(songFactory.getById(Long.valueOf(songs[i])));
-            		}
+            	if(strs[3].length() > 1) {
+	            	String[] songs = strs[3].split(",");
+	        		for(int i = 0; i < songs.length; i++) {
+	        			playlist.getSongs().add(songFactory.getById(Long.valueOf(songs[i]))); 
+	            	}
             	}
                 
                 playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
