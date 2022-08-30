@@ -1,12 +1,8 @@
 package services;
 
-import java.util.logging.Logger;
-
 import objects.User;
 
-public class Authenticator {
-	private static final Logger logger = Logger.getLogger(String.valueOf(Authenticator.class));
-    
+public class Authenticator {    
 	private LoginService loginService;
 	private SignUpService signUpService;
 	
@@ -36,6 +32,10 @@ public class Authenticator {
 		}
 		userToReg = signUpService.insertNewUser(userToReg);
 		return userToReg; 
+	}
+	
+	public User actionLogout() {
+		return null;
 	}
 	
 }

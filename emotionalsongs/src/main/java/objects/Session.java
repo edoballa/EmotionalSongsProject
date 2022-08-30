@@ -3,12 +3,14 @@ package objects;
 public class Session {
 	
 	private User user;
+	private boolean isLoggedIn = false;
 	private int previusAction;
 	private int currentAction;
 	private int actionDetails;
 	
 	public Session() {
-		this.currentAction = Action.START_PROGRAM;
+		this.previusAction = Action.START_PROGRAM;
+		this.user = null;
 	}
 	
 	
@@ -18,6 +20,9 @@ public class Session {
 	
 	public void setUser(User user) {
 		this.user = user;
+		if(user != null) {
+			this.isLoggedIn = true;
+		} else this.isLoggedIn = false;
 	}
 	
 	public int getPreviusAction() {
@@ -33,16 +38,16 @@ public class Session {
 		this.currentAction = currentAction;
 	}
 
-
 	public int getActionDetails() {
 		return actionDetails;
 	}
-
 
 	public void setActionDetails(int actionDetails) {
 		this.actionDetails = actionDetails;
 	}
 	
-	
+	public boolean getIsLoggedIn() {
+		return isLoggedIn;
+	}
 
 }

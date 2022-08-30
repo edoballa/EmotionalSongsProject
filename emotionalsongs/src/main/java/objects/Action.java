@@ -23,7 +23,9 @@ public class Action {
 	public static final int SELECT_PLAYLIST = 11;
 	public static final int VIEW_ALL_USER_PLAYLIST = 12;
 	
-	public String getActionDescription(int actionId) {
+	//public static final int NUMBER_OF_ACTION = 17;
+	
+	public static String getActionDescription(int actionId) {
 		switch(actionId) {
 			case EXIT:
 				return "Termina il programma";
@@ -62,7 +64,7 @@ public class Action {
 		}
 	}
 	
-	public int[] possibleActions(int previusAction, boolean login) {
+	public static int[] possibleActions(int previusAction, boolean login) {
 		/*return new int[] {EXIT, START_PROGRAM, LOGIN, REGISTRATION, LOGOUT, SEARCH, SELECT_SONG, ADD_EMOTION,
 				ADD_SONG_INTO_PLAYLIST, ADD_PLAYLIST, RENAME_PLAYLIST, DELETE_PLAYLIST, SELECT_PLAYLIST, VIEW_ALL_USER_PLAYLIST,
 				REMOVE_EMOTION, VIEW_ALL_USER_EMOTION, SELECT_USER_EMOTION};*/
