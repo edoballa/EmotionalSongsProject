@@ -6,7 +6,8 @@
 */
 package objects;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User{
 	/**
@@ -41,11 +42,15 @@ public class User{
 	 * An Address object to store the address data.
 	 */
     private Address address;
+    private List<Playlist> playlists;
+    private List<EmotionFelt> emotionsFelt;
 
     /**
      * User default constructor.
      */
     public User() {
+    	this.playlists = new ArrayList<>();
+        this.emotionsFelt = new ArrayList<>();
     }
 
     /**
@@ -61,7 +66,7 @@ public class User{
      * @param address The user's address.
      */
     public User(Long userId, String username, String password, String email, String firstName, String lastName,
-            String fiscalCode, Address address) {
+            String fiscalCode, Address address, List<Playlist> playlists, List<EmotionFelt> emotionsFelt) {
         super();
         this.userId = userId;
         this.username = username;
@@ -71,6 +76,8 @@ public class User{
         this.lastName = lastName;
         this.fiscalCode = fiscalCode;
         this.address = address;
+        this.playlists = playlists;
+        this.emotionsFelt = emotionsFelt;
     }
 
     /**
@@ -212,6 +219,22 @@ public class User{
     public void setAddress(Address address) {
         this.address = address;
     }
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
+	public List<EmotionFelt> getEmotionsFelt() {
+		return emotionsFelt;
+	}
+
+	public void setEmotionsFelt(List<EmotionFelt> emotionsFelt) {
+		this.emotionsFelt = emotionsFelt;
+	}
 
 }
 
