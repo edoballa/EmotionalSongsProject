@@ -1,7 +1,9 @@
 package services;
 
 import java.io.IOException;
+import java.util.Scanner;
 
+import objects.Address;
 import objects.User;
 import persistence.User_Factory;
 
@@ -22,7 +24,39 @@ public class SignUpService {
 	}
 	
 	public User insertdata() {
-		return new User();
+		Scanner cmdInput = new Scanner(System.in);
+		
+		System.out.print("Scegli un Username: ");
+        String inpUser = cmdInput.nextLine();
+        System.out.print("Scegli una Password: ");
+        String inpPass = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo indirizzo Email: ");
+        String inpEmail = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Nome: ");
+        String inpFName = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Cognome: ");
+        String inpLName = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Codice fiscale: ");
+        String inpCF = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Indirizzo: ");
+        String inpAddr = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Numero civico: ");
+        String inpAddrNum = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo CAP: ");
+        String inpCap = cmdInput.nextLine();
+        System.out.print("Inserisci la tua Citt√†: ");
+        String inpCity = cmdInput.nextLine();
+        System.out.print("Inserisci la tua Provincia: ");
+        String inpProv = cmdInput.nextLine();
+        System.out.print("Inserisci la tua Regione: ");
+        String inpReg = cmdInput.nextLine();
+        System.out.print("Inserisci il tuo Stato: ");
+        String inpCountry = cmdInput.nextLine();
+        
+        Address inpAddress = new Address(inpAddr, inpAddrNum, inpCap, inpCity, inpProv, inpReg, inpCountry);
+        
+        cmdInput.close();
+		return new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress);
 	}
 	
 	public boolean checkUserDataInsert(User paramUser) {
@@ -54,13 +88,13 @@ public class SignUpService {
 	
 	public String checkUniqueData(User paramUser) {
 		if(userFactory.getByUsername(paramUser.getUsername()) != null) {
-			return "Username gi‡ esistente";
+			return "Username gi√† esistente";
 		}
 		if(userFactory.getByEmail(paramUser.getEmail()) != null) {
-			return "Email gi‡ esistente";
+			return "Email gi√† esistente";
 		}
 		if(userFactory.getByFiscalCode(paramUser.getFiscalCode()) != null) {
-			return "Codice fiscale gi‡ esistente";
+			return "Codice fiscale gi√† esistente";
 		}
 		return null;
 	}
