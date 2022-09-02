@@ -23,13 +23,7 @@ public class Authenticator {
 	}
 	
 	public User actionRegisterUser(Scanner cmdInput) throws Exception {
-		User userToReg = signUpService.insertdata(cmdInput);
-		if(!signUpService.checkUserDataInsert(userToReg)) {
-			throw new Exception("Incorrect data");
-		}
-		
-		signUpService.checkUniqueData(userToReg, cmdInput);
-		
+		User userToReg = signUpService.insertdata(cmdInput); //the check for the data validity is inside
 		userToReg = signUpService.insertNewUser(userToReg);
 		return userToReg; 
 	}

@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import objects.InputScanner;
 import objects.User;
 import persistence.User_Factory;
 

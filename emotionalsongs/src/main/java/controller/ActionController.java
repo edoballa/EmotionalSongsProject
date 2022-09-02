@@ -3,7 +3,6 @@ package controller;
 import java.util.Scanner;
 
 import objects.Action;
-import objects.InputScanner;
 import objects.Session;
 import objects.User;
 import services.Authenticator;

@@ -30,12 +30,12 @@ public class Address {
     private String province;
     /**
 	 * A String to store the user's region.
-	 */
-    private String region;
+	 
+    private String region;*/
     /**
 	 * A String to store the user's country.
-	 */
-    private String country;
+	 
+    private String country;*/
     /**
 	 * A boolean to check the validity of the user's address data.
 	 */
@@ -58,14 +58,14 @@ public class Address {
     * @param region The user's province.
     * @param country The user's country.
     */
-    public Address(String address, String addressNumber, String cap, String city, String province, String region, String country) {
+    public Address(String address, String addressNumber, String cap, String city, String province) {
         this.address = address;
         this.addressNumber = addressNumber;
         this.cap = cap;
         this.city = city;
         this.province = province;
-        this.region = region;
-        this.country = country;
+        //this.region = region;
+        //this.country = country;
         this.valid = checkAddressData();
     }
 
@@ -152,34 +152,34 @@ public class Address {
     /**
      * This method return the region field.
      * @return String the region.
-     */
+     
     public String getRegion() {
         return region;
-    }
+    }*/
 
     /**
      * region setter method.
      * @param region The region to set.
-     */
+     
     public void setRegion(String region) {
         this.region = region;
-    }
+    }*/
 
     /**
      * This method return the country field.
      * @return String the country.
-     */
+    
     public String getCountry() {
         return country;
-    }
+    } */
 
     /**
      * country setter method.
      * @param country The country to set.
-     */
+     
     public void setCountry(String country) {
         this.country = country;
-    }
+    }*/
 
     /**
      * This method return the valid field.

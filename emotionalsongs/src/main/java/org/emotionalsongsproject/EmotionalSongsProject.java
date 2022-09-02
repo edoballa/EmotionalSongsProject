@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import controller.ActionController;
 import objects.Action;
-import objects.InputScanner;
 import objects.Session;
 
 public class EmotionalSongsProject {

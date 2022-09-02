@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import objects.Address;
-import objects.InputScanner;
 import objects.User;
 import persistence.User_Factory;
 
@@ -24,73 +23,144 @@ public class SignUpService {
 	}
 	
 	public User insertdata(Scanner cmdInput) {
+		boolean isValid = true;
 		
-		System.out.print("Scegli un Username: ");
-        String inpUser = cmdInput.nextLine();
-        System.out.print("Scegli una Password: ");
-        String inpPass = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo indirizzo Email: ");
-        String inpEmail = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Nome: ");
-        String inpFName = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Cognome: ");
-        String inpLName = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Codice fiscale: ");
-        String inpCF = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Indirizzo: ");
-        String inpAddr = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Numero civico: ");
-        String inpAddrNum = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo CAP: ");
-        String inpCap = cmdInput.nextLine();
-        System.out.print("Inserisci la tua CittÃ : ");
-        String inpCity = cmdInput.nextLine();
-        System.out.print("Inserisci la tua Provincia: ");
-        String inpProv = cmdInput.nextLine();
-        System.out.print("Inserisci la tua Regione: ");
-        String inpReg = cmdInput.nextLine();
-        System.out.print("Inserisci il tuo Stato: ");
-        String inpCountry = cmdInput.nextLine();
-        
-        Address inpAddress = new Address(inpAddr, inpAddrNum, inpCap, inpCity, inpProv, inpReg, inpCountry);
-        
-		return new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress, null, null);
-	}
-	
-	public boolean checkUserDataInsert(User paramUser) {
-		if(paramUser.getFirstName().isEmpty() || paramUser.getFirstName() == null) {
-			return false;
-		} else if(paramUser.getLastName().isEmpty() || paramUser.getLastName() == null) {
-			return false;
-		} else if(paramUser.getFiscalCode().length() > 16 || paramUser.getFiscalCode() == null || paramUser.getFiscalCode().isEmpty()) {
-			return false;
-		} else if(!paramUser.getAddress().getValid()) {
-			return false;
-		} else if(paramUser.getEmail() == null || paramUser.getEmail().isEmpty() || paramUser.getEmail().startsWith("@") || paramUser.getEmail().endsWith("@") || paramUser.getEmail().contains(".")) {
-			return false;
-		} else if(paramUser.getUsername() == null || paramUser.getUsername().isEmpty()) {
-			return false;
-		} else if(paramUser.getPassword() == null || paramUser.getPassword().isEmpty()) {
-			return false;
-		} else return true;
-	}
-	
-	public void checkUniqueData(User paramUser, Scanner cmdInput) {
-		boolean checkUniqueData = false;
-		
-		while(!checkUniqueData) {
-			if(userFactory.getByUsername(paramUser.getUsername()) != null) {
+		String inpUser = "";
+		do{
+			System.out.print("Scegli un Username: ");
+	        inpUser = cmdInput.nextLine();
+
+	        if(inpUser == null || inpUser.isEmpty()) {
+				isValid = false;
+			} else if(userFactory.getByUsername(inpUser) != null) {
 				System.out.println("Username già esistente, inserirne uno diverso :");
-				paramUser.setUsername(cmdInput.nextLine());
-				checkUniqueData = false;
-			} else checkUniqueData = true;
-			
-			if(userFactory.getByEmail(paramUser.getEmail()) != null) {
+				inpUser = cmdInput.nextLine();
+				isValid = false;
+			} else isValid = true;
+					
+		}while(!isValid);
+		
+		String inpPass = "";
+		do{
+			System.out.print("Scegli una Password: ");
+	        inpPass = cmdInput.nextLine();
+
+	        if(inpPass == null || inpPass.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+		String inpEmail = "";
+        do {
+	        System.out.print("Inserisci il tuo indirizzo Email: ");
+	        inpEmail = cmdInput.nextLine();
+	        
+	        if(inpEmail == null || inpEmail.isEmpty() || inpEmail.startsWith("@") || inpEmail.endsWith("@") 
+	        		|| inpEmail.contains(".")) {
+				isValid = false;
+			} else if(userFactory.getByEmail(inpEmail) != null) {
 				System.out.println("Email già esistente, inserirne un'altra: ");
-				paramUser.setUsername(cmdInput.nextLine());
-				checkUniqueData = false;
-			} else checkUniqueData = true;
-		}
+				inpEmail = cmdInput.nextLine();
+				isValid = false;
+			} else isValid = true;
+	        
+        } while(!isValid);
+        
+        String inpFName = "";
+        do{
+        	System.out.print("Inserisci il tuo Nome: ");
+            inpFName = cmdInput.nextLine();
+
+	        if(inpFName == null || inpFName.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpLName = "";
+        do{
+        	System.out.print("Inserisci il tuo Cognome: ");
+            inpLName = cmdInput.nextLine();
+
+	        if(inpLName == null || inpLName.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpCF = "";
+        do{
+        	System.out.print("Inserisci il tuo Codice fiscale: ");
+            inpCF = cmdInput.nextLine();
+
+	        if(inpCF == null || inpCF.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpAddr = "";
+        do{
+        	System.out.print("Inserisci il tuo Indirizzo: ");
+            inpAddr = cmdInput.nextLine();
+
+	        if(inpAddr == null || inpAddr.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpAddrNum = "";
+        do{
+        	System.out.print("Inserisci il tuo Numero civico: ");
+            inpAddrNum = cmdInput.nextLine();
+
+	        if(inpAddrNum == null || inpAddrNum.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpCap = "";
+        do{
+        	System.out.print("Inserisci il tuo CAP: ");
+            inpCap = cmdInput.nextLine();
+
+	        if(inpCap == null || inpCap.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpCity = "";
+        do{
+        	System.out.print("Inserisci la tua Citta : ");
+            inpCity = cmdInput.nextLine();
+
+	        if(inpCity == null || inpCity.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        String inpProv = "";
+        do{
+        	System.out.print("Inserisci la tua Provincia: ");
+            inpProv = cmdInput.nextLine();
+
+	        if(inpProv == null || inpProv.isEmpty()) {
+				isValid = false;
+			} else isValid = true;
+	        
+		}while(!isValid);
+        
+        
+        
+        Address inpAddress = new Address(inpAddr, inpAddrNum, inpCap, inpCity, inpProv);
+        User paramsUser = new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress, null, null);
+        
+		return null;
 	}
 	
 	public User insertNewUser(User paramUser) throws  Exception {

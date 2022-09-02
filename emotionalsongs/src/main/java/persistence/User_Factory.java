@@ -148,9 +148,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
                     + user.getAddress().getAddressNumber()+ ";"
                     + user.getAddress().getCity()+ ";"
                     + user.getAddress().getCap()+ ";"
-                    + user.getAddress().getProvince()+ ";"
-                    + user.getAddress().getRegion()+ ";"
-                    + user.getAddress().getCountry();
+                    + user.getAddress().getProvince(); //+ ";"
+                    //+ user.getAddress().getRegion()+ ";"
+                    //+ user.getAddress().getCountry();
 
             lines.add(line);
         }
@@ -185,12 +185,12 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
                 user.getAddress().setCap(strs[9]);
                 user.getAddress().setProvince(strs[10]);
                 
-                if(strs.length > 10){
+                /*if(strs.length > 10){
                     user.getAddress().setRegion(strs[11]);
                 }
                 if(strs.length > 11){
                     user.getAddress().setCountry(strs[12]);
-                }
+                }*/
                 
                 UserList.putIfAbsent(user.getUserId(), user);
             }
