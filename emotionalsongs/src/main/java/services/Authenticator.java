@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Scanner;
+
 import objects.User;
 
 public class Authenticator {    
@@ -11,25 +13,23 @@ public class Authenticator {
 		this.signUpService = SignUpService.getIstance();
 	}
 	
-	public User actionLogin() throws Exception {
-		User paramsUser = loginService.run();
-		if(loginService.loginAttempt(paramsUser)) {
-			
-		} else {
-			throw new Exception("User not found");
+	public User actionLogin(Scanner cmdInput) throws Exception {
+		User paramsUser = loginService.run(cmdInput);
+		if(!loginService.loginAttempt(paramsUser)) {
+			throw new Exception("User not found");	
 		}
 		
-		return null;
+		return loginService.loadUser(paramsUser);
 	}
 	
-	public User actionRegisterUser() throws Exception {
-		User userToReg = signUpService.insertdata();
+	public User actionRegisterUser(Scanner cmdInput) throws Exception {
+		User userToReg = signUpService.insertdata(cmdInput);
 		if(!signUpService.checkUserDataInsert(userToReg)) {
 			throw new Exception("Incorrect data");
 		}
-		if(signUpService.checkUniqueData(userToReg) != null) {
-			//TODO manage all cases to reinsert data
-		}
+		
+		signUpService.checkUniqueData(userToReg, cmdInput);
+		
 		userToReg = signUpService.insertNewUser(userToReg);
 		return userToReg; 
 	}

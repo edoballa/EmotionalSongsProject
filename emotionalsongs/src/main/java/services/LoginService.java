@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import objects.InputScanner;
 import objects.User;
 import persistence.User_Factory;
 
@@ -19,7 +20,6 @@ import persistence.User_Factory;
 
 
 public class LoginService {
-    private static final Logger logger = Logger.getLogger(String.valueOf(LoginService.class));
     private static LoginService istance = null;
     private User_Factory userFactory;
     
@@ -33,32 +33,31 @@ public class LoginService {
     	else return istance;
     }
 
-    public User run() {
-        Scanner cmdInput = new Scanner(System.in);
-
+    public User run(Scanner cmdInput) {
         System.out.print("Username: ");
         String inpUser = cmdInput.nextLine();
         System.out.print("Password: ");
         String inpPass = cmdInput.nextLine();
-        
-        cmdInput.close();
 
         return new User(inpUser, inpPass);
     }
 
     public boolean loginAttempt(User user) {
     	if(user.getUsername().isEmpty() || user.getUsername() == null) {
-    		logger.info("invalid username");
+    		System.out.println("Username invalido");
     		return false;
     	}
     	
     	if(user.getPassword().isEmpty() || user.getPassword() == null) {
-    		logger.info("invalid password");
+    		System.out.println("Password invalida");
     		return false;
     	}
     	
-    	logger.info("try login for user " + user.getUsername());
         return userFactory.existUser(user);
+    }
+    
+    public User loadUser(User paramUser) {
+    	return userFactory.getByUsername(paramUser.getUsername());
     }
 
 }

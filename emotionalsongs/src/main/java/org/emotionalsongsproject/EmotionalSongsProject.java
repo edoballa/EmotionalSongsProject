@@ -1,19 +1,24 @@
 package org.emotionalsongsproject;
 
+import java.util.Scanner;
+
 import controller.ActionController;
 import objects.Action;
+import objects.InputScanner;
 import objects.Session;
 
 public class EmotionalSongsProject {
 	public static void main(String[] args) throws Exception{
 		int action = Action.START_PROGRAM;
-		
 		System.out.println("Starting program...");
 		
 		Session session = new Session();
 		ActionController actionController = new ActionController();
 		
 		while(session.getCurrentAction() != Action.EXIT) {
+			session.setPreviusAction(session.getCurrentAction());
+			session.setCurrentAction(Action.NO_ACTION);
+
 			actionController.printActionList(session.getPreviusAction(), session.getIsLoggedIn());
 			action = actionController.insertAction();
 			
@@ -30,7 +35,7 @@ public class EmotionalSongsProject {
 				session = new Session();
 			}
 		}
-		
+
 		System.out.println("Close program...");
 	}
 }

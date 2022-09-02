@@ -14,7 +14,7 @@ import objects.Address;
 
 import objects.User;
 
-public class User_Factory implements IGeneric_Factory<User, Long>, Serializable {
+public class User_Factory implements IGeneric_Factory<User, Long> {
 
     private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
     private static User_Factory istance = null;
@@ -87,16 +87,6 @@ public class User_Factory implements IGeneric_Factory<User, Long>, Serializable 
     public User getByUsername(String username) {
         for (User user : UserList.values()) {
             if (user.getUsername().equals(username)) {
-                return user;
-            }
-        }
-
-        return null;
-    }
-
-    public User getByFiscalCode(String fiscalCode) {
-        for (User user : UserList.values()) {
-            if (user.getFiscalCode().equals(fiscalCode)) {
                 return user;
             }
         }

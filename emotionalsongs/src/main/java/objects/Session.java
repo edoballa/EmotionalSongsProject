@@ -33,8 +33,11 @@ public class Session {
 		return currentAction;
 	}
 	
+	public void setPreviusAction(int previusAction) {
+		this.previusAction = previusAction;
+	}
+
 	public void setCurrentAction(int currentAction) {
-		this.previusAction = this.currentAction;
 		this.currentAction = currentAction;
 	}
 

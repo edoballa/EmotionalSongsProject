@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import objects.Address;
+import objects.InputScanner;
 import objects.User;
 import persistence.User_Factory;
 
@@ -19,12 +20,10 @@ public class SignUpService {
 		if(istance == null) {
 			return new SignUpService();
 		}
-		else
-			return istance;
+		else return istance;
 	}
 	
-	public User insertdata() {
-		Scanner cmdInput = new Scanner(System.in);
+	public User insertdata(Scanner cmdInput) {
 		
 		System.out.print("Scegli un Username: ");
         String inpUser = cmdInput.nextLine();
@@ -55,48 +54,43 @@ public class SignUpService {
         
         Address inpAddress = new Address(inpAddr, inpAddrNum, inpCap, inpCity, inpProv, inpReg, inpCountry);
         
-        cmdInput.close();
-		return new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress);
+		return new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress, null, null);
 	}
 	
 	public boolean checkUserDataInsert(User paramUser) {
 		if(paramUser.getFirstName().isEmpty() || paramUser.getFirstName() == null) {
 			return false;
-		}
-		if(paramUser.getLastName().isEmpty() || paramUser.getLastName() == null) {
+		} else if(paramUser.getLastName().isEmpty() || paramUser.getLastName() == null) {
 			return false;
-		}
-		if(paramUser.getFiscalCode().length() > 16 || paramUser.getFiscalCode() == null || paramUser.getFiscalCode().isEmpty()) {
+		} else if(paramUser.getFiscalCode().length() > 16 || paramUser.getFiscalCode() == null || paramUser.getFiscalCode().isEmpty()) {
 			return false;
-		}
-
-		if(!paramUser.getAddress().getValid()) {
+		} else if(!paramUser.getAddress().getValid()) {
 			return false;
-		}
-		
-		if(paramUser.getEmail() == null || paramUser.getEmail().isEmpty() || paramUser.getEmail().startsWith("@") || paramUser.getEmail().endsWith("@") || paramUser.getEmail().contains(".")) {
+		} else if(paramUser.getEmail() == null || paramUser.getEmail().isEmpty() || paramUser.getEmail().startsWith("@") || paramUser.getEmail().endsWith("@") || paramUser.getEmail().contains(".")) {
 			return false;
-		}
-		if(paramUser.getUsername() == null || paramUser.getUsername().isEmpty()) {
+		} else if(paramUser.getUsername() == null || paramUser.getUsername().isEmpty()) {
 			return false;
-		}
-		if(paramUser.getPassword() == null || paramUser.getPassword().isEmpty()) {
+		} else if(paramUser.getPassword() == null || paramUser.getPassword().isEmpty()) {
 			return false;
-		}
-		return true;
+		} else return true;
 	}
 	
-	public String checkUniqueData(User paramUser) {
-		if(userFactory.getByUsername(paramUser.getUsername()) != null) {
-			return "Username gi√† esistente";
+	public void checkUniqueData(User paramUser, Scanner cmdInput) {
+		boolean checkUniqueData = false;
+		
+		while(!checkUniqueData) {
+			if(userFactory.getByUsername(paramUser.getUsername()) != null) {
+				System.out.println("Username gi‡†esistente, inserirne uno diverso :");
+				paramUser.setUsername(cmdInput.nextLine());
+				checkUniqueData = false;
+			} else checkUniqueData = true;
+			
+			if(userFactory.getByEmail(paramUser.getEmail()) != null) {
+				System.out.println("Email gi‡†esistente, inserirne un'altra: ");
+				paramUser.setUsername(cmdInput.nextLine());
+				checkUniqueData = false;
+			} else checkUniqueData = true;
 		}
-		if(userFactory.getByEmail(paramUser.getEmail()) != null) {
-			return "Email gi√† esistente";
-		}
-		if(userFactory.getByFiscalCode(paramUser.getFiscalCode()) != null) {
-			return "Codice fiscale gi√† esistente";
-		}
-		return null;
 	}
 	
 	public User insertNewUser(User paramUser) throws  Exception {
