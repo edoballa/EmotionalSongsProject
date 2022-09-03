@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import objects.Emotion;
+import objects.EmotionFeltDetails;
 import objects.Emotions;
 import objects.Song;
 
@@ -157,11 +158,9 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        Song song;
 
         for(String line : lines) {
-            song = new Song(); //do this for cache problems
+        	Song song = new Song(); 
             
             String[] strs = line.split(";");
             if(strs.length > 0){
@@ -170,19 +169,13 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
                 song.setAuthor(strs[2]);
                 song.setMusicalGenre(strs[3]);
                 song.setYear(strs[4]);
-                song.setEmotionList(new HashMap<>());
                 
-                Map<Long, Double> emotionsFelt = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(song.getSongId());
-                if(!emotionsFelt.isEmpty()) {
-                	for(int i = 0; i < emotionsFelt.size(); i++) {
-                		song.getEmotionList().put(Emotions.getEmotionById(Long.valueOf(i + 1)), 
-                				emotionsFelt.get(Long.valueOf(i + 1)));
-                	}
-                }
+                List<EmotionFeltDetails> emotionsFelt = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(song.getSongId());
+                song.setEmotionList(emotionsFelt);
+                
                 
                 songList.putIfAbsent(song.getSongId(), song);
             }
-            song = null; //do this for cache problems
         }    
     }
 

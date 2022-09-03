@@ -15,6 +15,7 @@ import java.util.Map;
 
 import objects.Emotion;
 import objects.EmotionFelt;
+import objects.EmotionFeltDetails;
 import objects.Emotions;
 import objects.Song;
 
@@ -186,9 +187,9 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * @param <songId> The song's id.
 	 * @return
 	 */
-	public Map<Long, Double> getEmotionAndRelativeScoreBySongId(Long songId) {
+	public List<EmotionFeltDetails> getEmotionAndRelativeScoreBySongId(Long songId) {
 		if(emotionFeltList.isEmpty()) {
-			return new HashMap<>();
+			return new ArrayList<EmotionFeltDetails>();
 		}
 		
 		Map<Long, EmotionScore> songEmotions = new HashMap<>();
@@ -212,12 +213,23 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 			}
 		}
 		
-		Map<Long, Double> score = new HashMap<>();
+		List<EmotionFeltDetails> emotionFeltDetailsList = new ArrayList<EmotionFeltDetails>();
 		for(EmotionScore eScore : songEmotions.values()) {
-			score.put(eScore.emotionId, eScore.score);
+			EmotionFeltDetails emotionFeltDetails = new EmotionFeltDetails();
+			emotionFeltDetails.setAverageOfRatings(eScore.score);
+			emotionFeltDetails.setNumberOfRatings(eScore.counter);
+			emotionFeltDetails.setEmotion(Emotions.getEmotionById(eScore.emotionId));
+			
+			for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+				if(emotionFelt.getSongId() == songId && !emotionFelt.getNote().isEmpty()) {
+					emotionFeltDetails.getComments().add(emotionFelt.getNote());					
+				}
+			}
+			
+			emotionFeltDetailsList.add(emotionFeltDetails);
 		}
 		
-		return score;
+		return emotionFeltDetailsList;
 	}
 	
 	/**

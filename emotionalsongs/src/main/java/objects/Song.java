@@ -6,7 +6,9 @@
 */
 package objects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Song{
@@ -33,13 +35,13 @@ public class Song{
     /**
      * A Map of Emotion to store all the type of emotions.
      */
-    private Map<Emotion, Double> emotionList; 
+    private List<EmotionFeltDetails> emotionList; 
 
     /**
      * Song default constructor.
      */
     public Song() {
-        this.emotionList = new HashMap<>();
+        this.emotionList = new ArrayList<>();
     }
 
     /**
@@ -52,7 +54,7 @@ public class Song{
      * @param year The song's year.
      * @param emotionList The list of emotions.
      */
-    public Song(Long songId, String title, String author, String musicalGenre, String year, Map<Emotion, Double> emotionList) {
+    public Song(Long songId, String title, String author, String musicalGenre, String year, List<EmotionFeltDetails> emotionList) {
         this.songId = songId;
         this.title = title;
         this.author = author;
@@ -60,7 +62,7 @@ public class Song{
         this.year = year;
         if(emotionList == null)
             this.emotionList = emotionList;
-        else this.emotionList = new HashMap<>();
+        else this.emotionList = new ArrayList<>();
     }
 
     /**
@@ -147,7 +149,7 @@ public class Song{
      * This method return a Map of Emotion.
      * @return Map<Emotion, Double> the List of Emotions.
      */
-    public Map<Emotion, Double> getEmotionList() {
+    public List<EmotionFeltDetails> getEmotionList() {
         return emotionList;
     }
 
@@ -155,7 +157,7 @@ public class Song{
      * emotionList setter method.
      * @param emotionList The list of emotions to set.
      */
-    public void setEmotionList(Map<Emotion, Double> emotionList) {
+    public void setEmotionList(List<EmotionFeltDetails> emotionList) {
         this.emotionList = emotionList;
     }
 }
