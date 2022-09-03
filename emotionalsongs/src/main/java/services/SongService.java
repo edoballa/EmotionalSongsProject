@@ -87,7 +87,7 @@ public class SongService {
 	}
 	
 	public Long selectSong(Scanner cmdInput) {
-		boolean validValue= false;
+		boolean validValue = false;
 		boolean validId = false;
 		String songId;
 		
@@ -102,11 +102,11 @@ public class SongService {
 		        for(int i = 0; i < chars.length; i++) {
 		        	switch(chars[i]) {
 		        	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
-		        		validId = true;
+		        		validValue = true;
 		        		break;
 		        	default:
 		        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
-		        		validId = false;
+		        		validValue = false;
 		        		break;
 		        	}
 		        }

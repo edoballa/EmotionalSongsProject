@@ -169,12 +169,12 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 		 * <code>scoreSum</code>
 		 * An integer to keep track of the sum of the scores about a song.
 		 */
-		public int scoreSum;
+		public int scoreSum = 0;
 		/**
 		 * <code>counter</code>
 		 * An integer to keep track of the number of scores given to a song by users.
 		 */
-		public int counter;
+		public int counter = 0;
 		/**
 		 * <code>score</code>
 		 * An integer to keep track the score related to an emotion.
@@ -193,21 +193,24 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 		}
 		
 		Map<Long, EmotionScore> songEmotions = new HashMap<>();
-		EmotionScore emotionScore = new EmotionScore();
 		
 		for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+			EmotionScore emotionScore = new EmotionScore();
+			
 			if(emotionFelt.getSongId() == songId) {
 				if(!songEmotions.containsKey(emotionFelt.getEmotionId())) {
 					emotionScore.emotionId = emotionFelt.getEmotionId();
 					emotionScore.counter = 1;
 					emotionScore.scoreSum = emotionFelt.getScore();
 					emotionScore.score = Double.valueOf(emotionScore.scoreSum / emotionScore.counter);
-					songEmotions.put(emotionFelt.getEmotionId(), emotionScore);
+				
+					songEmotions.put(emotionScore.emotionId, emotionScore);
 				} else {
 					emotionScore = songEmotions.get(emotionFelt.getEmotionId());
 					emotionScore.counter++;
 					emotionScore.scoreSum += emotionFelt.getScore();
 					emotionScore.score = Double.valueOf(emotionScore.scoreSum / emotionScore.counter);
+					
 					songEmotions.replace(emotionScore.emotionId, emotionScore);
 				}
 			}

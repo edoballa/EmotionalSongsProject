@@ -121,7 +121,9 @@ public class ActionController {
 				canDoNextAction = true;
 				break;
 			case Action.SELECT_SONG:
-				Long songId = songService.getStringToSearch(cmdInput);
+				Long songId = songService.selectSong(cmdInput);
+				songService.printSongDetails(songId);
+				canDoNextAction = true;
 				break;
 			
 		}
