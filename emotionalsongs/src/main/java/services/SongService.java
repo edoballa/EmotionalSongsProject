@@ -2,13 +2,17 @@ package services;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
 
+import objects.Emotion;
 import objects.EmotionFelt;
+import objects.EmotionFeltDetails;
 import objects.Playlist;
 import objects.Song;
 import persistence.EmotionFelt_Factory;
@@ -119,13 +123,26 @@ public class SongService {
 	}
 	
 	public void printSongDetails(Long songId) {
+		Song song = new Song();
 		try {
-			Song song = songFactory.getById(songId);
+			song = songFactory.getById(songId);
 		} catch (Exception e) {
-			e= new Exception("Sonthing went wrong when get song details");
+			e= new Exception("Something went wrong when get song details");
 			e.printStackTrace();
 		}
 		
-		System.out.println(song);
+		System.out.println(song.getTitle().toUpperCase() + "(" + song.getAuthor() + ")");
+		System.out.println("Genere : " + song.getMusicalGenre());
+		System.out.println("Anno : " + song.getYear());
+		
+		System.out.println("Emozioni provate dagli utenti (il numero indica il valore medio)");	
+		for(EmotionFeltDetails emd : song.getEmotionList()) {
+			System.out.println(emd.getEmotion().getName().toUpperCase() + "(" + emd.getEmotion().getDescription() + ")");
+			System.out.println("Valore medio: " + emd.getAverageOfRatings() + " (la media fa riferimento a " + emd.getNumberOfRatings() + " recensioni)");
+			System.out.println("Commenti: ");
+			for(String s : emd.getComments()) {
+				System.out.println(s);
+			}
+		} 
 	}
 }

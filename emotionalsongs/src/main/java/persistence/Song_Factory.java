@@ -80,6 +80,12 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 		return songList;
 	}
 	
+	public void updateSongInList(Song song) {
+		if(songList.containsKey(song.getSongId())) {
+			songList.replace(song.getSongId(), song);
+		}
+	}
+	
 	public List<Song> getSongByString(String string){
 		List<Song> songs = new ArrayList<>();
 		

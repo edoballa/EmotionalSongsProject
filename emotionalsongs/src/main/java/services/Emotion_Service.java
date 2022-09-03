@@ -1,11 +1,14 @@
 package services;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import objects.EmotionFelt;
+import objects.EmotionFeltDetails;
+import objects.Song;
 import persistence.EmotionFelt_Factory;
 import persistence.Song_Factory;
 import persistence.User_Factory;
@@ -23,8 +26,10 @@ public class Emotion_Service {
 	
 	public void insertNewEmotion(EmotionFelt emotionFelt) throws IOException, Exception {
 		emotionFeltFactory.create(emotionFelt);
-		Map<Long, Double> emotionsData = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(emotionFelt.getSongId());
-		emotionFeltFactory.updateEmotionsData(emotionsData, songFactory.getById(emotionFelt.getSongId()));
+		List<EmotionFeltDetails> emotionsData = emotionFeltFactory.getEmotionAndRelativeScoreBySongId(emotionFelt.getSongId());
+		Song song = songFactory.getById(emotionFelt.getSongId());
+		song.setEmotionList(emotionsData);
+		songFactory.updateSongInList(song);
 	}
 	
 	public boolean checkData(String note, Long songId, Long userId, int score) throws Exception {

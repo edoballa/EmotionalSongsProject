@@ -234,19 +234,6 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	
 	/**
 	 * 
-	 * @param <emotionsData>
-	 * @param <song>
-	 */
-	public void updateEmotionsData(Map<Long, Double> emotionsData, Song song) {
-		for(int i = 0; i < emotionsData.size(); i++) {
-			song.getEmotionList().replace(Emotions.getEmotionById(Long.valueOf(i + 1)), 
-					emotionsData.get(Long.valueOf(i + 1)));
-		}
-		
-	}
-	
-	/**
-	 * 
 	 * @return
 	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
 	 */
