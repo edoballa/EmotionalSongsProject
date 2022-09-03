@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+
+import org.apache.commons.lang3.StringUtils;
 
 import objects.EmotionFelt;
 import objects.Playlist;
@@ -17,10 +20,13 @@ public class SongService {
 	private Playlist_Factory playlistFactory;
 	private EmotionFelt_Factory emotionFeltFactory;
 	
+	private Map<Long, Song> lastSearch;
+	
 	public SongService() throws Exception {
 		songFactory = Song_Factory.getIstance();
 		playlistFactory = Playlist_Factory.getIstance();
 		emotionFeltFactory = EmotionFelt_Factory.getIstance();
+		lastSearch = new HashMap<Long, Song>();
 	}
 
 	//* Ricerca con 3 lettere, per titolo, per autore e anno
@@ -28,18 +34,19 @@ public class SongService {
 		List<Song> songByTitle = songFactory.getByTitle(song);
 		List<Song> songByAuthor = songFactory.getSongByString(song);
 		List<Song> songByMusicalGenre = songFactory.getByMusicalGenre(song);
-		Map<Long, Song> songToReturn = new HashMap<>();
+		lastSearch.clear();
 		
 		for(Song s : songByTitle) {
-			songToReturn.putIfAbsent(s.getSongId(), s);
+			lastSearch.putIfAbsent(s.getSongId(), s);
 		}
 		for(Song s : songByAuthor) {
-			songToReturn.putIfAbsent(s.getSongId(), s);
+			lastSearch.putIfAbsent(s.getSongId(), s);
 		}
 		for(Song s : songByMusicalGenre) {
-			songToReturn.putIfAbsent(s.getSongId(), s);
+			lastSearch.putIfAbsent(s.getSongId(), s);
 		}
-		return songToReturn;
+		
+		return lastSearch;
 	}
 	
 	//* Creazione di una playlist
@@ -57,5 +64,68 @@ public class SongService {
 		emotionFelt.setUserId(userId);
 		emotionFelt.setEmotionId(emotionId);
 		emotionFeltFactory.create(emotionFelt);
+	}
+	
+	public String getStringToSearch(Scanner cmdInput) {
+		String stringToSearch;
+		do {
+			System.out.print("Inserisci la canzone da cercare (inserisci almeno 3 lettere): ");
+			stringToSearch = cmdInput.nextLine();
+		}while(stringToSearch.length() < 3);
+		
+		return stringToSearch;
+	}
+	
+	public void showResult(Map<Long, Song> resultMap) {
+		for(Song s : resultMap.values()) {
+			System.out.println(s.getSongId() + " - " + s.getTitle() + "(" + s.getAuthor() + ")" );
+		}
+	}
+	
+	public Long selectSong(Scanner cmdInput) {
+		boolean validValue= false;
+		boolean validId = false;
+		String songId;
+		
+		do {
+			do {
+				System.out.print("Canzone da selezionare: ");
+				songId = cmdInput.nextLine();
+				
+				char[] chars = new char[songId.length()];
+				songId.getChars(0, songId.length(), chars, 0);
+	        	
+		        for(int i = 0; i < chars.length; i++) {
+		        	switch(chars[i]) {
+		        	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+		        		validId = true;
+		        		break;
+		        	default:
+		        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
+		        		validId = false;
+		        		break;
+		        	}
+		        }
+				
+			}while(!validValue);
+			
+			if(lastSearch.containsKey(Long.valueOf(songId))) {
+				validId = true;
+			}
+			
+		}while(!validId);
+		
+		return Long.valueOf(songId);
+	}
+	
+	public void printSongDetails(Long songId) {
+		try {
+			Song song = songFactory.getById(songId);
+		} catch (Exception e) {
+			e= new Exception("Sonthing went wrong when get song details");
+			e.printStackTrace();
+		}
+		
+		System.out.println(song);
 	}
 }

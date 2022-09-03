@@ -16,7 +16,8 @@ public class Authenticator {
 	public User actionLogin(Scanner cmdInput) throws Exception {
 		User paramsUser = loginService.run(cmdInput);
 		if(!loginService.loginAttempt(paramsUser)) {
-			throw new Exception("User not found");	
+			System.out.println("User not found");
+			return null;
 		}
 		
 		return loginService.loadUser(paramsUser);

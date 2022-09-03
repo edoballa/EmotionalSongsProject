@@ -3,6 +3,7 @@ package objects;
 public class Action {
 	public static final int EXIT = -1;
 	public static final int HOME = -2;
+	public static final int NO_ACTION = -3;
 	public static final int START_PROGRAM = 0;
 
 	public static final int LOGIN = 1;

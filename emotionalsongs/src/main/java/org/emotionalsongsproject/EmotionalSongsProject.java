@@ -1,7 +1,5 @@
 package org.emotionalsongsproject;
 
-import java.util.Scanner;
-
 import controller.ActionController;
 import objects.Action;
 import objects.Session;
@@ -15,13 +13,13 @@ public class EmotionalSongsProject {
 		ActionController actionController = new ActionController();
 		
 		while(session.getCurrentAction() != Action.EXIT) {
-			session.setPreviusAction(session.getCurrentAction());
-			session.setCurrentAction(Action.NO_ACTION);
 
 			actionController.printActionList(session.getPreviusAction(), session.getIsLoggedIn());
 			action = actionController.insertAction();
 			
 			if(action < Action.EXIT || action > Action.SELECT_USER_EMOTION) {
+				continue;
+			} else if(!actionController.checkInsertAction(action, session.getPreviusAction(), session.getIsLoggedIn())) {
 				continue;
 			}
 			

@@ -57,7 +57,7 @@ public class SignUpService {
 	        inpEmail = cmdInput.nextLine();
 	        
 	        if(inpEmail == null || inpEmail.isEmpty() || inpEmail.startsWith("@") || inpEmail.endsWith("@") 
-	        		|| inpEmail.contains(".")) {
+	        		|| !inpEmail.contains(".")) {
 				isValid = false;
 			} else if(userFactory.getByEmail(inpEmail) != null) {
 				System.out.println("Email già esistente, inserirne un'altra: ");
@@ -155,12 +155,10 @@ public class SignUpService {
 	        
 		}while(!isValid);
         
-        
-        
         Address inpAddress = new Address(inpAddr, inpAddrNum, inpCap, inpCity, inpProv);
         User paramsUser = new User(null, inpUser, inpPass, inpEmail, inpFName, inpLName, inpCF, inpAddress, null, null);
         
-		return null;
+		return paramsUser;
 	}
 	
 	public User insertNewUser(User paramUser) throws  Exception {
