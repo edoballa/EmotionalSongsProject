@@ -21,7 +21,7 @@ public class TestMain {
 	}
 	
 	public void TestSong() throws Exception {
-		Song song = new Song(null, "Test inserimento3", "Io", "Io","2022", new HashMap<>());
+		/*Song song = new Song(null, "Test inserimento3", "Io", "Io","2022", new HashMap<>());
 		songFactory.create(song);
 		
 		song.setMusicalGenre("Pop - Rock");
@@ -41,11 +41,11 @@ public class TestMain {
 				System.out.println(Emotions.getNameById(Long.valueOf(i+1)) +" : " 
 						+ s.getEmotionList().get(Emotions.getEmotionById(Long.valueOf(i+1))));
 			}
-		}
+		}*/
 	}
 	
 	public void TestUser() throws IOException, Exception {
-		Address address = new Address("via Santa Caterina", "36", "22066", "Mariano Comense", "CO", "Lombardia", "Italia"); 
+		/*Address address = new Address("via Santa Caterina", "36", "22066", "Mariano Comense", "CO", "Lombardia", "Italia"); 
 		User user = new User(null, "edoballa", "pippo", "edo.balla01@gmail.com", "Edoardo", "Ballabio", "BLLDRD01T31B639K", address);
 		Address address2 = new Address("via Cavour", "28", "20900", "Monza", "MB", "Lombardia", "Italia"); 
 		User user2 = new User(null, "mariorossi", "qwerty", "mario.rossi@gmail.com", "Mario", "Rossi", "MRLDRD91F21B447C", address2);
@@ -61,12 +61,12 @@ public class TestMain {
 		userFactory.update(user);
 		
 		user = userFactory.getById(1L);
-		userFactory.delete(user);
+		userFactory.delete(user);*/
 	}
 	
 	public void TestAuthenticator() throws Exception {
-		Authenticator authenticator = new Authenticator();
+		/*Authenticator authenticator = new Authenticator();
 		authenticator.actionRegisterUser();
-		authenticator.actionLogin();
+		authenticator.actionLogin();*/
 	}
 }
