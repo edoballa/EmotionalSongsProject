@@ -36,6 +36,7 @@ public class EmotionFelt  {
      * EmotionFelt default constructor.
      */
     public EmotionFelt() {
+    	this.score = 0;
     }
 
     /**

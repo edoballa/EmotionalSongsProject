@@ -1,28 +1,20 @@
 package services;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Scanner;
 
 import objects.Playlist;
 import objects.Song;
 import persistence.Playlist_Factory;
-import persistence.User_Factory;
 
 public class PlaylistService {
-	private static PlaylistService istance = null;
 	private Playlist_Factory playlistFactory;
 	
-	private PlaylistService() throws Exception{
-        this.playlistFactory = Playlist_Factory.getIstance();
+	public PlaylistService() throws Exception {
+		playlistFactory = Playlist_Factory.getIstance();
     }
     
-    public static PlaylistService getIstance() throws Exception {
-    	if(istance == null)
-    		return new PlaylistService();
-    	else return istance;
-    }
-	
-	public void addPlaylist(String playlistName, Long userId) throws IOException, Exception {
+   public Playlist addPlaylist(String playlistName, Long userId) throws IOException, Exception {
 		Playlist playlist = new Playlist();
 		playlist.setName(playlistName);
 		playlist.setPublic(false);
@@ -32,7 +24,7 @@ public class PlaylistService {
 		playlist.setPlaylistId(playlistId);
 		
 		playlistFactory.create(playlist);
-		
+		return playlistFactory.getById(playlistId);		
 	}
 	
 	public Playlist addSongToPlaylist(String playlistName, Song song, Long userId) throws IOException, Exception {
@@ -43,6 +35,11 @@ public class PlaylistService {
 		playlist = playlistFactory.getById(playlist.getPlaylistId());
 		
 		return playlist;
+	}
+	
+	public void addSongsToPlaylist(Playlist playlist) throws IOException, Exception {
+		playlistFactory.update(playlist);
+
 	}
 	
 	public Playlist removeSongFromPlaylist(String playlistName, Song song, Long userId) throws IOException, Exception {
@@ -66,6 +63,16 @@ public class PlaylistService {
 		playlistFactory.update(playlist);
 		
 		return playlist;
+	}
+	
+	public String insertPlaylistData(Scanner cmdInput) {
+		String playlistName = null;
+		do {
+			System.out.println("Inserisci il nome della playlist: ");
+			playlistName = cmdInput.nextLine();
+		} while(playlistName.isEmpty() || playlistName == null);
+		
+		return playlistName;
 	}
 	
 }

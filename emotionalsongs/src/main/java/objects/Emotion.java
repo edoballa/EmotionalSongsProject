@@ -6,10 +6,6 @@
 */
 package objects;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Emotion {
 	/**
 	 * A Long to keep track of the id of an emotion.

@@ -1,15 +1,9 @@
-package org.emotionalsongsproject;
+package emotionalsongs;
 
 import java.io.IOException;
-import java.util.HashMap;
 
-import objects.Address;
-import objects.Emotions;
-import objects.Song;
-import objects.User;
 import persistence.Song_Factory;
 import persistence.User_Factory;
-import services.Authenticator;
 
 public class TestMain {
 	private Song_Factory songFactory;

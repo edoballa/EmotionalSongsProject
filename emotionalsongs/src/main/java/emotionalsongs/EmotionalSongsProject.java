@@ -1,4 +1,4 @@
-package org.emotionalsongsproject;
+package emotionalsongs;
 
 import controller.ActionController;
 import objects.Action;

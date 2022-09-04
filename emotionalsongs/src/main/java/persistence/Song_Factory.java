@@ -7,13 +7,10 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
-import objects.Emotion;
 import objects.EmotionFeltDetails;
-import objects.Emotions;
 import objects.Song;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class Song_Factory implements IGeneric_Factory<Song, Long>{
@@ -90,19 +87,8 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 		List<Song> songs = new ArrayList<>();
 		
 		for(Song song : songList.values()) {
-			if(song.getTitle().contains(string) || song.getAuthor().contains(string)) {
-				songs.add(song);
-			}
-		}
-		
-		return songs;
-	}
-	
-	public List<Song> getByTitle(String title) {
-		List<Song> songs = new ArrayList<>();
-		
-		for(Song song : songList.values()) {
-			if(song.getTitle().equals(title) || song.getTitle().contains(title)) {
+			if(song.getTitle().toLowerCase().contains(string.toLowerCase()) || song.getAuthor().toLowerCase().contains(string.toLowerCase())
+					|| song.getYear().contains(string)) {
 				songs.add(song);
 			}
 		}

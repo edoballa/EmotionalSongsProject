@@ -115,5 +115,11 @@ public class Emotions {
         
         return e;
     }
+    
+    public static void printAllEmotions() {
+    	for(int i = 1; i < 10; i++) {
+    		System.out.println(i + " - " + getNameById(Long.valueOf(i)) + " (" + getDescriptionById(Long.valueOf(i)) + ")");
+    	}
+    }
 }
 

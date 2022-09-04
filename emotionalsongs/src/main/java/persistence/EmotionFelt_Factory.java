@@ -13,15 +13,12 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
-import objects.Emotion;
 import objects.EmotionFelt;
 import objects.EmotionFeltDetails;
 import objects.Emotions;
-import objects.Song;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String>{
 	/**
