@@ -1,37 +1,42 @@
 /**
 * This package contains the classes that instantiate the objects.
 *
-* @author Diana Cantaluppi Matr. 744457.
-* @author Edoardo Ballabio Matr. 745115.
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package objects;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Song{
     /**
+     * <code>songId</code>
      * A Long to keep track of the song's id.
      */
     private Long songId;
     /**
+     * <code>title</code>
 	 * A String to store the song's title.
 	 */
     private String title;
     /**
+     * <code>author</code>
 	 * A String to store the song's author.
 	 */
     private String author;
     /**
+     * <code>musicalGenre</code>
 	 * A String to store the song's musical genre.
 	 */
     private String musicalGenre;
     /**
+     * <code>year</code>
 	 * A String to store the song's year.
 	 */
     private String year;
     /**
+     * <code>emotionList</code>
      * A Map of Emotion to store all the type of emotions.
      */
     private List<EmotionFeltDetails> emotionList; 
@@ -46,12 +51,12 @@ public class Song{
     /**
      * Song constructor with all fields as parameters.
      * 
-     * @param songId The song's id.
-     * @param title The song's title.
-     * @param author The song's author.
-     * @param musicalGenre The song's musical genre.
-     * @param year The song's year.
-     * @param emotionList The list of emotions.
+     * @param <songId> The song's id.
+     * @param <title> The song's title.
+     * @param <author> The song's author.
+     * @param <musicalGenre> The song's musical genre.
+     * @param <year> The song's year.
+     * @param <emotionList> The list of emotions.
      */
     public Song(Long songId, String title, String author, String musicalGenre, String year, List<EmotionFeltDetails> emotionList) {
         this.songId = songId;
@@ -66,7 +71,7 @@ public class Song{
 
     /**
      * songId setter method.
-     * @param songId The songId to set.
+     * @param <songId> The songId to set.
      */
     public void setSongId(Long songId) {
         this.songId = songId;
@@ -90,7 +95,7 @@ public class Song{
 
     /**
      * title setter method.
-     * @param title The song's title to set.
+     * @param <title> The song's title to set.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -106,7 +111,7 @@ public class Song{
 
     /**
      * author setter method.
-     * @param author The song's author to set.
+     * @param <author> The song's author to set.
      */
     public void setAuthor(String author) {
         this.author = author;
@@ -122,7 +127,7 @@ public class Song{
 
     /**
      * musicalGenre setter method.
-     * @param musicalGenre The song's musical genre to set.
+     * @param <musicalGenre> The song's musical genre to set.
      */
     public void setMusicalGenre(String musicalGenre) {
         this.musicalGenre = musicalGenre;
@@ -138,7 +143,7 @@ public class Song{
 
     /**
      * year setter method.
-     * @param year The song's year to set.
+     * @param <year> The song's year to set.
      */
     public void setYear(String year) {
         this.year = year;
@@ -154,10 +159,9 @@ public class Song{
 
     /**
      * emotionList setter method.
-     * @param emotionList The list of emotions to set.
+     * @param <emotionList> The list of emotions to set.
      */
     public void setEmotionList(List<EmotionFeltDetails> emotionList) {
         this.emotionList = emotionList;
     }
 }
-
