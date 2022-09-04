@@ -148,7 +148,7 @@ public class Action {
 			case VIEW_PLAYLIST_DETAILS:
 				return "Vedi dettagli playlist";
 			default:
-				return "Scelta non valida";
+				return "";
 		}
 	}
 	

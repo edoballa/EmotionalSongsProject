@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import objects.EmotionFeltDetails;
 import objects.Playlist;
 import objects.Song;
 import persistence.Playlist_Factory;
@@ -145,5 +146,13 @@ public class PlaylistService {
 		
 		return Long.valueOf(playlistId);
 	} 
+	
+	public void printPlaylistDetails(Playlist p) {
+		System.out.println("------- DETTAGLI PLAYLIST " + p.getName().toUpperCase() + " -------");
+		
+		for(Song song : p.getSongs()) {
+			System.out.println(song.getTitle().toUpperCase() + "(" + song.getAuthor() + ")");
+		} 
+	}
 	
 }

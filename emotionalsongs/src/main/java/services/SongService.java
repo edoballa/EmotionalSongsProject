@@ -148,7 +148,6 @@ public class SongService {
 				System.out.println(s);
 			}
 		} 
-		System.out.println("--------------------------------");
 	}
 	
 	public Long getLastSongSelected() {

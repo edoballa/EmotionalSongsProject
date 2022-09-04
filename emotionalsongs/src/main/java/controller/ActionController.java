@@ -120,6 +120,9 @@ public class ActionController {
 			case Action.EXIT:
 				canDoNextAction = true;
 				break;
+			case Action.BACK:
+				canDoNextAction = true;
+				break;
 			case Action.LOGIN:
 				canDoNextAction = login(session);
 				break;
@@ -151,6 +154,9 @@ public class ActionController {
 				break;
 			case Action.DELETE_PLAYLIST:
 				canDoNextAction = deletePlaylist(session);
+				break;
+			case Action.VIEW_PLAYLIST_DETAILS:
+				canDoNextAction = viewPlaylistDetail(session.getUser().getPlaylists());
 				break;
 				
 		}
@@ -224,6 +230,12 @@ public class ActionController {
 		}
 		
 		return false;
+	}
+	
+	private boolean viewPlaylistDetail(Map<Long, Playlist> playlistMap) {
+		Long playListSelected = playlistService.selectPlaylist(cmdInput, playlistMap);
+		playlistService.printPlaylistDetails(playlistMap.get(playListSelected));
+		return true;
 	}
 	
 	private boolean deletePlaylist(Session session) {
