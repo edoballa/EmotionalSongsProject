@@ -68,10 +68,10 @@ public class Action {
 	 */
 	public static final int VIEW_ALL_USER_EMOTION = 14;
 	/**
-	 * <code>UPDATE_EMOTION_COMMENT</code>
-	 * An integer with a value of 15, that representing the user's action </strong>update emotion comment</strong>.
+	 * <code>UPDATE_USER_EMOTION</code>
+	 * An integer with a value of 15, that representing the user's action </strong>update user emotion</strong>.
 	 */
-	public static final int UPDATE_EMOTION_COMMENT = 15;
+	public static final int UPDATE_USER_EMOTION = 15;
 	/**
 	 * <code>ADD_PLAYLIST</code>
 	 * An integer with a value of 8, that representing the user's action </strong>add playlist</strong>.
@@ -143,8 +143,8 @@ public class Action {
 				return "Cancella un emozione provata";
 			case VIEW_ALL_USER_EMOTION:
 				return "Visualizza tutte le emozioni inserite";
-			case UPDATE_EMOTION_COMMENT:
-				return "Visualizza tutte le tue playlist";
+			case UPDATE_USER_EMOTION:
+				return "Aggiorna un emozione inserita";
 			case VIEW_PLAYLIST_DETAILS:
 				return "Vedi dettagli playlist";
 			default:
@@ -195,11 +195,11 @@ public class Action {
 			case VIEW_PLAYLIST_DETAILS:
 				return new int[] {RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
 			case VIEW_ALL_USER_EMOTION:
-				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
-			case UPDATE_EMOTION_COMMENT:
-				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
+				return new int[] {UPDATE_USER_EMOTION, REMOVE_EMOTION, BACK};
+			case UPDATE_USER_EMOTION:
+				return new int[] {UPDATE_USER_EMOTION, REMOVE_EMOTION, BACK};
 			case REMOVE_EMOTION:
-				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
+				return new int[] {UPDATE_USER_EMOTION, REMOVE_EMOTION, BACK};
 			default:
 					return null;
 		}

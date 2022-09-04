@@ -1,11 +1,9 @@
 package services;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import objects.EmotionFeltDetails;
 import objects.Playlist;
 import objects.Song;
 import persistence.Playlist_Factory;
@@ -30,7 +28,7 @@ public class PlaylistService {
 	
 	public Playlist addSongToPlaylist(String playlistName, Song song, Long userId) throws IOException, Exception {
 		Playlist playlist = playlistFactory.getByName(playlistName, userId);
-		playlist.getSongs().add(song);
+		playlist.getSongs().put(song.getSongId(), song);
 		
 		playlistFactory.update(playlist);
 		playlist = playlistFactory.getById(playlist.getPlaylistId());
@@ -43,22 +41,18 @@ public class PlaylistService {
 
 	}
 	
-	public Playlist removeSongFromPlaylist(String playlistName, Song song, Long userId) throws IOException, Exception {
-		Playlist playlist = playlistFactory.getByName(playlistName, userId);
-		playlist.getSongs().remove(song);
-		
-		playlistFactory.update(playlist);
-		playlist = playlistFactory.getById(playlist.getPlaylistId());
-		
-		return playlist;
-	}
-	
 	public void deletePlaylist(Playlist playlist) throws Exception {
 		playlistFactory.delete(playlist);
 	}
 	
 	public Playlist updatePlaylistName(String newName, Playlist playlist) throws IOException, Exception {
 		playlist.setName(newName);
+		playlistFactory.update(playlist);
+		
+		return playlist;
+	}
+	
+	public Playlist updatePlaylist(Playlist playlist) throws IOException, Exception {
 		playlistFactory.update(playlist);
 		
 		return playlist;
@@ -150,9 +144,75 @@ public class PlaylistService {
 	public void printPlaylistDetails(Playlist p) {
 		System.out.println("------- DETTAGLI PLAYLIST " + p.getName().toUpperCase() + " -------");
 		
-		for(Song song : p.getSongs()) {
+		for(Song song : p.getSongs().values()) {
 			System.out.println(song.getTitle().toUpperCase() + "(" + song.getAuthor() + ")");
 		} 
 	}
 	
+	public Long selectSongIntoPlaylist(Scanner cmdInput, Map<Long, Song> songs) {
+		boolean validValue = false;
+		boolean validId = false;
+		String songId;
+		
+		do {
+			do {
+				System.out.print("Canzone da eliminare: ");
+				songId = cmdInput.nextLine();
+				
+				if(songId == "EXIT") {
+					return null;
+				} else {
+					char[] chars = new char[songId.length()];
+					songId.getChars(0, songId.length(), chars, 0);
+		        	
+			        for(int i = 0; i < chars.length; i++) {
+			        	switch(chars[i]) {
+			        	case '0':
+							validValue = true;
+							break;
+						case '1':
+							validValue = true;
+							break;
+						case '2':
+							validValue = true;
+							break;
+						case '3':
+							validValue = true;
+							break;
+						case '4':
+							validValue = true;
+							break;
+						case '5':
+							validValue = true;
+							break;
+						case '6':
+							validValue = true;
+							break;
+						case '7':
+							validValue = true;
+							break;
+						case '8':
+							validValue = true;
+							break;
+						case '9':
+							validValue = true;
+							break;
+						default:
+			        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
+			        		validValue = false;
+			        		break;
+			        	}
+			        }
+				}
+				
+			}while(!validValue);
+			
+			if(songs.containsKey(Long.valueOf(songId))) {
+				validId = true;
+			}
+			
+		}while(!validId);
+		
+		return Long.valueOf(songId);
+	}
 }

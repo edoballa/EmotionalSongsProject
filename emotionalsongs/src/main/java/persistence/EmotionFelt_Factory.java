@@ -73,6 +73,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
      */
 	@Override
 	public void create(EmotionFelt emotionFelt) throws Exception, IOException {
+		emotionFelt.calculateEmotionFeltId();
 		emotionFeltMap.putIfAbsent(emotionFelt.getEmotionFeltId(), emotionFelt);
 		save();
 	}
@@ -126,13 +127,13 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * This method return a list of all the emotions felt by a user.
 	 * 
 	 * @param <userId> The user's id.
-	 * @return A list of EmotionFelt.
+	 * @return A map of EmotionFelt.
 	 */
-	public List<EmotionFelt> listAllByUser(Long userId) {
-		List<EmotionFelt> userEmotions = new ArrayList<>();
+	public Map<String, EmotionFelt> listAllByUser(Long userId) {
+		Map<String, EmotionFelt> userEmotions = new HashMap<>();
 		for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
 			if(emotionFelt.getUserId() == userId) {
-				userEmotions.add(emotionFelt);
+				userEmotions.put(emotionFelt.getEmotionFeltId(), emotionFelt);
 			}
 		}
 		

@@ -232,7 +232,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
                     + playlist.getName() + ";"; 
             
             if(playlist.getSongs() != null && !playlist.getSongs().isEmpty()) {
-	            for(Song song : playlist.getSongs()) {
+	            for(Song song : playlist.getSongs().values()) {
 	            	songs += song.getSongId() + ",";
 	            }
 	            //songs = songs.substring(0, songs.length() - 1);
@@ -265,12 +265,12 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
             	playlist.setUserId(Long.valueOf(strs[1]));
             	playlist.setName(strs[2]);
             	playlist.setPublic(Boolean.valueOf(strs[4]));
-            	playlist.setSongs(new ArrayList<>());
+            	playlist.setSongs(new HashMap<>());
             	
             	if(strs[3].length() > 1) {
 	            	String[] songs = strs[3].split(",");
 	        		for(int i = 0; i < songs.length; i++) {
-	        			playlist.getSongs().add(songFactory.getById(Long.valueOf(songs[i]))); 
+	        			playlist.getSongs().put(songFactory.getById(Long.valueOf(songs[i])).getSongId(), songFactory.getById(Long.valueOf(songs[i]))); 
 	            	}
             	}
                 

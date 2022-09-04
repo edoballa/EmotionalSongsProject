@@ -6,8 +6,8 @@
 */
 package objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Playlist {
 	/**
@@ -29,7 +29,7 @@ public class Playlist {
      * <code>songs</code>
      * A List of Song to store the song of a playlist.
      */
-    private List<Song> songs;
+    private Map<Long, Song> songs;
     /**
      * <code>isPublic</code>
      * A boolean to control the visibility of a playlist.
@@ -40,7 +40,7 @@ public class Playlist {
      * Playlist default constructor.
      */
     public Playlist() {
-    	this.songs = new ArrayList<>();
+    	this.songs = new HashMap<>();
     }
 
     /**
@@ -52,7 +52,7 @@ public class Playlist {
      * @param <songs> The playlist's songs.
      * @param <isPublic> The visibility of the playlist.
      */
-    public Playlist(Long playlistId, Long userId, String name, List<Song> songs, boolean isPublic) {
+    public Playlist(Long playlistId, Long userId, String name, Map<Long, Song> songs, boolean isPublic) {
         this.playlistId = playlistId;
         this.userId = userId;
         this.name = name;
@@ -109,10 +109,10 @@ public class Playlist {
     }
 
     /**
-     * This method return a List of Song.
-     * @return List<Song> the List of Song.
+     * This method return a Map of Song.
+     * @return Map<Long, Song> the map of Songs.
      */
-    public List<Song> getSongs() {
+    public Map<Long, Song> getSongs() {
         return songs;
     }
 
@@ -120,7 +120,7 @@ public class Playlist {
      * songs setter method.
      * @param <songs> The playlist's songs to set.
      */
-    public void setSongs(List<Song> songs) {
+    public void setSongs(Map<Long, Song> songs) {
         this.songs = songs;
     }
 
