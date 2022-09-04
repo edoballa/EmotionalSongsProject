@@ -136,7 +136,7 @@ public class Action {
 			case DELETE_PLAYLIST:
 				return "Cancella la playlist";
 			case UPDATE_PLAYLIST_SONG:
-				return "Crea una nuova playlist";
+				return "Aggiorna il contenuto di una playlist";
 			case VIEW_ALL_USER_PLAYLIST:
 				return "Visualizza tutte le tue playlist";
 			case REMOVE_EMOTION:

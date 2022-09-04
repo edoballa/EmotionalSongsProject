@@ -17,7 +17,10 @@ public class EmotionalSongsProject {
 			actionController.printActionList(session.getPreviousAction(), session.getIsLoggedIn());
 			action = actionController.insertAction();
 			
-			if(action < Action.EXIT || action > Action.VIEW_PLAYLIST_DETAILS || action == Action.BACK) {
+			if(action == Action.EXIT) {
+				session.setCurrentAction(action);
+				continue;
+			} else if((action < Action.EXIT || action > Action.VIEW_PLAYLIST_DETAILS) && action != Action.BACK) {
 				continue;
 			} else if(!actionController.checkInsertAction(action, session.getPreviousAction(), session.getIsLoggedIn())) {
 				continue;

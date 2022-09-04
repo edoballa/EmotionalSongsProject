@@ -32,10 +32,10 @@ public class EmotionService {
 	}
 	
 	public EmotionFelt insertEmotionData(Scanner cmdInput, boolean newEmotion, Long songId, Map<String, EmotionFelt> emotionByUserAndSong) {
-		Emotions.printAllEmotions();
 		EmotionFelt ef = new EmotionFelt();
 		
 		if(newEmotion) {
+			Emotions.printAllEmotions();
 			do {
 				System.out.print("Emozione: ");
 				String emotion = cmdInput.nextLine();
@@ -69,7 +69,7 @@ public class EmotionService {
 		}
 		
 		do {
-			System.out.print("Valutazione: ");
+			System.out.print("Valutazione (da 1 a 5): ");
 			String rating = cmdInput.nextLine();
 			
 			if(rating.isBlank()) {

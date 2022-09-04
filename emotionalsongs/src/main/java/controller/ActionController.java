@@ -50,6 +50,9 @@ public class ActionController {
         	
 	        for(int i = 0; i < chars.length; i++) {
 	        	switch(chars[i]) {
+	        	case '-':
+					validAction = true;
+					break;
 	        	case '0':
 					validAction = true;
 					break;
@@ -172,7 +175,11 @@ public class ActionController {
 		}
 		
 		if(canDoNextAction) {
-			session.setPreviousAction(session.getCurrentAction());
+			if(session.getIsLoggedIn() && session.getUser().getPlaylists().isEmpty() && session.getCurrentAction() == Action.DELETE_PLAYLIST) {
+				session.setPreviousAction(Action.BACK);
+			} else if(session.getIsLoggedIn() && session.getUser().getEmotionsFelt().isEmpty() && session.getCurrentAction() == Action.REMOVE_EMOTION) {
+				session.setPreviousAction(Action.BACK);
+			} else session.setPreviousAction(session.getCurrentAction());
 		}
 		session.setCurrentAction(Action.NO_ACTION);
 		
@@ -234,6 +241,7 @@ public class ActionController {
 			songService.showResult(result);		
 		} else {
 			System.out.println("La ricerca non ha dato risultati");
+			return false;
 		}
 		return true;
 	}
@@ -298,7 +306,7 @@ public class ActionController {
 		try {
 			System.out.println("------- ELENCO EMOZIONI INSERITE --------------------------------------------------------------");
 			user.setEmotionsFelt(emotionService.getUserEmotion(user.getUserId()));
-			if(!user.getPlaylists().isEmpty()) {
+			if(!user.getEmotionsFelt().isEmpty()) {
 				emotionService.printEmotionList(user.getEmotionsFelt());
 			} else {
 				System.out.println("L'utente non ha inserito nessuna emozione");
