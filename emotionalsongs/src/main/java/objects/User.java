@@ -6,8 +6,8 @@
 */
 package objects;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User{
 	/**
@@ -42,15 +42,15 @@ public class User{
 	 * An Address object to store the address data.
 	 */
     private Address address;
-    private List<Playlist> playlists;
-    private List<EmotionFelt> emotionsFelt;
+    private Map<Long, Playlist> playlists;
+    private Map<String, EmotionFelt> emotionsFelt;
 
     /**
      * User default constructor.
      */
     public User() {
-    	this.playlists = new ArrayList<>();
-        this.emotionsFelt = new ArrayList<>();
+    	this.playlists = new HashMap<>();
+        this.emotionsFelt = new HashMap<>();
     }
 
     /**
@@ -66,7 +66,7 @@ public class User{
      * @param address The user's address.
      */
     public User(Long userId, String username, String password, String email, String firstName, String lastName,
-            String fiscalCode, Address address, List<Playlist> playlists, List<EmotionFelt> emotionsFelt) {
+            String fiscalCode, Address address, Map<Long, Playlist> playlists, Map<String, EmotionFelt> emotionsFelt) {
         super();
         this.userId = userId;
         this.username = username;
@@ -220,19 +220,19 @@ public class User{
         this.address = address;
     }
 
-	public List<Playlist> getPlaylists() {
+	public Map<Long, Playlist> getPlaylists() {
 		return playlists;
 	}
 
-	public void setPlaylists(List<Playlist> playlists) {
+	public void setPlaylists(Map<Long, Playlist> playlists) {
 		this.playlists = playlists;
 	}
 
-	public List<EmotionFelt> getEmotionsFelt() {
+	public Map<String, EmotionFelt> getEmotionsFelt() {
 		return emotionsFelt;
 	}
 
-	public void setEmotionsFelt(List<EmotionFelt> emotionsFelt) {
+	public void setEmotionsFelt(Map<String, EmotionFelt> emotionsFelt) {
 		this.emotionsFelt = emotionsFelt;
 	}
 
