@@ -159,7 +159,7 @@ public class PlaylistService {
 				System.out.print("Canzone da eliminare: ");
 				songId = cmdInput.nextLine();
 				
-				if(songId == "EXIT") {
+				if(songId.equals("EXIT")) {
 					return null;
 				} else {
 					char[] chars = new char[songId.length()];

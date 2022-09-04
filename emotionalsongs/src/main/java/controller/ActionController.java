@@ -371,7 +371,7 @@ public class ActionController {
 			System.out.println("Ricerca di canzoni da aggiungere alla playlist. Per uscire dalla ricerca inserire EXIT");
 			String songToSearch = songService.getStringToSearch(cmdInput);
 			
-			if(songToSearch == "EXIT") {
+			if(songToSearch.equals("EXIT")) {
 				end = true;
 				continue;
 			}
@@ -411,7 +411,7 @@ public class ActionController {
 			System.out.println("Per uscire dalla ricerca inserire EXIT");
 			String songToSearch = songService.getStringToSearch(cmdInput);
 			
-			if(songToSearch == "EXIT") {
+			if(songToSearch.equals("EXIT")) {
 				end = true;
 				continue;
 			}

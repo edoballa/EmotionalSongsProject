@@ -38,8 +38,8 @@ public class EmotionService {
 			do {
 				System.out.print("Emozione: ");
 				String emotion = cmdInput.nextLine();
-				if(emotion == "1" || emotion == "2" || emotion == "3" || emotion == "4" || emotion == "5" 
-						|| emotion == "6" || emotion == "7" || emotion == "8" || emotion == "9") {
+				if(emotion.equals("1") || emotion.equals("2") || emotion.equals("3") || emotion.equals("4") || emotion.equals("5") 
+						|| emotion.equals("6") || emotion.equals("7") || emotion.equals("8") || emotion.equals("9")) {
 					ef.setEmotionId(Long.valueOf(emotion));
 				}
 			} while(ef.getEmotionId() == null);
@@ -49,9 +49,8 @@ public class EmotionService {
 			System.out.print("Valutazione: ");
 			String rating = cmdInput.nextLine();
 			
-			if(rating.length() == 1 && (rating == "0" || rating == "1" || rating == "2" || rating == "3" 
-					|| rating == "4" || rating == "5" || rating == "6" || rating == "7" || rating == "8" 
-					|| rating == "9")) {
+			if(rating.length() == 1 && (rating.equals("1") || rating.equals("2") || rating.equals("3") 
+					|| rating.equals("4") || rating.equals("5") )) {
 				ef.setScore(Integer.valueOf(rating));
 			}
 			
