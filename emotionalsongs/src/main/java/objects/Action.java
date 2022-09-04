@@ -160,10 +160,6 @@ public class Action {
 	 * @return An array of integers that contains all the values ​​associate with the actions that the user can choose.
 	 */
 	public static int[] possibleActions(int previousAction, boolean login) {
-		/*return new int[] {EXIT, START_PROGRAM, LOGIN, REGISTRATION, LOGOUT, SEARCH, SELECT_SONG, ADD_EMOTION,
-				ADD_SONG_INTO_PLAYLIST, ADD_PLAYLIST, RENAME_PLAYLIST, DELETE_PLAYLIST, SELECT_PLAYLIST, VIEW_ALL_USER_PLAYLIST,
-				REMOVE_EMOTION, VIEW_ALL_USER_EMOTION, SELECT_USER_EMOTION};*/
-		
 		switch(previousAction) {
 			case START_PROGRAM:
 				return new int[] {EXIT, LOGIN, REGISTRATION, SEARCH};
