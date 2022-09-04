@@ -1,29 +1,105 @@
+* This package contains the classes that instantiate the objects.
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package objects;
 
 public class Action {
+	/**
+	 * <code>EXIT</code>
+	 * An integer with a value of -1, that representing the user's action </strong>exit</strong>.
+	 */
 	public static final int EXIT = -1;
+	/**
+	 * <code>NO_ACTION</code>
+	 * An integer with a value of -2, that representing the user's action </strong>no action</strong>.
+	 */
 	public static final int NO_ACTION = -2;
+	/**
+	 * <code>START_PROGRAM</code>
+	 * An integer with a value of 0, that representing the user's action </strong>start program</strong>.
+	 */
 	public static final int START_PROGRAM = 0;
-
+	/**
+	 * <code>LOGIN</code>
+	 * An integer with a value of 1, that representing the user's action </strong>login</strong>.
+	 */
 	public static final int LOGIN = 1;
+	/**
+	 * <code>REGISTRATION</code>
+	 * An integer with a value of 2, that representing the user's action </strong>registration</strong>.
+	 */
 	public static final int REGISTRATION = 2;
-	public static final int LOGOUT = 3;
-	
+	/**
+	 * <code>LOGOUT</code>
+	 * An integer with a value of 3, that representing the user's action </strong>logout</strong>.
+	 */
+	public static final int LOGOUT = 3;	
+	/**
+	 * <code>SEARCH</code>
+	 * An integer with a value of 4, that representing the user's action </strong>search</strong>.
+	 */
 	public static final int SEARCH = 4;
+	/**
+	 * <code>SELECT_SONG</code>
+	 * An integer with a value of 5, that representing the user's action </strong>select song</strong>.
+	 */
 	public static final int SELECT_SONG = 5;
+	/**
+	 * <code>ADD_EMOTION</code>
+	 * An integer with a value of 6, that representing the user's action </strong>add emotion</strong>.
+	 */
 	public static final int ADD_EMOTION = 6;
+	/**
+	 * <code>REMOVE_EMOTION</code>
+	 * An integer with a value of 7, that representing the user's action </strong>remove emotion</strong>.
+	 */
 	public static final int REMOVE_EMOTION = 7;
+	/**
+	 * <code>VIEW_ALL_USER_EMOTION</code>
+	 * An integer with a value of 14, that representing the user's action </strong>view all user emotion</strong>.
+	 */
 	public static final int VIEW_ALL_USER_EMOTION = 14;
+	/**
+	 * <code>UPDATE_EMOTION_COMMENT</code>
+	 * An integer with a value of 15, that representing the user's action </strong>update emotion comment</strong>.
+	 */
 	public static final int UPDATE_EMOTION_COMMENT = 15;
-	
+	/**
+	 * <code>ADD_PLAYLIST</code>
+	 * An integer with a value of 8, that representing the user's action </strong>add playlist</strong>.
+	 */
 	public static final int ADD_PLAYLIST = 8;
+	/**
+	 * <code>RENAME_PLAYLIST</code>
+	 * An integer with a value of 9, that representing the user's action </strong>rename playlist</strong>.
+	 */
 	public static final int RENAME_PLAYLIST = 9;
+	/**
+	 * <code>DELETE_PLAYLIST</code>
+	 * An integer with a value of 10, that representing the user's action </strong>delete playlist</strong>.
+	 */
 	public static final int DELETE_PLAYLIST = 10;
+	/**
+	 * <code>UPDATE_PLAYLIST_SONG</code>
+	 * An integer with a value of 11, that representing the user's action </strong>update playlist song</strong>.
+	 */
 	public static final int UPDATE_PLAYLIST_SONG = 11;
+	/**
+	 * <code>VIEW_ALL_USER_PLAYLIST</code>
+	 * An integer with a value of 12, that representing the user's action </strong>view all user playlist</strong>.
+	 */
 	public static final int VIEW_ALL_USER_PLAYLIST = 12;
 	
 	//public static final int NUMBER_OF_ACTION = 17;
 	
+	/**
+	 * This method return the description of an action based on its id.
+	 * 
+	 * @param <actionId> The action's id.
+	 * @return String the description of the action.
+	 */
 	public static String getActionDescription(int actionId) {
 		switch(actionId) {
 			case EXIT:
@@ -61,12 +137,19 @@ public class Action {
 		}
 	}
 	
-	public static int[] possibleActions(int previusAction, boolean login) {
+	/**
+	 * This method returns all possible actions that a user can choose in the state in which it is.
+	 * 
+	 * @param <previousAction> An integer indicating the user's last action.
+	 * @param <login> A boolean that tracks the user is logged in or not.
+	 * @return An array of integers that contains all the values ​​associate with the actions that the user can choose.
+	 */
+	public static int[] possibleActions(int previousAction, boolean login) {
 		/*return new int[] {EXIT, START_PROGRAM, LOGIN, REGISTRATION, LOGOUT, SEARCH, SELECT_SONG, ADD_EMOTION,
 				ADD_SONG_INTO_PLAYLIST, ADD_PLAYLIST, RENAME_PLAYLIST, DELETE_PLAYLIST, SELECT_PLAYLIST, VIEW_ALL_USER_PLAYLIST,
 				REMOVE_EMOTION, VIEW_ALL_USER_EMOTION, SELECT_USER_EMOTION};*/
 		
-		switch(previusAction) {
+		switch(previousAction) {
 			case START_PROGRAM:
 				return new int[] {EXIT, LOGIN, REGISTRATION, SEARCH};
 			case LOGIN:
