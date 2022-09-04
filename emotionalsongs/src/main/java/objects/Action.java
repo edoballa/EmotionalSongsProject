@@ -1,4 +1,4 @@
-* This package contains the classes that instantiate the objects.
+/* This package contains the classes that instantiate the objects.
 *
 * @author Diana Cantaluppi, Matr. 744457 Sede Como.
 * @author Edoardo Ballabio, Matr. 745115 Sede Como.
