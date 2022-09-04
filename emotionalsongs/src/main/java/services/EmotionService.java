@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class EmotionService {
 		songFactory.updateSongInList(song);
 	}
 	
-	public EmotionFelt insertEmotionData(Scanner cmdInput, boolean newEmotion) {
+	public EmotionFelt insertEmotionData(Scanner cmdInput, boolean newEmotion, Long songId, Map<String, EmotionFelt> emotionByUserAndSong) {
 		Emotions.printAllEmotions();
 		EmotionFelt ef = new EmotionFelt();
 		
@@ -38,9 +39,31 @@ public class EmotionService {
 			do {
 				System.out.print("Emozione: ");
 				String emotion = cmdInput.nextLine();
+				
+				if(emotion.isBlank()) {
+					System.out.println("Inserire un valore.");
+					continue;
+				}
+				
 				if(emotion.equals("1") || emotion.equals("2") || emotion.equals("3") || emotion.equals("4") || emotion.equals("5") 
 						|| emotion.equals("6") || emotion.equals("7") || emotion.equals("8") || emotion.equals("9")) {
+					
+					if(songId != null && !emotionByUserAndSong.isEmpty()) {
+						boolean existEmotionYet = false;
+						for(EmotionFelt em : emotionByUserAndSong.values()) {
+							if(em.getSongId() == songId) {
+								existEmotionYet = false;
+							}
+						}
+						
+						if(!existEmotionYet) {
+							System.out.println("É già presente un'emozione uguale per questa canzone, inserirne una diversa.");
+							continue;
+						} 
+					}
+					
 					ef.setEmotionId(Long.valueOf(emotion));
+					
 				}
 			} while(ef.getEmotionId() == null);
 		}
@@ -48,6 +71,11 @@ public class EmotionService {
 		do {
 			System.out.print("Valutazione: ");
 			String rating = cmdInput.nextLine();
+			
+			if(rating.isBlank()) {
+				System.out.println("Inserire un valore.");
+				continue;
+			}
 			
 			if(rating.length() == 1 && (rating.equals("1") || rating.equals("2") || rating.equals("3") 
 					|| rating.equals("4") || rating.equals("5") )) {
@@ -59,7 +87,12 @@ public class EmotionService {
 		System.out.print("Commento (max 256 caratteri): ");
 		String comment = cmdInput.nextLine();
 
-		ef.setNote(comment.substring(0, 255));
+		if(comment.length() > 256) {
+			ef.setNote(comment.substring(0, 255));
+		} else if(comment.isBlank()) {
+			ef.setNote("");
+		} else ef.setNote(comment);
+				
 		return ef;
 	}
 	
@@ -81,6 +114,12 @@ public class EmotionService {
         while(!validCode) {
         	System.out.print("Inserire il codice dell'emozione: ");
         	emotionFeltCode = cmdInput.nextLine();
+        	
+        	if(emotionFeltCode.isBlank()) {
+				System.out.println("Inserire un valore.");
+				continue;
+			}
+        	
         	if(emotionFeltMap.containsKey(emotionFeltCode)) {
         		validCode = true;
         	}
@@ -96,6 +135,17 @@ public class EmotionService {
 	
 	public Map<String, EmotionFelt> getUserEmotion(Long userId){
 		return emotionFeltFactory.listAllByUser(userId);
+	}
+	
+	public Map<String, EmotionFelt> getSongUserEmotion(Long userId, Long songId){
+		Map<String, EmotionFelt> emotionByUserAndSong = new HashMap<String, EmotionFelt>();
+		for(EmotionFelt ef : emotionFeltFactory.listAllByUser(userId).values()) {
+			if(ef.getSongId() == songId) {
+				emotionByUserAndSong.put(ef.getEmotionFeltId(), ef);
+			}
+		}
+		
+		return emotionByUserAndSong;
 	}
 	
 	public void updateEmotionFelt(EmotionFelt ef) throws Exception {

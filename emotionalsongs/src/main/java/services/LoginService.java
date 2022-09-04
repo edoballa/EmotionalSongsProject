@@ -26,10 +26,19 @@ public class LoginService {
     }
 
     public User run(Scanner cmdInput) {
-        System.out.print("Username: ");
-        String inpUser = cmdInput.nextLine();
-        System.out.print("Password: ");
-        String inpPass = cmdInput.nextLine();
+    	String inpUser;
+    	do {
+    		System.out.print("Username: ");
+    		inpUser = cmdInput.nextLine();
+    		
+    	} while(inpUser.isBlank());
+    	
+    	String inpPass;
+    	do {
+    		System.out.print("Password: ");
+    		inpPass = cmdInput.nextLine();
+    		
+    	} while(inpPass.isBlank());
 
         return new User(inpUser, inpPass);
     }

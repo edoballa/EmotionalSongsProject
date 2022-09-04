@@ -63,7 +63,7 @@ public class PlaylistService {
 		do {
 			System.out.print("Inserisci il nome della playlist: ");
 			playlistName = cmdInput.nextLine();
-		} while(playlistName.isEmpty() || playlistName == null);
+		} while(playlistName.isBlank() || playlistName == null);
 		
 		return playlistName;
 	}
@@ -85,8 +85,13 @@ public class PlaylistService {
 		
 		do {
 			do {
-				System.out.print("Canzone da selezionare: ");
+				System.out.print("Playlist da selezionare: ");
 				playlistId = cmdInput.nextLine();
+				
+				if(playlistId.isBlank()) {
+					System.out.println("Inserire un valore.");
+					continue;
+				}
 				
 				char[] chars = new char[playlistId.length()];
 				playlistId.getChars(0, playlistId.length(), chars, 0);
@@ -142,7 +147,7 @@ public class PlaylistService {
 	} 
 	
 	public void printPlaylistDetails(Playlist p) {
-		System.out.println("------- DETTAGLI PLAYLIST " + p.getName().toUpperCase() + " -------");
+		System.out.println("------- " + p.getName().toUpperCase() + " ------------------------------------------");
 		
 		for(Song song : p.getSongs().values()) {
 			System.out.println(song.getTitle().toUpperCase() + "(" + song.getAuthor() + ")");
@@ -158,6 +163,11 @@ public class PlaylistService {
 			do {
 				System.out.print("Canzone da eliminare: ");
 				songId = cmdInput.nextLine();
+				
+				if(songId.isBlank()) {
+					System.out.println("Inserire un valore.");
+					continue;
+				}
 				
 				if(songId.equals("EXIT")) {
 					return null;

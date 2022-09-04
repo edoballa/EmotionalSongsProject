@@ -39,7 +39,7 @@ public class SongService {
 		do {
 			System.out.print("Inserisci la canzone da cercare (inserisci almeno 3 lettere): ");
 			stringToSearch = cmdInput.nextLine();
-		}while(stringToSearch.length() < 3);
+		}while(stringToSearch.length() < 3 || stringToSearch.isBlank());
 		
 		return stringToSearch;
 	}
@@ -59,6 +59,11 @@ public class SongService {
 			do {
 				System.out.print("Canzone da selezionare: ");
 				songId = cmdInput.nextLine();
+				
+				if(songId.isBlank()) {
+					System.out.println("Inserire un valore.");
+					continue;
+				}
 				
 				char[] chars = new char[songId.length()];
 				songId.getChars(0, songId.length(), chars, 0);
@@ -134,7 +139,7 @@ public class SongService {
 			e.printStackTrace();
 		}
 		
-		System.out.println("------- DETTAGLI CANZONE -------");
+		System.out.println("------- DETTAGLI CANZONE ----------------------------------------------------------------------");
 		System.out.println(song.getTitle().toUpperCase() + "(" + song.getAuthor() + ")");
 		System.out.println("Genere : " + song.getMusicalGenre());
 		System.out.println("Anno : " + song.getYear());

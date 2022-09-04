@@ -29,7 +29,7 @@ public class SignUpService {
 			System.out.print("Scegli un Username: ");
 	        inpUser = cmdInput.nextLine();
 
-	        if(inpUser == null || inpUser.isEmpty()) {
+	        if(inpUser == null || inpUser.isBlank()) {
 				isValid = false;
 			} else if(userFactory.getByUsername(inpUser) != null) {
 				System.out.println("Username già esistente, inserirne uno diverso :");
@@ -44,7 +44,7 @@ public class SignUpService {
 			System.out.print("Scegli una Password: ");
 	        inpPass = cmdInput.nextLine();
 
-	        if(inpPass == null || inpPass.isEmpty()) {
+	        if(inpPass == null || inpPass.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -55,7 +55,7 @@ public class SignUpService {
 	        System.out.print("Inserisci il tuo indirizzo Email: ");
 	        inpEmail = cmdInput.nextLine();
 	        
-	        if(inpEmail == null || inpEmail.isEmpty() || inpEmail.startsWith("@") || inpEmail.endsWith("@") 
+	        if(inpEmail == null || inpEmail.isBlank() || inpEmail.startsWith("@") || inpEmail.endsWith("@") 
 	        		|| !inpEmail.contains(".")) {
 				isValid = false;
 			} else if(userFactory.getByEmail(inpEmail) != null) {
@@ -71,7 +71,7 @@ public class SignUpService {
         	System.out.print("Inserisci il tuo Nome: ");
             inpFName = cmdInput.nextLine();
 
-	        if(inpFName == null || inpFName.isEmpty()) {
+	        if(inpFName == null || inpFName.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -82,7 +82,7 @@ public class SignUpService {
         	System.out.print("Inserisci il tuo Cognome: ");
             inpLName = cmdInput.nextLine();
 
-	        if(inpLName == null || inpLName.isEmpty()) {
+	        if(inpLName == null || inpLName.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -104,7 +104,7 @@ public class SignUpService {
         	System.out.print("Inserisci il tuo Indirizzo: ");
             inpAddr = cmdInput.nextLine();
 
-	        if(inpAddr == null || inpAddr.isEmpty()) {
+	        if(inpAddr == null || inpAddr.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -115,7 +115,7 @@ public class SignUpService {
         	System.out.print("Inserisci il tuo Numero civico: ");
             inpAddrNum = cmdInput.nextLine();
 
-	        if(inpAddrNum == null || inpAddrNum.isEmpty()) {
+	        if(inpAddrNum == null || inpAddrNum.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -126,7 +126,7 @@ public class SignUpService {
         	System.out.print("Inserisci il tuo CAP: ");
             inpCap = cmdInput.nextLine();
 
-	        if(inpCap == null || inpCap.isEmpty()) {
+	        if(inpCap == null || inpCap.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -137,7 +137,7 @@ public class SignUpService {
         	System.out.print("Inserisci la tua Citta : ");
             inpCity = cmdInput.nextLine();
 
-	        if(inpCity == null || inpCity.isEmpty()) {
+	        if(inpCity == null || inpCity.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        
@@ -148,7 +148,7 @@ public class SignUpService {
         	System.out.print("Inserisci la tua Provincia: ");
             inpProv = cmdInput.nextLine();
 
-	        if(inpProv == null || inpProv.isEmpty()) {
+	        if(inpProv == null || inpProv.isBlank()) {
 				isValid = false;
 			} else isValid = true;
 	        

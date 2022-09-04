@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class ActionController {
         	System.out.print("Azione scelta: ");
         	input = cmdInput.nextLine();
         	
-        	if(input.length() > 2) {
+        	if(input.length() > 2 || input.isBlank()) {
         		continue;
         	}
 	        
@@ -87,6 +88,7 @@ public class ActionController {
 	        }
         }
 
+        System.out.println("-----------------------------------------------------------------------------------------------");
         return Integer.valueOf(input);
 	}
 	
@@ -196,6 +198,7 @@ public class ActionController {
 	
 	private boolean logout(Session session) {
 		session.setUser(authenticator.actionLogout());
+		System.out.println("Logout eseguito con successo!");
 		return true;
 	}
 	
@@ -224,6 +227,7 @@ public class ActionController {
 	}
 	
 	private boolean cercaBranoMusicale() {
+		System.out.println("------- RISULTATI RICERCA ---------------------------------------------------------------------");
 		String stringToSearch = songService.getStringToSearch(cmdInput);
 		Map<Long, Song> result = songService.searchSong(stringToSearch);
 		if(!result.isEmpty()) {
@@ -235,12 +239,15 @@ public class ActionController {
 	}
 	
 	private boolean inserisciEmozioniBrano(User user) {
-		EmotionFelt ef = emotionService.insertEmotionData(cmdInput, true);
-		ef.setSongId(songService.getLastSongSelected());
+		Long songId = songService.getLastSongSelected();
+		Map<String, EmotionFelt> emotionByUserAndSong = emotionService.getSongUserEmotion(user.getUserId(), songId);
+		EmotionFelt ef = emotionService.insertEmotionData(cmdInput, true, songId, emotionByUserAndSong);
+		ef.setSongId(songId);
 		ef.setUserId(user.getUserId());
 		
 		try {
 			emotionService.insertNewEmotion(ef);
+			System.out.println("Emozione inserita correttamente!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during registrer new emotion felt");
@@ -255,6 +262,7 @@ public class ActionController {
 		try {
 			emotionService.deleteEmotionFelt(emotionFeltCode);
 			user.setEmotionsFelt(emotionService.getUserEmotion(user.getUserId()));
+			System.out.println("Emozione cancellata con successo!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during delete user emotion felt");
@@ -267,7 +275,7 @@ public class ActionController {
 	private boolean updateUserEmotion(User user) {
 		String emotionFeltCode = emotionService.selectEmotionFelt(cmdInput, user.getEmotionsFelt());
 		String[] ids = emotionFeltCode.split("_");
-		EmotionFelt ef = emotionService.insertEmotionData(cmdInput, false);
+		EmotionFelt ef = emotionService.insertEmotionData(cmdInput, false, null, new HashMap<String, EmotionFelt>());
 		ef.setEmotionFeltId(emotionFeltCode);
 		ef.setSongId(Long.valueOf(ids[1]));
 		ef.setEmotionId(Long.valueOf(ids[0]));
@@ -276,6 +284,7 @@ public class ActionController {
 		try {
 			emotionService.updateEmotionFelt(ef);
 			user.setEmotionsFelt(emotionService.getUserEmotion(user.getUserId()));
+			System.out.println("Emozione aggiornata correttamente!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during delete user emotion felt");
@@ -287,6 +296,7 @@ public class ActionController {
 	
 	private boolean viewUserEmotion(User user) {
 		try {
+			System.out.println("------- ELENCO EMOZIONI INSERITE --------------------------------------------------------------");
 			user.setEmotionsFelt(emotionService.getUserEmotion(user.getUserId()));
 			if(!user.getPlaylists().isEmpty()) {
 				emotionService.printEmotionList(user.getEmotionsFelt());
@@ -304,6 +314,7 @@ public class ActionController {
 	}
 	
 	private boolean viewUserPlaylist(User user) {
+		System.out.println("------- ELENCO PLAYLIST -----------------------------------------------------------------------");
 		user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
 		if(!user.getPlaylists().isEmpty()) {
 			playlistService.printUserPlaylist(user.getPlaylists());
@@ -315,6 +326,7 @@ public class ActionController {
 	}
 	
 	private boolean viewPlaylistDetail(Map<Long, Playlist> playlistMap) {
+		System.out.println("Playlist aggiunta con successo!");
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, playlistMap);
 		playlistService.printPlaylistDetails(playlistMap.get(playListSelected));
 		return true;
@@ -325,6 +337,7 @@ public class ActionController {
 		try {
 			playlistService.deletePlaylist(user.getPlaylists().get(playListSelected));
 			user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
+			System.out.println("Playlist cancellata con successo!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during delete playlist");
@@ -340,6 +353,7 @@ public class ActionController {
 		try {
 			playlistService.updatePlaylistName(newName, user.getPlaylists().get(playListSelected));
 			user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
+			System.out.println("Playlist aggiornata con successo!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during update playlist name");
@@ -377,7 +391,13 @@ public class ActionController {
 			}
 			
 			Map<Long, Song> res = songService.searchSong(songToSearch);
-			songService.showResult(res);
+			if(!res.isEmpty()) {
+				songService.showResult(res);		
+			} else {
+				System.out.println("La ricerca non ha dato risultati");
+				continue;
+			}
+			
 			Long songSelected = songService.selectSong(cmdInput);
 			Song s = songService.getSongById(songSelected);
 			p.getSongs().put(s.getSongId(), s);
@@ -386,6 +406,7 @@ public class ActionController {
 		try {
 			playlistService.updatePlaylist(p);
 			user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
+			System.out.println("Playlist aggiornata con successo!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during update playlist name");
@@ -417,7 +438,13 @@ public class ActionController {
 			}
 			
 			Map<Long, Song> res = songService.searchSong(songToSearch);
-			songService.showResult(res);
+			if(!res.isEmpty()) {
+				songService.showResult(res);		
+			} else {
+				System.out.println("La ricerca non ha dato risultati");
+				continue;
+			}
+			
 			Long songSelected = songService.selectSong(cmdInput);
 			Song s = songService.getSongById(songSelected);
 			p.getSongs().put(s.getSongId(), s);
@@ -426,6 +453,7 @@ public class ActionController {
 		try {
 			playlistService.addSongsToPlaylist(p);
 			user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
+			System.out.println("Playlist aggiunta con successo!");
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during registrer the songs playlist");
