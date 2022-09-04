@@ -28,14 +28,17 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\emotionFelt_data.csv";
 	/**
 	 * <code>istance</code>
+	 * A EmotionFelt_Factory object that allows to instantiate the class only once.
 	 */
     private static EmotionFelt_Factory istance = null;
     /**
      * <code>emotionFeltMap</code>
+     * A Map of EmotionFelt that contains all the emotions felt by a user while listening to a song.
      */
     private Map<String, EmotionFelt> emotionFeltMap;
     /**
      * <code>lines</code>
+     * A List of String that contains the lines of a file.
      */
     private List<String> lines;
     
@@ -120,10 +123,10 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	/**
-	 * This method return 
+	 * This method return a list of all the emotions felt by a user.
 	 * 
 	 * @param <userId> The user's id.
-	 * @return
+	 * @return A list of EmotionFelt.
 	 */
 	public List<EmotionFelt> listAllByUser(Long userId) {
 		List<EmotionFelt> userEmotions = new ArrayList<>();
@@ -137,10 +140,10 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	/**
-	 * This method return a list
+	 * This method return a list of all the emotions felt related to a song.
 	 * 
 	 * @param <songId> The song's id.
-	 * @return
+	 * @return A list of EmotionFelt.
 	 */
 	public List<EmotionFelt> listAllBySongId(Long songId) {
 		List<EmotionFelt> songEmotions = new ArrayList<>();
@@ -180,9 +183,11 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	/**
+	 * This method returns a list with all the details of the emotions experienced by users while listening to a song.
+	 * The list contains the emotion felt and the relative score.
 	 * 
 	 * @param <songId> The song's id.
-	 * @return
+	 * @return A list of EmotionFeltDetails.
 	 */
 	public List<EmotionFeltDetails> getEmotionAndRelativeScoreBySongId(Long songId) {
 		if(emotionFeltMap.isEmpty()) {
@@ -233,8 +238,10 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	/**
+	 * This method creates a new file in which it saves the emotions felt by a user while listening to a song.
+	 * If a file with that name already exists, it deletes it and creates a new one.
 	 * 
-	 * @return
+	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
 	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
 	 */
 	private Boolean save() throws Exception{
@@ -256,7 +263,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
     }
     
 	/**
-	 * 
+	 * This method adds the emotions felt with the related data to a list of strings.
+	 * The data in the list are divided by a separator.
 	 */
     private void prepareDataForWriting() {
         lines.clear();
