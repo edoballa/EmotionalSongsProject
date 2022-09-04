@@ -14,12 +14,12 @@ public class EmotionalSongsProject {
 		
 		while(session.getCurrentAction() != Action.EXIT) {
 
-			actionController.printActionList(session.getPreviusAction(), session.getIsLoggedIn());
+			actionController.printActionList(session.getPreviousAction(), session.getIsLoggedIn());
 			action = actionController.insertAction();
 			
-			if(action < Action.EXIT || action > Action.UPDATE_EMOTION_COMMENT) {
+			if(action < Action.EXIT || action > Action.VIEW_PLAYLIST_DETAILS) {
 				continue;
-			} else if(!actionController.checkInsertAction(action, session.getPreviusAction(), session.getIsLoggedIn())) {
+			} else if(!actionController.checkInsertAction(action, session.getPreviousAction(), session.getIsLoggedIn())) {
 				continue;
 			}
 			

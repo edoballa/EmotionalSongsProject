@@ -94,6 +94,7 @@ public class ActionController {
 	public void printActionList(int actionId, boolean isLoggedIn) {
 		int[] possibleActions = Action.possibleActions(actionId, isLoggedIn);
 		
+		System.out.println("-----------------------------------------------------------------------------------------------");
 		System.out.println("Per effettuare un azione inserire il numero ad essa corrispondente, le azioni eseguibili sono :");
 		for(int i = 0; i < possibleActions.length; i++) {
 			System.out.println("(" + possibleActions[i] + ") -> " + Action.getActionDescription(possibleActions[i]));
@@ -142,21 +143,31 @@ public class ActionController {
 				canDoNextAction = registraPlaylist(session);
 				break;
 			case Action.VIEW_ALL_USER_PLAYLIST:
+				session.getUser().setPlaylists(playlistService.getUserPlaylist(session.getUser().getUserId()));
+				playlistService.printUserPlaylist(session.getUser().getPlaylists());
 				break;
+			case Action.RENAME_PLAYLIST:
+				canDoNextAction = updatePlaylistName(session);
+				break;
+			case Action.DELETE_PLAYLIST:
+				canDoNextAction = deletePlaylist(session);
+				break;
+				
 		}
 		
 		if(canDoNextAction) {
-			session.setPreviusAction(session.getCurrentAction());
+			session.setPreviousAction(session.getCurrentAction());
 		}
 		session.setCurrentAction(Action.NO_ACTION);
 		
 	}
 	
-	public boolean login(Session session) {
+	private boolean login(Session session) {
 		try {
 			User user = authenticator.actionLogin(cmdInput);
 			if(user != null) {
 				session.setUser(user);
+				session.getUser().setPlaylists(playlistService.getUserPlaylist(session.getUser().getUserId()));
 				System.out.println("Login effettuata correttamente!");
 				return true;
 			} else System.out.println("La login non è stata effettuata correttamente, si prega di riprovare.");
@@ -168,7 +179,7 @@ public class ActionController {
 		return false;
 	}
 	
-	public boolean registrazione(Session session) {
+	private boolean registrazione(Session session) {
 		try {
 			User user = authenticator.actionRegisterUser(cmdInput);
 			
@@ -186,20 +197,20 @@ public class ActionController {
 		return false;
 	}
 	
-	public boolean visualizzaEmozioneBrano() {
+	private boolean visualizzaEmozioneBrano() {
 		Long songId = songService.selectSong(cmdInput);
 		songService.printSongDetails(songId);
 		return true;
 	}
 	
-	public boolean cercaBranoMusicale() {
+	private boolean cercaBranoMusicale() {
 		String stringToSearch = songService.getStringToSearch(cmdInput);
 		Map<Long, Song> result = songService.searchSong(stringToSearch);
 		songService.showResult(result);		
 		return true;
 	}
 	
-	public boolean inserisciEmozioniBrano(Session session) {
+	private boolean inserisciEmozioniBrano(Session session) {
 		EmotionFelt ef = emotionService.insertEmotionData(cmdInput);
 		ef.setSongId(songService.getLastSongSelected());
 		ef.setUserId(session.getUser().getUserId());
@@ -215,9 +226,38 @@ public class ActionController {
 		return false;
 	}
 	
-	public boolean registraPlaylist(Session session) {
-		String playlistName = playlistService.insertPlaylistData(cmdInput);
+	private boolean deletePlaylist(Session session) {
+		Long playListSelected = playlistService.selectPlaylist(cmdInput, session.getUser().getPlaylists());
+		try {
+			playlistService.deletePlaylist(session.getUser().getPlaylists().get(playListSelected));
+			session.getUser().setPlaylists(playlistService.getUserPlaylist(session.getUser().getUserId()));
+			return true;
+		} catch (Exception e) {
+			e = new Exception("Something went wrong during delete playlist");
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	private boolean updatePlaylistName(Session session) {
+		Long playListSelected = playlistService.selectPlaylist(cmdInput, session.getUser().getPlaylists());
+		String newName = playlistService.insertPlaylistData(cmdInput);
+		try {
+			playlistService.updatePlaylistName(newName, session.getUser().getPlaylists().get(playListSelected));
+			session.getUser().setPlaylists(playlistService.getUserPlaylist(session.getUser().getUserId()));
+			return true;
+		} catch (Exception e) {
+			e = new Exception("Something went wrong during update playlist name");
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	private boolean registraPlaylist(Session session) {
 		Playlist p = new Playlist();
+		String playlistName = playlistService.insertPlaylistData(cmdInput);
 		
 		try {
 			p = playlistService.addPlaylist(playlistName, session.getUser().getUserId());
@@ -245,6 +285,7 @@ public class ActionController {
 		
 		try {
 			playlistService.addSongsToPlaylist(p);
+			session.getUser().setPlaylists(playlistService.getUserPlaylist(session.getUser().getUserId()));
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during registrer the songs playlist");

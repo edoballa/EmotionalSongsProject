@@ -18,6 +18,11 @@ public class Action {
 	 */
 	public static final int NO_ACTION = -2;
 	/**
+	 * <code>BACK</code>
+	 * An integer with a value of -3, that representing the user's action </strong>no action</strong>.
+	 */
+	public static final int BACK = -3;
+	/**
 	 * <code>START_PROGRAM</code>
 	 * An integer with a value of 0, that representing the user's action </strong>start program</strong>.
 	 */
@@ -92,6 +97,11 @@ public class Action {
 	 * An integer with a value of 12, that representing the user's action </strong>view all user playlist</strong>.
 	 */
 	public static final int VIEW_ALL_USER_PLAYLIST = 12;
+	/**
+	 * <code>VIEW_PLAYLIST_DETAILS</code>
+	 * An integer with a value of 16, that representing the user's action </strong>update emotion comment</strong>.
+	 */
+	public static final int VIEW_PLAYLIST_DETAILS = 16;
 	
 	//public static final int NUMBER_OF_ACTION = 17;
 	
@@ -105,6 +115,8 @@ public class Action {
 		switch(actionId) {
 			case EXIT:
 				return "Termina il programma";
+			case BACK:
+				return "Torna indietro";
 			case LOGIN:
 				return "Login";
 			case REGISTRATION:
@@ -133,6 +145,8 @@ public class Action {
 				return "Visualizza tutte le emozioni inserite";
 			case UPDATE_EMOTION_COMMENT:
 				return "Visualizza tutte le tue playlist";
+			case VIEW_PLAYLIST_DETAILS:
+				return "Vedi dettagli playlist";
 			default:
 				return "Scelta non valida";
 		}
@@ -159,6 +173,8 @@ public class Action {
 				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
 			case LOGOUT:
 				return new int[] {EXIT, LOGIN, REGISTRATION, SEARCH};
+			case BACK:
+				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
 			case SEARCH:
 				if(login) {
 					return new int[] {EXIT, LOGOUT, SEARCH, SELECT_SONG, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
@@ -172,21 +188,24 @@ public class Action {
 				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
 			case ADD_PLAYLIST:
 				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
+			case VIEW_ALL_USER_PLAYLIST:
+				return new int[] {ADD_PLAYLIST, VIEW_PLAYLIST_DETAILS, RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
 			case RENAME_PLAYLIST:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
+				return new int[] {ADD_PLAYLIST, VIEW_PLAYLIST_DETAILS, RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
 			case DELETE_PLAYLIST:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
+				return new int[] {ADD_PLAYLIST, VIEW_PLAYLIST_DETAILS, RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
 			case UPDATE_PLAYLIST_SONG:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, RENAME_PLAYLIST, DELETE_PLAYLIST, VIEW_ALL_USER_PLAYLIST,
-						VIEW_ALL_USER_EMOTION};
-			case REMOVE_EMOTION:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION};
+				return new int[] {ADD_PLAYLIST, VIEW_PLAYLIST_DETAILS, RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
+			case VIEW_PLAYLIST_DETAILS:
+				return new int[] {RENAME_PLAYLIST, DELETE_PLAYLIST, UPDATE_PLAYLIST_SONG, BACK};
 			case VIEW_ALL_USER_EMOTION:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, VIEW_ALL_USER_EMOTION, UPDATE_EMOTION_COMMENT};
+				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
 			case UPDATE_EMOTION_COMMENT:
-				return new int[] {EXIT, LOGOUT, SEARCH, ADD_PLAYLIST, VIEW_ALL_USER_PLAYLIST, REMOVE_EMOTION, VIEW_ALL_USER_EMOTION};
+				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
+			case REMOVE_EMOTION:
+				return new int[] {UPDATE_EMOTION_COMMENT, REMOVE_EMOTION, BACK};
 			default:
-				return null;
+					return null;
 		}
 	}
 }
