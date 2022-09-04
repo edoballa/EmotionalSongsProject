@@ -45,8 +45,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 
 	@Override
 	public void create(Song song) throws Exception, IOException {
-		song.setSongId(nextKey);
-		nextKey++;
+		song.setSongId(getNextKey());
 		songList.putIfAbsent(song.getSongId(), song);
 		save();
 	}
@@ -107,6 +106,13 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 		
 		return songs;
 	}	
+	
+	public Long getNextKey() {
+    	while(songList.containsKey(nextKey)) {
+    		nextKey++;
+    	}
+    	return nextKey;
+	}
 	
 	private Boolean save() throws Exception{
         prepareDataForWriting();

@@ -45,8 +45,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 
     @Override
 	public void create(Playlist playlist) throws Exception, IOException {
-    	playlist.setPlaylistId(nextKey);
-    	nextKey++;
+    	playlist.setPlaylistId(getNextKey());
 		playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
     	save();		
 	}
@@ -73,9 +72,11 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 		return playlistList;
 	}
 	
-	public Long getNextId() {
-		Integer nextId = playlistList.size() + 1;
-		return nextId.longValue();
+	public Long getNextKey() {
+    	while(playlistList.containsKey(nextKey)) {
+    		nextKey++;
+    	}
+    	return nextKey;
 	}
 	
 	public Playlist getByName(String playlistName, Long userId) {
