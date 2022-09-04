@@ -17,7 +17,7 @@ public class EmotionalSongsProject {
 			actionController.printActionList(session.getPreviusAction(), session.getIsLoggedIn());
 			action = actionController.insertAction();
 			
-			if(action < Action.EXIT || action > Action.SELECT_USER_EMOTION) {
+			if(action < Action.EXIT || action > Action.UPDATE_EMOTION_COMMENT) {
 				continue;
 			} else if(!actionController.checkInsertAction(action, session.getPreviusAction(), session.getIsLoggedIn())) {
 				continue;
