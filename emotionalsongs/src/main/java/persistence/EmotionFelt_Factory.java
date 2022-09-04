@@ -31,9 +31,9 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
     private static EmotionFelt_Factory istance = null;
     /**
-     * <code>emotionFeltList</code>
+     * <code>emotionFeltMap</code>
      */
-    private Map<String, EmotionFelt> emotionFeltList;
+    private Map<String, EmotionFelt> emotionFeltMap;
     /**
      * <code>lines</code>
      */
@@ -43,7 +43,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
      * EmotionFelt_Factory default constructor.
      */
     private EmotionFelt_Factory() throws Exception {
-    	this.emotionFeltList = new HashMap<>();
+    	this.emotionFeltMap = new HashMap<>();
         this.lines = new ArrayList<>();
         
         fillList();
@@ -70,7 +70,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
      */
 	@Override
 	public void create(EmotionFelt emotionFelt) throws Exception, IOException {
-		emotionFeltList.putIfAbsent(emotionFelt.getEmotionFeltId(), emotionFelt);
+		emotionFeltMap.putIfAbsent(emotionFelt.getEmotionFeltId(), emotionFelt);
 		save();
 	}
 
@@ -82,7 +82,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	@Override
 	public EmotionFelt getById(String id) throws Exception {
-		return emotionFeltList.get(id);
+		return emotionFeltMap.get(id);
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	@Override
 	public void update(EmotionFelt emotionFelt) throws Exception, IOException {
-		emotionFeltList.remove(emotionFelt.getEmotionFeltId());
-		emotionFeltList.put(emotionFelt.getEmotionFeltId(), emotionFelt);
+		emotionFeltMap.remove(emotionFelt.getEmotionFeltId());
+		emotionFeltMap.put(emotionFelt.getEmotionFeltId(), emotionFelt);
 		save();
 	}
 
@@ -107,7 +107,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	@Override
 	public void delete(EmotionFelt emotionFelt) throws Exception {
-		emotionFeltList.remove(emotionFelt.getEmotionFeltId());
+		emotionFeltMap.remove(emotionFelt.getEmotionFeltId());
 		save();
 	}
 
@@ -116,7 +116,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	@Override
 	public Map<String, EmotionFelt> listAll() {
-		return emotionFeltList;
+		return emotionFeltMap;
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	public List<EmotionFelt> listAllByUser(Long userId) {
 		List<EmotionFelt> userEmotions = new ArrayList<>();
-		for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+		for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
 			if(emotionFelt.getUserId() == userId) {
 				userEmotions.add(emotionFelt);
 			}
@@ -144,7 +144,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 */
 	public List<EmotionFelt> listAllBySongId(Long songId) {
 		List<EmotionFelt> songEmotions = new ArrayList<>();
-		for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+		for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
 			if(emotionFelt.getSongId() == songId) {
 				songEmotions.add(emotionFelt);
 			}
@@ -185,13 +185,13 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * @return
 	 */
 	public List<EmotionFeltDetails> getEmotionAndRelativeScoreBySongId(Long songId) {
-		if(emotionFeltList.isEmpty()) {
+		if(emotionFeltMap.isEmpty()) {
 			return new ArrayList<EmotionFeltDetails>();
 		}
 		
 		Map<Long, EmotionScore> songEmotions = new HashMap<>();
 		
-		for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+		for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
 			EmotionScore emotionScore = new EmotionScore();
 			
 			if(emotionFelt.getSongId() == songId) {
@@ -220,7 +220,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 			emotionFeltDetails.setNumberOfRatings(eScore.counter);
 			emotionFeltDetails.setEmotion(Emotions.getEmotionById(eScore.emotionId));
 			
-			for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+			for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
 				if(emotionFelt.getSongId() == songId && !emotionFelt.getNote().isEmpty()) {
 					emotionFeltDetails.getComments().add(emotionFelt.getNote());					
 				}
@@ -249,7 +249,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
             return false;
         }
         
-        emotionFeltList.clear();
+        emotionFeltMap.clear();
         fillList();
         
         return true;
@@ -262,7 +262,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
         lines.clear();
         String line = new String();
         
-        for(EmotionFelt emotionFelt : emotionFeltList.values()) {
+        for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
         	//(emozioneId, score, note, canzoneId, userId)
             line = emotionFelt.getEmotionId() + ";" 
                     + emotionFelt.getScore() + ";"
@@ -286,11 +286,9 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        EmotionFelt emotionFelt;
 
         for(String line : lines) {
-            emotionFelt = new EmotionFelt(); //do this for cache problems
+        	EmotionFelt emotionFelt = new EmotionFelt();
             
             String[] strs = line.split(";");
             if(strs.length > 0){
@@ -312,9 +310,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
                 
                 emotionFelt.setEmotionFeltId(strs[0] + "_" + strs[3] + "_" + strs[4]);
                 
-                emotionFeltList.putIfAbsent(emotionFelt.getEmotionFeltId(), emotionFelt);
+                emotionFeltMap.putIfAbsent(emotionFelt.getEmotionFeltId(), emotionFelt);
             }
-            emotionFelt = null; //do this for cache problems
         }    
     }
 

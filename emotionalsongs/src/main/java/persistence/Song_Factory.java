@@ -18,20 +18,20 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     private static Song_Factory istance = null;
     private EmotionFelt_Factory emotionFeltFactory;
     
-    private Map<Long, Song> songList;
+    private Map<Long, Song> songMap;
     private List<String> lines;
     private Long nextKey = null;
     
     private Song_Factory() throws Exception {
-    	this.songList = new HashMap<>();
+    	this.songMap = new HashMap<>();
         this.lines = new ArrayList<>();
         this.emotionFeltFactory = EmotionFelt_Factory.getIstance();
         
         fillList();
         
         if(nextKey == null) {
-        	nextKey = Long.valueOf(songList.size());
-        	while(songList.containsKey(nextKey)) {
+        	nextKey = Long.valueOf(songMap.size());
+        	while(songMap.containsKey(nextKey)) {
         		nextKey++;
         	}
         }
@@ -46,46 +46,46 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	@Override
 	public void create(Song song) throws Exception, IOException {
 		song.setSongId(getNextKey());
-		songList.putIfAbsent(song.getSongId(), song);
+		songMap.putIfAbsent(song.getSongId(), song);
 		save();
 	}
 
 	@Override
 	public Song getById(Long id) throws Exception {
-		if(songList.containsKey(id))
-			return songList.get(id);
+		if(songMap.containsKey(id))
+			return songMap.get(id);
 		else return null;
 	}
 
 	@Override
 	public void update(Song song) throws Exception, IOException {
-		songList.replace(song.getSongId(), song);
+		songMap.replace(song.getSongId(), song);
 		save();
 	}
 
 	@Override
 	public void delete(Song song) throws Exception {
-		if(songList.containsKey(song.getSongId())) {
-			songList.remove(song.getSongId());
+		if(songMap.containsKey(song.getSongId())) {
+			songMap.remove(song.getSongId());
 			save();
 		}	
 	}
 
 	@Override
 	public Map<Long, Song> listAll() {
-		return songList;
+		return songMap;
 	}
 	
 	public void updateSongInList(Song song) {
-		if(songList.containsKey(song.getSongId())) {
-			songList.replace(song.getSongId(), song);
+		if(songMap.containsKey(song.getSongId())) {
+			songMap.replace(song.getSongId(), song);
 		}
 	}
 	
 	public List<Song> getSongByString(String string){
 		List<Song> songs = new ArrayList<>();
 		
-		for(Song song : songList.values()) {
+		for(Song song : songMap.values()) {
 			if(song.getTitle().toLowerCase().contains(string.toLowerCase()) || song.getAuthor().toLowerCase().contains(string.toLowerCase())
 					|| song.getYear().contains(string)) {
 				songs.add(song);
@@ -98,7 +98,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	public List<Song> getByMusicalGenre(String musicalGenre) {
 		List<Song> songs = new ArrayList<>();
 		
-		for(Song song : songList.values()) {
+		for(Song song : songMap.values()) {
 			if(song.getMusicalGenre().equals(musicalGenre)) {
 				songs.add(song);
 			}
@@ -108,7 +108,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	}	
 	
 	public Long getNextKey() {
-    	while(songList.containsKey(nextKey)) {
+    	while(songMap.containsKey(nextKey)) {
     		nextKey++;
     	}
     	return nextKey;
@@ -126,7 +126,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
             return false;
         }
         
-        songList.clear();
+        songMap.clear();
         fillList();
         
         return true;
@@ -136,7 +136,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
         lines.clear();
         String line = new String();
         
-        for(Song song : songList.values()) {
+        for(Song song : songMap.values()) {
             
             line = song.getSongId() + ";"
                     + song.getTitle() + ";" 
@@ -172,7 +172,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
                 song.setEmotionList(emotionsFelt);
                 
                 
-                songList.putIfAbsent(song.getSongId(), song);
+                songMap.putIfAbsent(song.getSongId(), song);
             }
         }    
     }

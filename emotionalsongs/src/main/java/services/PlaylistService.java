@@ -20,11 +20,9 @@ public class PlaylistService {
 		playlist.setPublic(false);
 		playlist.setUserId(userId);
 		
-		Long playlistId = playlistFactory.getNextId();
-		playlist.setPlaylistId(playlistId);
-		
+		playlist.setPlaylistId(playlistFactory.getNextKey());
 		playlistFactory.create(playlist);
-		return playlistFactory.getById(playlistId);		
+		return playlistFactory.getById(playlist.getPlaylistId());		
 	}
 	
 	public Playlist addSongToPlaylist(String playlistName, Song song, Long userId) throws IOException, Exception {

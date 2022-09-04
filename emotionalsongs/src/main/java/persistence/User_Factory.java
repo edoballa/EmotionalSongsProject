@@ -17,12 +17,12 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
     private static User_Factory istance = null;
 
-    private Map<Long, User> userList;
+    private Map<Long, User> userMap;
     private List<String> lines;
     private Long nextKey = null;
 
     private User_Factory() throws Exception {
-        this.userList = new HashMap<>();
+        this.userMap = new HashMap<>();
         this.lines = new ArrayList<>();
         
         //System.out.println(FILEPATH);
@@ -30,8 +30,8 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         fillUserList();
         
         if(nextKey == null) {
-        	nextKey = Long.valueOf(userList.size());
-        	while(userList.containsKey(nextKey)) {
+        	nextKey = Long.valueOf(userMap.size());
+        	while(userMap.containsKey(nextKey)) {
         		nextKey++;
         	}
         }
@@ -46,7 +46,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
     
     public Long getNextKey() {
-    	while(userList.containsKey(nextKey)) {
+    	while(userMap.containsKey(nextKey)) {
     		nextKey++;
     	}
     	return nextKey;
@@ -55,14 +55,14 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     @Override
     public void create(User user) throws Exception, IOException {
         user.setUserId(getNextKey());
-        userList.putIfAbsent(user.getUserId(), user);
+        userMap.putIfAbsent(user.getUserId(), user);
         save();
     }
 
     @Override
     public User getById(Long id) throws Exception {
-        if (userList.containsKey(id)) {
-            return userList.get(id);
+        if (userMap.containsKey(id)) {
+            return userMap.get(id);
         } else {
             return null;
         }
@@ -70,26 +70,26 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
 
     @Override
     public void update(User user) throws Exception, IOException {
-        userList.remove(user.getUserId());
-        userList.put(user.getUserId(), user);
+        userMap.remove(user.getUserId());
+        userMap.put(user.getUserId(), user);
         save();
     }
 
     @Override
     public void delete(User user) throws Exception {
-        if (userList.containsKey(user.getUserId())) {
-            userList.remove(user.getUserId());
+        if (userMap.containsKey(user.getUserId())) {
+            userMap.remove(user.getUserId());
             save();
         }
     }
 
     @Override
     public Map<Long, User> listAll() {
-        return userList;
+        return userMap;
     }
 
     public User getByUsername(String username) {
-        for (User user : userList.values()) {
+        for (User user : userMap.values()) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -99,7 +99,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     public User getByEmail(String email) {
-        for (User user : userList.values()) {
+        for (User user : userMap.values()) {
             if (user.getEmail().equals(email)) {
                 return user;
             }
@@ -109,7 +109,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     public boolean existUser(User user) {
-        for (User u : userList.values()) {
+        for (User u : userMap.values()) {
             if (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
                 return true;
             }
@@ -130,7 +130,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
             return false;
         }
 
-        userList.clear();
+        userMap.clear();
         fillUserList();
 
         return true;
@@ -140,7 +140,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         lines.clear();
         String line = new String();
 
-        for (User user : userList.values()) {
+        for (User user : userMap.values()) {
 
             line = user.getUserId() + ";"
                     + user.getUsername() + ";"
@@ -169,10 +169,8 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
             ex.printStackTrace();
         }
 
-        User user;
-
-        for (String line : lines) {
-            user = new User(); //do this for cache problems
+       for (String line : lines) {
+        	User user = new User(); 
 
             String[] strs = line.split(";");
             if (strs.length > 0) {
@@ -196,9 +194,8 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
                     user.getAddress().setCountry(strs[12]);
                 }*/
                 
-                userList.putIfAbsent(user.getUserId(), user);
+                userMap.putIfAbsent(user.getUserId(), user);
             }
-            user = null; //do this for cache problems
         }
     }
 

@@ -18,20 +18,20 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     private static Playlist_Factory istance = null;
     
     private Song_Factory songFactory;
-    private Map<Long, Playlist> playlistList;
+    private Map<Long, Playlist> playlistMap;
     private List<String> lines;
     private Long nextKey = null;
     
     private Playlist_Factory() throws Exception {
-    	this.playlistList = new HashMap<>();
+    	this.playlistMap = new HashMap<>();
         this.lines = new ArrayList<>();
         this.songFactory = Song_Factory.getIstance();
         
         fillList();
         
         if(nextKey == null) {
-        	nextKey = Long.valueOf(playlistList.size());
-        	while(playlistList.containsKey(nextKey)) {
+        	nextKey = Long.valueOf(playlistMap.size());
+        	while(playlistMap.containsKey(nextKey)) {
         		nextKey++;
         	}
         }
@@ -45,34 +45,34 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 
     @Override
 	public void create(Playlist playlist) throws Exception, IOException {
-		playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
+		playlistMap.putIfAbsent(playlist.getPlaylistId(), playlist);
     	save();
 	}
 
 	@Override
 	public Playlist getById(Long id) throws Exception {
-		return playlistList.get(id);
+		return playlistMap.get(id);
 	}
 
 	@Override
 	public void update(Playlist playlist) throws Exception, IOException {
-		playlistList.replace(playlist.getPlaylistId(), playlist);
+		playlistMap.replace(playlist.getPlaylistId(), playlist);
     	save();
 	}
 
 	@Override
 	public void delete(Playlist playlist) throws Exception {
-		playlistList.remove(playlist.getPlaylistId());
+		playlistMap.remove(playlist.getPlaylistId());
     	save();
 	}
 	
 	@Override
 	public Map<Long, Playlist> listAll() {
-		return playlistList;
+		return playlistMap;
 	}
 	
 	public Long getNextKey() {
-    	while(playlistList.containsKey(nextKey)) {
+    	while(playlistMap.containsKey(nextKey)) {
     		nextKey++;
     	}
     	return nextKey;
@@ -93,7 +93,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	public Map<Long, Playlist> getUserPlaylist(Long userId){
 		Map<Long, Playlist> userPlaylist = new HashMap<>();
 		
-		for(Playlist playlist : playlistList.values()) {
+		for(Playlist playlist : playlistMap.values()) {
 			if(playlist.getUserId() == userId) {
 				userPlaylist.put(playlist.getPlaylistId(), playlist);
 			}
@@ -114,7 +114,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
             return false;
         }
         
-        playlistList.clear();
+        playlistMap.clear();
         fillList();
         
         return true;
@@ -125,7 +125,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
         String line = new String();
         String songs = "";
         
-        for(Playlist playlist : playlistList.values()) {
+        for(Playlist playlist : playlistMap.values()) {
         	//(playlistId, userId, nome, List<canzone>, isPublic)
             line = playlist.getPlaylistId() + ";"
                     + playlist.getUserId() + ";" 
@@ -151,11 +151,9 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        Playlist playlist;
 
         for(String line : lines) {
-        	playlist = new Playlist(); //do this for cache problems
+        	Playlist playlist = new Playlist(); 
             
             String[] strs = line.split(";");
             if(strs.length > 0){
@@ -172,9 +170,8 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	            	}
             	}
                 
-                playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
+                playlistMap.putIfAbsent(playlist.getPlaylistId(), playlist);
             }
-            playlist = null; //do this for cache problems
         }    
     }
 }

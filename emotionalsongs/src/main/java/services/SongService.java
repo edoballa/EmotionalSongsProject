@@ -1,31 +1,23 @@
 package services;
 
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import objects.EmotionFelt;
 import objects.EmotionFeltDetails;
-import objects.Playlist;
 import objects.Song;
-import persistence.EmotionFelt_Factory;
-import persistence.Playlist_Factory;
 import persistence.Song_Factory;
 
 public class SongService {
 	private Song_Factory songFactory;
-	private Playlist_Factory playlistFactory;
-	private EmotionFelt_Factory emotionFeltFactory;
 	
 	private Map<Long, Song> lastSearch;
 	private Long lastSelectedSong;
 	
 	public SongService() throws Exception {
 		songFactory = Song_Factory.getIstance();
-		playlistFactory = Playlist_Factory.getIstance();
-		emotionFeltFactory = EmotionFelt_Factory.getIstance();
 		lastSearch = new HashMap<Long, Song>();
 	}
 
