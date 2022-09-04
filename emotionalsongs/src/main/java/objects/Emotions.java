@@ -65,11 +65,11 @@ public class Emotions {
             case 2:
                 return "Sensazione di trascendenza, ispirazione.";
             case 3:
-                return "SensualitÃ , affetto, sentimento d'amore";
+                return "Sensualità , affetto, sentimento d'amore";
             case 4:
                 return "Sensazioni sognanti, malinconiche, sentimentali";
             case 5:
-                return "Relax, serenitÃ Â , meditazione";
+                return "Relax, serenità, meditazione";
             case 6:
                 return "Sentirsi forte, eroico, trionfante, energico";
             case 7:
@@ -92,7 +92,7 @@ public class Emotions {
             case 1:
                 return "Stupore";
             case 2:
-                return "SolennitÃ Â ";
+                return "Solennità";
             case 3:
                 return "Tenerezza";
             case 4:
