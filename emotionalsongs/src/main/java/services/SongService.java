@@ -139,15 +139,17 @@ public class SongService {
 		System.out.println("Genere : " + song.getMusicalGenre());
 		System.out.println("Anno : " + song.getYear());
 		
-		System.out.println("Emozioni provate dagli utenti (il numero indica il valore medio)");	
-		for(EmotionFeltDetails emd : song.getEmotionList()) {
-			System.out.println(emd.getEmotion().getName() + "(" + emd.getEmotion().getDescription() + ")");
-			System.out.println("Valore medio: " + emd.getAverageOfRatings() + " (la media fa riferimento a " + emd.getNumberOfRatings() + " recensioni)");
-			System.out.println("Commenti: ");
-			for(String s : emd.getComments()) {
-				System.out.println(s);
-			}
-		} 
+		if(!song.getEmotionList().isEmpty()) {
+			System.out.println("Emozioni provate dagli utenti (il numero indica il valore medio)");	
+			for(EmotionFeltDetails emd : song.getEmotionList()) {
+				System.out.println(emd.getEmotion().getName() + "(" + emd.getEmotion().getDescription() + ")");
+				System.out.println("Valore medio: " + emd.getAverageOfRatings() + " (la media fa riferimento a " + emd.getNumberOfRatings() + " recensioni)");
+				System.out.println("Commenti: ");
+				for(String s : emd.getComments()) {
+					System.out.println(s);
+				}
+			} 
+		}
 	}
 	
 	public Long getLastSongSelected() {

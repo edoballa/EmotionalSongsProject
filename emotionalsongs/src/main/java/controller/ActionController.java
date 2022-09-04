@@ -226,7 +226,11 @@ public class ActionController {
 	private boolean cercaBranoMusicale() {
 		String stringToSearch = songService.getStringToSearch(cmdInput);
 		Map<Long, Song> result = songService.searchSong(stringToSearch);
-		songService.showResult(result);		
+		if(!result.isEmpty()) {
+			songService.showResult(result);		
+		} else {
+			System.out.println("La ricerca non ha dato risultati");
+		}
 		return true;
 	}
 	
@@ -284,7 +288,12 @@ public class ActionController {
 	private boolean viewUserEmotion(User user) {
 		try {
 			user.setEmotionsFelt(emotionService.getUserEmotion(user.getUserId()));
-			emotionService.printEmotionList(user.getEmotionsFelt());
+			if(!user.getPlaylists().isEmpty()) {
+				emotionService.printEmotionList(user.getEmotionsFelt());
+			} else {
+				System.out.println("L'utente non ha inserito nessuna emozione");
+				return false;
+			}
 			return true;
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during show user emotion felt");
@@ -296,7 +305,12 @@ public class ActionController {
 	
 	private boolean viewUserPlaylist(User user) {
 		user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
-		playlistService.printUserPlaylist(user.getPlaylists());
+		if(!user.getPlaylists().isEmpty()) {
+			playlistService.printUserPlaylist(user.getPlaylists());
+		} else {
+			System.out.println("L'utente non ha nessuna playlist");
+			return false;
+		}
 		return true;
 	}
 	
