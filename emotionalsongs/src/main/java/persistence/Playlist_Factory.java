@@ -45,9 +45,8 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 
     @Override
 	public void create(Playlist playlist) throws Exception, IOException {
-    	playlist.setPlaylistId(getNextKey());
 		playlistList.putIfAbsent(playlist.getPlaylistId(), playlist);
-    	save();		
+    	save();
 	}
 
 	@Override
