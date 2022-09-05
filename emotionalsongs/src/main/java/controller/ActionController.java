@@ -458,7 +458,7 @@ public class ActionController {
 		}
 		
 		try {
-			playlistService.addSongsToPlaylist(p);
+			playlistService.updatePlaylist(p);
 			user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
 			System.out.println("Playlist aggiunta con successo!");
 			return true;
