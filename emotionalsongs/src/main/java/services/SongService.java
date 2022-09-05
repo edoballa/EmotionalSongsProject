@@ -1,3 +1,9 @@
+/**
+* This package contains the classes that implements the actions calling the factory. 
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package services;
 
 
@@ -11,17 +17,38 @@ import objects.Song;
 import persistence.Song_Factory;
 
 public class SongService {
+	/**
+	 * <code>songFactory</code>
+	 * A SongFactory object use to invoke the methods of that class.
+	 */
 	private Song_Factory songFactory;
-	
+	/**
+	 * <code>lastSearch</code>
+	 * A Map that contains the last search of the user.
+	 */
 	private Map<Long, Song> lastSearch;
+	/**
+	 * <code>lastSelectedSong</code>
+	 * A Long to keep track of the id of the last selected song.
+	 */
 	private Long lastSelectedSong;
 	
+	/**
+	 *  SongService default constructor.
+	 *  
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public SongService() throws Exception {
 		songFactory = Song_Factory.getIstance();
 		lastSearch = new HashMap<Long, Song>();
 	}
 
-	//* Ricerca con 3 lettere, per titolo, per autore e anno
+	/**
+	 * This method return a map with the searched song inside.
+	 * 
+	 * @param <song> A String that represents the song to search.
+	 * @return A Map that contains the last song search by the user.
+	 */
 	public Map<Long, Song> searchSong(String song) {
 		List<Song> songByAuthor = songFactory.getSongByString(song);
 		
@@ -34,6 +61,12 @@ public class SongService {
 		return lastSearch;
 	}
 	
+	/**
+	 * This method return the String that contains the song to search.
+	 * 
+	 * @param <cmdInput> User's input from cmd.
+	 * @return A String.
+	 */
 	public String getStringToSearch(Scanner cmdInput) {
 		String stringToSearch;
 		do {
@@ -44,12 +77,23 @@ public class SongService {
 		return stringToSearch;
 	}
 	
+	/**
+	 * This method print on the console a Map of Song.
+	 * 
+	 * @param <resultMap> A Map of Song.
+	 */
 	public void showResult(Map<Long, Song> resultMap) {
 		for(Song s : resultMap.values()) {
 			System.out.println(s.getSongId() + " - " + s.getTitle() + "(" + s.getAuthor() + ")" );
 		}
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param <cmdInput> User's input from cmd.
+	 * @return
+	 */
 	public Long selectSong(Scanner cmdInput) {
 		boolean validValue = false;
 		boolean validId = false;
@@ -101,7 +145,7 @@ public class SongService {
 						validValue = true;
 						break;
 					default:
-		        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
+		        		System.out.println("Il valore inserito non Ã¨ valido, scegliere nuovamente.");
 		        		validValue = false;
 		        		break;
 		        	}
@@ -119,6 +163,12 @@ public class SongService {
 		return Long.valueOf(songId);
 	}
 	
+	/**
+	 * This method return a song based on its id.
+	 * 
+	 * @param <id> The song's id.
+	 * @return A Song object.
+	 */
 	public Song getSongById(Long id) {
 		try {
 			return songFactory.getById(id);
@@ -130,6 +180,11 @@ public class SongService {
 		return new Song();
 	}
 	
+	/**
+	 * This method print on the console all the data and details of a song, with also the emotions felt by the users and the associated details.
+	 * 
+	 * @param <songId> The song's id.
+	 */
 	public void printSongDetails(Long songId) {
 		Song song = new Song();
 		try {
@@ -157,6 +212,11 @@ public class SongService {
 		}
 	}
 	
+	/**
+	 * This method return the id of the last song selected.
+	 * 
+	 * @return A Long.
+	 */
 	public Long getLastSongSelected() {
 		return this.lastSelectedSong;
 	}
