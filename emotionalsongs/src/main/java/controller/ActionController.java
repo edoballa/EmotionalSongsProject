@@ -334,7 +334,6 @@ public class ActionController {
 	}
 	
 	private boolean viewPlaylistDetail(Map<Long, Playlist> playlistMap) {
-		System.out.println("Playlist aggiunta con successo!");
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, playlistMap);
 		playlistService.printPlaylistDetails(playlistMap.get(playListSelected));
 		return true;
