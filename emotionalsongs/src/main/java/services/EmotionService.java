@@ -1,5 +1,5 @@
 /**
-* This package contains the classes that implements the actions calling the factory. 
+* This package contains the busisness logic.
 *
 * @author Diana Cantaluppi, Matr. 744457 Sede Como.
 * @author Edoardo Ballabio, Matr. 745115 Sede Como.
