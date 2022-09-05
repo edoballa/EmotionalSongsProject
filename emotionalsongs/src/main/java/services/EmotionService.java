@@ -96,7 +96,7 @@ public class EmotionService {
 						}
 						
 						if(!existEmotionYet) {
-							System.out.println("√â gi√† presente un'emozione uguale per questa canzone, inserirne una diversa.");
+							System.out.println("» gi‡ presente un'emozione uguale per questa canzone, inserirne una diversa.");
 							continue;
 						} 
 					}

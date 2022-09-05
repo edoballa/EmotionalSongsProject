@@ -190,7 +190,7 @@ public class PlaylistService {
 						validValue = true;
 						break;
 					default:
-		        		System.out.println("Il valore inserito non Ã¨ valido, scegliere nuovamente.");
+		        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
 		        		validValue = false;
 		        		break;
 		        	}
@@ -282,7 +282,7 @@ public class PlaylistService {
 							validValue = true;
 							break;
 						default:
-			        		System.out.println("Il valore inserito non Ã¨ valido, scegliere nuovamente.");
+			        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
 			        		validValue = false;
 			        		break;
 			        	}

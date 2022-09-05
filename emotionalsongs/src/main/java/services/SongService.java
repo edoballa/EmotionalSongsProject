@@ -151,7 +151,7 @@ public class SongService {
 						validValue = true;
 						break;
 					default:
-		        		System.out.println("Il valore inserito non Ã¨ valido, scegliere nuovamente.");
+		        		System.out.println("Il valore inserito non è valido, scegliere nuovamente.");
 		        		validValue = false;
 		        		break;
 		        	}
@@ -206,14 +206,19 @@ public class SongService {
 		System.out.println("Anno : " + song.getYear());
 		
 		if(!song.getEmotionList().isEmpty()) {
-			System.out.println("Emozioni provate dagli utenti (il numero indica il valore medio)");	
+			System.out.println("\nEmozioni provate dagli utenti (il numero indica il valore medio): \n");
+			
 			for(EmotionFeltDetails emd : song.getEmotionList()) {
 				System.out.println(emd.getEmotion().getName() + "(" + emd.getEmotion().getDescription() + ")");
 				System.out.println("Valore medio: " + emd.getAverageOfRatings() + " (la media fa riferimento a " + emd.getNumberOfRatings() + " recensioni)");
-				System.out.println("Commenti: ");
-				for(String s : emd.getComments()) {
-					System.out.println(s);
+				
+				if(!emd.getComments().isEmpty()) {
+					System.out.println("Commenti: ");
+					for(String s : emd.getComments()) {
+						System.out.println(s);
+					}
 				}
+				System.out.println("--------------");
 			} 
 		}
 	}

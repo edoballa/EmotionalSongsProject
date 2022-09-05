@@ -258,7 +258,7 @@ public class ActionController {
 				session.getUser().setEmotionsFelt(emotionService.getUserEmotion(session.getUser().getUserId()));
 				System.out.println("Login effettuata correttamente!");
 				return true;
-			} else System.out.println("La login non Ã¨ stata effettuata correttamente, si prega di riprovare.");
+			} else System.out.println("La login non è stata effettuata correttamente, si prega di riprovare.");
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during login");
 			e.printStackTrace();

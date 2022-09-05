@@ -231,7 +231,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 			emotionFeltDetails.setEmotion(Emotions.getEmotionById(eScore.emotionId));
 			
 			for(EmotionFelt emotionFelt : emotionFeltMap.values()) {
-				if(emotionFelt.getSongId() == songId && !emotionFelt.getNote().isEmpty()) {
+				if(emotionFelt.getSongId() == songId && !emotionFelt.getNote().isEmpty() 
+						&& emotionFelt.getEmotionId() == emotionFeltDetails.getEmotion().getEmotionId()) {
 					emotionFeltDetails.getComments().add(emotionFelt.getNote());					
 				}
 			}
