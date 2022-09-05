@@ -1,3 +1,9 @@
+/**
+* This package contains the classes that implements the actions calling the factory. 
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package services;
 
 import java.util.Scanner;
@@ -7,13 +13,32 @@ import objects.User;
 import persistence.User_Factory;
 
 public class SignUpService {
+	/**
+	 * <code>istance</code>
+	 * A SignUpService object that allows to instantiate the class only once.
+	 */
 	private static SignUpService istance = null;
+	/**
+	 * <code>userFactory</code>
+	 * A UserFactory object use to invoke the methods of that class.
+	 */
 	private User_Factory userFactory;
 	
+	/**
+	 *  SignUpService default constructor.
+	 *  
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	private SignUpService() throws Exception {
 		this.userFactory = User_Factory.getIstance();
 	}
 	
+	/**
+     * This method return the istance of the SignUpService object.
+     * 
+     * @return the object SignUpService.
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
 	public static SignUpService getIstance() throws Exception {
 		if(istance == null) {
 			return new SignUpService();
@@ -21,6 +46,13 @@ public class SignUpService {
 		else return istance;
 	}
 	
+	/**
+	 * This method allows the user to insert data for the registration.
+	 * The appropriate checks are carried out on the various fields to be insert.
+	 * 
+	 * @param <cmdInput>User's input from cmd.
+	 * @return A User object.
+	 */
 	public User insertdata(Scanner cmdInput) {
 		boolean isValid = true;
 		
@@ -32,7 +64,7 @@ public class SignUpService {
 	        if(inpUser == null || inpUser.isBlank()) {
 				isValid = false;
 			} else if(userFactory.getByUsername(inpUser) != null) {
-				System.out.println("Username gi‡†esistente, inserirne uno diverso :");
+				System.out.println("Username gi√† esistente, inserirne uno diverso :");
 				inpUser = cmdInput.nextLine();
 				isValid = false;
 			} else isValid = true;
@@ -59,7 +91,7 @@ public class SignUpService {
 	        		|| !inpEmail.contains(".")) {
 				isValid = false;
 			} else if(userFactory.getByEmail(inpEmail) != null) {
-				System.out.println("Email gi‡†esistente, inserirne un'altra: ");
+				System.out.println("Email gi√† esistente, inserirne un'altra: ");
 				inpEmail = cmdInput.nextLine();
 				isValid = false;
 			} else isValid = true;
@@ -134,7 +166,7 @@ public class SignUpService {
         
         String inpCity = "";
         do{
-        	System.out.print("Inserisci la tua Citta†: ");
+        	System.out.print("Inserisci la tua Citta : ");
             inpCity = cmdInput.nextLine();
 
 	        if(inpCity == null || inpCity.isBlank()) {
@@ -160,6 +192,13 @@ public class SignUpService {
 		return paramsUser;
 	}
 	
+	/**
+	 * This method insert a new User in the Map.
+	 * 
+	 * @param <paramUser> The User to insert.
+	 * @return A User object.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public User insertNewUser(User paramUser) throws  Exception {
 		userFactory.create(paramUser);
 		return userFactory.getByUsername(paramUser.getUsername());
