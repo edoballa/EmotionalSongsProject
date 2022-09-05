@@ -36,12 +36,13 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	 */
     private Song_Factory songFactory;
     /**
-	 * <code>playlistList</code>
+	 * <code>playlistMap</code>
+	 * A Map of Playlist that contains all the playlist create by a user.
 	 */
     private Map<Long, Playlist> playlistMap;
     /**
-     * A Map of Playlist that contains all the playlist create by a user.
 	 * <code>lines</code>
+	 * A List of String that contains the lines of a file.
 	 */
     private List<String> lines;
     /**
@@ -90,7 +91,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
      * @throws <IOException> This exception is thrown if there is any input/output error.
      */
     @Override
-	public void create(Playlist playlist) throws Exception, IOException {
+    public void create(Playlist playlist) throws Exception, IOException {
 		playlistMap.putIfAbsent(playlist.getPlaylistId(), playlist);
     	save();		
 	}
@@ -135,7 +136,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method return a Map with all the Playlist.
 	 * 
-	 * @return <playlistList>
+	 * @return <playlistMap> A Map of Playlist.
 	 */
 	@Override
 	public Map<Long, Playlist> listAll() {
@@ -145,7 +146,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method return the next key of the playlist map.
 	 * 
-	 * @return An integer that indicate the next key of the map.
+	 * @return A Long that indicate the next key of the map.
 	 */
 	public Long getNextKey() {
 		while(playlistMap.containsKey(nextKey)) {
@@ -217,10 +218,10 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     }
     
 	/**
-	 * This method adds the playlists creates by a user to a list of strings.
+	 * This method adds the playlists creates by a user to a list of String.
 	 * The data in the list are divided by a separator.
 	 */
-    private void prepareDataForWriting() {
+	private void prepareDataForWriting() {
         lines.clear();
         String line = new String();
         
@@ -247,10 +248,11 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     }
     
     /**
+     * This method after the every update refresh the object Map.
      * 
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
      */
-    private void fillList() throws Exception{
+	private void fillList() throws Exception{
         lines.clear();
         
         try {
