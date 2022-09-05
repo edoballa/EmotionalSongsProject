@@ -25,7 +25,7 @@ public class Authenticator {
 	/**
 	 *  Authenticator default constructor.
 	 *  
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public Authenticator() throws Exception {
 		this.loginService = LoginService.getIstance();
@@ -36,9 +36,9 @@ public class Authenticator {
 	 * This method return a User object if the credentials entered by the user are correct.
 	 * Otherwise it return null.
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return A User object.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public User actionLogin(Scanner cmdInput) throws Exception {
 		User paramsUser = loginService.run(cmdInput);
@@ -53,9 +53,9 @@ public class Authenticator {
 	/**
 	 * This method return a User object if the registration is successful.
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return A User object.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public User actionRegisterUser(Scanner cmdInput) throws Exception {
 		User userToReg = signUpService.insertdata(cmdInput); //the check for the data validity is inside

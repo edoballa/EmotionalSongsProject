@@ -48,7 +48,7 @@ public class EmotionFeltDetails {
 
 	/**
      * emotion setter method.
-     * @param <emotion> The emotion to set.
+     * @param emotion The emotion to set.
      */
 	public void setEmotion(Emotion emotion) {
 		this.emotion = emotion;
@@ -64,7 +64,7 @@ public class EmotionFeltDetails {
 	
 	/**
      * averageOfRatings setter method.
-     * @param <averageOfRatings> The average of ratings to set.
+     * @param averageOfRatings The average of ratings to set.
      */
 	public void setAverageOfRatings(Double averageOfRatings) {
 		this.averageOfRatings = averageOfRatings;
@@ -80,7 +80,7 @@ public class EmotionFeltDetails {
 	
 	/**
      * numberOfRatings setter method.
-     * @param <numberOfRatings> The number of ratings to set.
+     * @param numberOfRatings The number of ratings to set.
      */
 	public void setNumberOfRatings(int numberOfRatings) {
 		this.numberOfRatings = numberOfRatings;
@@ -96,7 +96,7 @@ public class EmotionFeltDetails {
 	
 	/**
      * comments setter method.
-     * @param <comments> The emotion's comments to set.
+     * @param comments The emotion's comments to set.
      */
 	public void setComments(List<String> comments) {
 		this.comments = comments;

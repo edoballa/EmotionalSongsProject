@@ -72,16 +72,16 @@ public class User{
     /**
      * User constructor with all fields as parameters.
      * 
-     * @param <userId> The user's id.
-     * @param <username> The user's username.
-     * @param <password> The user's password.
-     * @param <email> The user's email.
-     * @param <firstName> The user's first name.
-     * @param <lastName> The user's last name.
-     * @param <fiscalCode> The user's fiscal code.
-     * @param <address> The user's address.
-     * @param <playlists> A Map of playlist.
-     * @param <emotionsFelt> A map of emotions felt.
+     * @param userId The user's id.
+     * @param username The user's username.
+     * @param password The user's password.
+     * @param email The user's email.
+     * @param firstName The user's first name.
+     * @param lastName The user's last name.
+     * @param fiscalCode The user's fiscal code.
+     * @param address The user's address.
+     * @param playlists A Map of playlist.
+     * @param emotionsFelt A map of emotions felt.
      */
     public User(Long userId, String username, String password, String email, String firstName, String lastName,
             String fiscalCode, Address address, Map<Long, Playlist> playlists, Map<String, EmotionFelt> emotionsFelt) {
@@ -101,8 +101,8 @@ public class User{
     /**
      * User constructor with all fields as parameters.
      * 
-     * @param <username> The user's username.
-     * @param <password> The user's password.
+     * @param username The user's username.
+     * @param password The user's password.
      */
     public User(String username, String password) {
         super();
@@ -120,7 +120,7 @@ public class User{
 
     /**
      * userId setter method.
-     * @param <userId> The user id to set.
+     * @param userId The user id to set.
      */
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -136,7 +136,7 @@ public class User{
 
     /**
      * username setter method.
-     * @param <username> The username to set.
+     * @param username The username to set.
      */
     public void setUsername(String username) {
         this.username = username;
@@ -152,7 +152,7 @@ public class User{
 
     /**
      * password setter method.
-     * @param <password> The password to set.
+     * @param password The password to set.
      */
     public void setPassword(String password) {
         this.password = password;
@@ -168,7 +168,7 @@ public class User{
 
     /**
      * email setter method.
-     * @param <email> The email to set.
+     * @param email The email to set.
      */
     public void setEmail(String email) {
         this.email = email;
@@ -184,7 +184,7 @@ public class User{
 
     /**
      * firstName setter method.
-     * @param <firstName> The first name to set.
+     * @param firstName The first name to set.
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -200,7 +200,7 @@ public class User{
 
     /**
      * lastName setter method.
-     * @param <lastName> The last name to set.
+     * @param lastName The last name to set.
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -216,7 +216,7 @@ public class User{
 
     /**
      * fiscalCode setter method.
-     * @param <fiscalCode> The fiscal code to set.
+     * @param fiscalCode The fiscal code to set.
      */
     public void setFiscalCode(String fiscalCode) {
         this.fiscalCode = fiscalCode;
@@ -232,7 +232,7 @@ public class User{
 
     /**
      * address setter method.
-     * @param <address> The address to set.
+     * @param address The address to set.
      */
     public void setAddress(Address address) {
         this.address = address;
@@ -248,7 +248,7 @@ public class User{
 
     /**
      * playlists setter method.
-     * @param <playlists> The Map of playlists to set.
+     * @param playlists The Map of playlists to set.
      */
 	public void setPlaylists(Map<Long, Playlist> playlists) {
 		this.playlists = playlists;
@@ -264,7 +264,7 @@ public class User{
 
 	/**
      * emotionsFelt setter method.
-     * @param <emotionsFelt> The map of emotions felt to set.
+     * @param emotionsFelt The map of emotions felt to set.
      */
 	public void setEmotionsFelt(Map<String, EmotionFelt> emotionsFelt) {
 		this.emotionsFelt = emotionsFelt;

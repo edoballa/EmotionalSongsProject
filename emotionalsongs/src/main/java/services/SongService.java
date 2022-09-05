@@ -36,7 +36,7 @@ public class SongService {
 	/**
 	 *  SongService default constructor.
 	 *  
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public SongService() throws Exception {
 		songFactory = Song_Factory.getIstance();
@@ -46,7 +46,7 @@ public class SongService {
 	/**
 	 * This method return a map with the searched song inside.
 	 * 
-	 * @param <song> A String that represents the song to search.
+	 * @param song A String that represents the song to search.
 	 * @return A Map that contains the last song search by the user.
 	 */
 	public Map<Long, Song> searchSong(String song) {
@@ -64,7 +64,7 @@ public class SongService {
 	/**
 	 * This method return the String that contains the song to search.
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return A String.
 	 */
 	public String getStringToSearch(Scanner cmdInput) {
@@ -80,7 +80,7 @@ public class SongService {
 	/**
 	 * This method print on the console a Map of Song.
 	 * 
-	 * @param <resultMap> A Map of Song.
+	 * @param resultMap A Map of Song.
 	 */
 	public void showResult(Map<Long, Song> resultMap) {
 		for(Song s : resultMap.values()) {
@@ -91,7 +91,7 @@ public class SongService {
 	/**
 	 * 
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return
 	 */
 	public Long selectSong(Scanner cmdInput) {
@@ -166,7 +166,7 @@ public class SongService {
 	/**
 	 * This method return a song based on its id.
 	 * 
-	 * @param <id> The song's id.
+	 * @param id The song's id.
 	 * @return A Song object.
 	 */
 	public Song getSongById(Long id) {
@@ -183,7 +183,7 @@ public class SongService {
 	/**
 	 * This method print on the console all the data and details of a song, with also the emotions felt by the users and the associated details.
 	 * 
-	 * @param <songId> The song's id.
+	 * @param songId The song's id.
 	 */
 	public void printSongDetails(Long songId) {
 		Song song = new Song();

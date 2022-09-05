@@ -54,7 +54,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     /**
      * Playlist_Factory default constructor.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     private Playlist_Factory() throws Exception {
     	this.playlistMap = new HashMap<>();
@@ -75,7 +75,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
      * This method return the istance of the Playlist_Factory object.
      * 
      * @return The object Playlist_Factory.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     public static Playlist_Factory getIstance() throws Exception {
     	if(istance == null){
@@ -86,9 +86,9 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     /**
      * This method create a playlist and add to the Map.
      * 
-     * @param <playlist> The object that represents the playlist.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+     * @param playlist The object that represents the playlist.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
      */
     @Override
     public void create(Playlist playlist) throws Exception, IOException {
@@ -99,9 +99,9 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     /**
      * This method return a Playlist based on its id.
      * 
-     * @param <id> The playlist's id.
+     * @param id The playlist's id.
      * @return The object Playlist.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	@Override
 	public Playlist getById(Long id) throws Exception {
@@ -111,9 +111,9 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method replace in the map a Playlist object with the one passed as a parameter.
 	 * 
-	 * @param <playlist> The object that represents the playlist.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+	 * @param playlist The object that represents the playlist.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
 	 */
 	@Override
 	public void update(Playlist playlist) throws Exception, IOException {
@@ -124,8 +124,8 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method remove a Playlist from the map.
 	 * 
-	 * @param <playlist> The object that represents the playlist.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param playlist The object that represents the playlist.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	@Override
 	public void delete(Playlist playlist) throws Exception {
@@ -158,8 +158,8 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method returns a user's playlist based on the playlist name.
 	 * 
-	 * @param <playlistName> The name of the playlist.
-	 * @param <userId> The user's id.
+	 * @param playlistName The name of the playlist.
+	 * @param userId The user's id.
 	 * @return A Playlist object.
 	 */
 	public Playlist getByName(String playlistName, Long userId) {
@@ -177,7 +177,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method returns all playlists created by a user.
 	 * 
-	 * @param <userId> The user's id.
+	 * @param userId The user's id.
 	 * @return A map of playlists.
 	 */
 	public Map<Long, Playlist> getUserPlaylist(Long userId){
@@ -197,7 +197,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	 * If a file with that name already exists, it deletes it and creates a new one.
 	 * 
 	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	private Boolean save() throws Exception{
         prepareDataForWriting();
@@ -250,7 +250,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     /**
      * This method after the every update refresh the object Map.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	private void fillList() throws Exception{
         lines.clear();

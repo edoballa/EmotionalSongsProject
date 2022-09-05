@@ -55,7 +55,7 @@ public class Emotions {
 
     /**
      * This method return the description based on emotion.
-     * @param <id> The emotion's id.
+     * @param id The emotion's id.
      * @return String the description of the emotion.
      */
     public static String getDescriptionById(Long id) {
@@ -84,7 +84,7 @@ public class Emotions {
     
     /**
      * This method return the name of the emotion associate with a given id.
-     * @param <id> The emotion's id.
+     * @param id The emotion's id.
      * @return String the name of the emotion.
      */
     public static String getNameById(Long id) {
@@ -113,7 +113,7 @@ public class Emotions {
     
     /**
      * This method return an Emotion object that correspond to the id passed as a parameter.
-     * @param <id> The emotion's id.
+     * @param id The emotion's id.
      * @return Emotion the Emotion object with related fields.
      */
     public static Emotion getEmotionById(Long id){

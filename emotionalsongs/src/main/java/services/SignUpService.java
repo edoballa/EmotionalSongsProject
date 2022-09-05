@@ -27,7 +27,7 @@ public class SignUpService {
 	/**
 	 *  SignUpService default constructor.
 	 *  
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	private SignUpService() throws Exception {
 		this.userFactory = User_Factory.getIstance();
@@ -37,7 +37,7 @@ public class SignUpService {
      * This method return the istance of the SignUpService object.
      * 
      * @return the object SignUpService.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	public static SignUpService getIstance() throws Exception {
 		if(istance == null) {
@@ -50,7 +50,7 @@ public class SignUpService {
 	 * This method allows the user to insert data for the registration.
 	 * The appropriate checks are carried out on the various fields to be insert.
 	 * 
-	 * @param <cmdInput>User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return A User object.
 	 */
 	public User insertdata(Scanner cmdInput) {
@@ -195,9 +195,9 @@ public class SignUpService {
 	/**
 	 * This method insert a new User in the Map.
 	 * 
-	 * @param <paramUser> The User to insert.
+	 * @param paramUser The User to insert.
 	 * @return A User object.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public User insertNewUser(User paramUser) throws  Exception {
 		userFactory.create(paramUser);

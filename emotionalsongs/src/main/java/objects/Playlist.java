@@ -46,11 +46,11 @@ public class Playlist {
     /**
      * Playlist constructor with all fields as parameters.
      * 
-     * @param <playlistId> The playlist's id.
-     * @param <userId> The user's id.
-     * @param <name> The playlist's name.
-     * @param <songs> The playlist's songs.
-     * @param <isPublic> The visibility of the playlist.
+     * @param playlistId The playlist's id.
+     * @param userId The user's id.
+     * @param name The playlist's name.
+     * @param songs The playlist's songs.
+     * @param isPublic The visibility of the playlist.
      */
     public Playlist(Long playlistId, Long userId, String name, Map<Long, Song> songs, boolean isPublic) {
         this.playlistId = playlistId;
@@ -70,7 +70,7 @@ public class Playlist {
 
     /**
      * playlistId setter method.
-     * @param <playlistId> The playlistId to set.
+     * @param playlistId The playlistId to set.
      */
     public void setPlaylistId(Long playlistId) {
         this.playlistId = playlistId;
@@ -86,7 +86,7 @@ public class Playlist {
 
     /**
      * userId setter method.
-     * @param <userId> The userId to set.
+     * @param userId The userId to set.
      */
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -102,7 +102,7 @@ public class Playlist {
 
     /**
      * name setter method.
-     * @param <name> The playlist's name to set.
+     * @param name The playlist's name to set.
      */
     public void setName(String name) {
         this.name = name;
@@ -118,7 +118,7 @@ public class Playlist {
 
     /**
      * songs setter method.
-     * @param <songs> The playlist's songs to set.
+     * @param songs The playlist's songs to set.
      */
     public void setSongs(Map<Long, Song> songs) {
         this.songs = songs;
@@ -134,7 +134,7 @@ public class Playlist {
 
     /**
      * isPublic setter method.
-     * @param <isPublic> The playlist's visibility to set.
+     * @param isPublic The playlist's visibility to set.
      */
     public void setPublic(boolean isPublic) {
         this.isPublic = isPublic;

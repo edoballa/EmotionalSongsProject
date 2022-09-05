@@ -48,11 +48,11 @@ public class EmotionFelt  {
     /**
      * EmotionFelt constructor with all fields as parameters.
      * 
-     * @param <emotionId> The emotion's id.
-     * @param <note> The note about the emotion felt.
-     * @param <songId> The song's id.
-     * @param <userId> The user's id.
-     * @param <score> The score about the emotion felt.
+     * @param emotionId The emotion's id.
+     * @param note The note about the emotion felt.
+     * @param songId The song's id.
+     * @param userId The user's id.
+     * @param score The score about the emotion felt.
      */
     public EmotionFelt(Long emotionId, String note, Long songId, Long userId, int score) {
         this.emotionId = emotionId;
@@ -73,7 +73,7 @@ public class EmotionFelt  {
 
     /**
      * emotionId setter method.
-     * @param <emotionId> The emotionId to set.
+     * @param emotionId The emotionId to set.
      */
     public void setEmotionId(Long emotionId) {
         this.emotionId = emotionId;
@@ -89,7 +89,7 @@ public class EmotionFelt  {
 
     /**
      * note setter method.
-     * @param <note> The note to set.
+     * @param note The note to set.
      */
     public void setNote(String note) {
         this.note = note;
@@ -105,7 +105,7 @@ public class EmotionFelt  {
 
     /**
      * songId setter method.
-     * @param <songId> The songId to set.
+     * @param songId The songId to set.
      */
     public void setSongId(Long songId) {
         this.songId = songId;
@@ -121,7 +121,7 @@ public class EmotionFelt  {
 
     /**
      * userId setter method.
-     * @param <userId> The userId to set.
+     * @param userId The userId to set.
      */
     public void setUserId(Long userId) {
         this.userId = userId;
@@ -137,7 +137,7 @@ public class EmotionFelt  {
 
     /**
      * emotionFeltId setter method.
-     * @param <emotionFeltId> The emotionFeltId to set.
+     * @param emotionFeltId The emotionFeltId to set.
      */
     public void setEmotionFeltId(String emotionFeltId) {
         this.emotionFeltId = emotionFeltId;
@@ -153,7 +153,7 @@ public class EmotionFelt  {
 
     /**
      * score setter method.
-     * @param <score> The score to set.
+     * @param score The score to set.
      */
     public void setScore(int score) {
         this.score = score;

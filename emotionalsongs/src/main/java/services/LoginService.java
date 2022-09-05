@@ -27,7 +27,7 @@ public class LoginService {
     /**
 	 *  LoginService default constructor.
 	 *  
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
     private LoginService() throws Exception{
         this.userFactory = User_Factory.getIstance();
@@ -37,7 +37,7 @@ public class LoginService {
      * This method return the istance of the LoginService object.
      * 
      * @return the object LoginService.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     public static LoginService getIstance() throws Exception {
     	if(istance == null)
@@ -49,7 +49,7 @@ public class LoginService {
      * This method allows the user to type the username and password and create a user object with them.
      * If the user input is empty the program will continue to ask the user for credentials.
      * 
-     * @param <cmdInput> User's input from cmd.
+     * @param cmdInput User's input from cmd.
      * @return A User object create with the credentials typed by the user.
      */
     public User run(Scanner cmdInput) {
@@ -74,7 +74,7 @@ public class LoginService {
      * This method return true if the user's credentials are not empty and the user is registered.
      * If both of the above conditions are not verified, it returns false.
      * 
-     * @param <user> User object with which to attempt to login.
+     * @param user User object with which to attempt to login.
      * @return A boolean value.
      */
     public boolean loginAttempt(User user) {
@@ -99,7 +99,7 @@ public class LoginService {
     
     /**
      * 
-     * @param <paramUser> The User object.
+     * @param paramUser The User object.
      * @return A User object.
      */
     public User loadUser(User paramUser) {

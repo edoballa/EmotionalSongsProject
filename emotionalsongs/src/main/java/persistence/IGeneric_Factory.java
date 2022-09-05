@@ -13,8 +13,8 @@ import java.util.Map;
  * This interface contains the CRUD methods.
  * It also contains the method to return the entire list of objects.
  *
- * @param <T> Generic object.
- * @param <T1> Key type of the generic object.
+ * @param T Generic object.
+ * @param T1 Key type of the generic object.
  */
 public interface IGeneric_Factory<T, T1> {
     public void create(T t) throws Exception, IOException;

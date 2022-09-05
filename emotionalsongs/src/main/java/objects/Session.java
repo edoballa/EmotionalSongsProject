@@ -46,7 +46,7 @@ public class Session {
 	
 	/**
      * user setter method.
-     * @param <user> The user to set.
+     * @param user The user to set.
      */
 	public void setUser(User user) {
 		this.user = user;
@@ -73,7 +73,7 @@ public class Session {
 	
 	/**
      * previousAction setter method.
-     * @param <previousAction> The previousAction to set.
+     * @param previousAction The previousAction to set.
      */
 	public void setPreviousAction(int previousAction) {
 		this.previousAction = previousAction;
@@ -81,7 +81,7 @@ public class Session {
 
 	/**
      * currentAction setter method.
-     * @param <currentAction> The currentAction to set.
+     * @param currentAction The currentAction to set.
      */
 	public void setCurrentAction(int currentAction) {
 		this.currentAction = currentAction;

@@ -49,7 +49,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * User_Factory default constructor.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     private User_Factory() throws Exception {
         this.userMap = new HashMap<>();
@@ -69,7 +69,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
      * This method return the istance of the User_Factory object.
      * 
      * @return The object User_Factory.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     public static User_Factory getIstance() throws Exception {
         if (istance == null) {
@@ -82,9 +82,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method create an user and add to the map.
      * 
-     * @param <user> The object that represents the user.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+     * @param user The object that represents the user.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
      */
     @Override
     public void create(User user) throws Exception, IOException {
@@ -96,9 +96,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method return a User based on its id.
      * 
-     * @param <id> The user's id.
+     * @param id The user's id.
      * @return The object User.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     @Override
     public User getById(Long id) throws Exception {
@@ -112,9 +112,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method replace in the map an User object with the one passed as a parameter.
 	 * 
-	 * @param <user> The object that represents the user.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+	 * @param user The object that represents the user.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
 	 */
     @Override
     public void update(User user) throws Exception, IOException {
@@ -126,8 +126,8 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method remove an User from the map.
 	 * 
-	 * @param <user> The object that represents the user.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param user The object that represents the user.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
     @Override
     public void delete(User user) throws Exception {
@@ -162,7 +162,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method return a user based on the user's username.
      * 
-     * @param <username> The username of the user.
+     * @param username The username of the user.
      * @return A User object.
      */
     public User getByUsername(String username) {
@@ -178,7 +178,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method returns a user based on the user's email.
      * 
-     * @param <email> The user's email.
+     * @param email The user's email.
      * @return A User object.
      */
     public User getByEmail(String email) {
@@ -194,7 +194,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method checks if a user exists or doesn't exist.
      * 
-     * @param <user> The user object to check if it exists.
+     * @param user The user object to check if it exists.
      * @return True if the user exists, false if the user doesn't exists.
      */
     public boolean existUser(User user) throws Exception {
@@ -215,7 +215,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
 	 * If a file with that name already exists, it deletes it and creates a new one.
 	 * 
 	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
     private Boolean save() throws Exception {
         prepareDataForWriting();
@@ -266,7 +266,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
      * This method after the every update refresh the object Map.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     private void fillUserList() throws Exception {
         lines.clear();

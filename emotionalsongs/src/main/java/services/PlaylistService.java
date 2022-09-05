@@ -24,7 +24,7 @@ public class PlaylistService {
 	/**
 	 *  PlaylistService default constructor.
 	 *  
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public PlaylistService() throws Exception {
 		playlistFactory = Playlist_Factory.getIstance();
@@ -33,11 +33,11 @@ public class PlaylistService {
 	/**
 	 * This method creates a new empty playlist naming it with the name passed as a parameter.
 	 * 
-	 * @param <playlistName> The name of the playlist.
-	 * @param <userId> The user's id.
+	 * @param playlistName The name of the playlist.
+	 * @param userId The user's id.
 	 * @return A Playlist object.
-	 * @throws <IOException> This exception is thrown if there is any input/output error.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws IOException This exception is thrown if there is any input/output error.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public Playlist addPlaylist(String playlistName, Long userId) throws IOException, Exception {
 		Playlist playlist = new Playlist();
@@ -53,8 +53,8 @@ public class PlaylistService {
 	/**
 	 * This method delete a Playlist.
 	 * 
-	 * @param <playlist> The Playlist to delete the song.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param playlist The Playlist to delete the song.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public void deletePlaylist(Playlist playlist) throws Exception {
 		playlistFactory.delete(playlist);
@@ -63,11 +63,11 @@ public class PlaylistService {
 	/**
 	 * This method replace the name of the playlist.
 	 * 
-	 * @param <newName> The new name of the playlist.
-	 * @param <playlist> The playlist to rename.
+	 * @param newName The new name of the playlist.
+	 * @param playlist The playlist to rename.
 	 * @return A Playlist object.
-	 * @throws <IOException> This exception is thrown if there is any input/output error.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws IOException This exception is thrown if there is any input/output error.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public Playlist updatePlaylistName(String newName, Playlist playlist) throws IOException, Exception {
 		playlist.setName(newName);
@@ -79,10 +79,10 @@ public class PlaylistService {
 	/**
 	 * This method update the playlist object.
 	 * 
-	 * @param <playlist> The playlist to update.
+	 * @param playlist The playlist to update.
 	 * @return A Playlist object.
-	 * @throws <IOException> This exception is thrown if there is any input/output error.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws IOException This exception is thrown if there is any input/output error.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public Playlist updatePlaylist(Playlist playlist) throws IOException, Exception {
 		playlistFactory.update(playlist);
@@ -93,7 +93,7 @@ public class PlaylistService {
 	/**
 	 * This method allows the user to insert from cmd the playlist name.
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @return A String with the name of the playlist.
 	 */
 	public String insertPlaylistData(Scanner cmdInput) {
@@ -109,7 +109,7 @@ public class PlaylistService {
 	/**
 	 * This method return a Map with all the playlists of the user.
 	 * 
-	 * @param <userId> The user's id.
+	 * @param userId The user's id.
 	 * @return A Map of Playlist.
 	 */
 	public Map<Long, Playlist> getUserPlaylist(Long userId) {	
@@ -119,7 +119,7 @@ public class PlaylistService {
 	/**
 	 * This method print on the console the playlist of the user.
 	 * 
-	 * @param <pl> A Map of Playlist.
+	 * @param pl A Map of Playlist.
 	 */
 	public void printUserPlaylist(Map<Long, Playlist> pl) {
 		for(Playlist p : pl.values()) {
@@ -129,7 +129,7 @@ public class PlaylistService {
 	
 	/**
 	 * 
-	 * @param <cmdInput> User's input from cmd.
+	 * @param cmdInput User's input from cmd.
 	 * @param playlistMap A Map of Playlist.
 	 * @return
 	 */
@@ -204,7 +204,7 @@ public class PlaylistService {
 	/**
 	 * This method print on the console the name of the playlist with all the songs and the authors contained in it.
 	 * 
-	 * @param <p> A Playlist object.
+	 * @param p A Playlist object.
 	 */
 	public void printPlaylistDetails(Playlist p) {
 		System.out.println("------- " + p.getName().toUpperCase() + " ------------------------------------------");
@@ -217,8 +217,8 @@ public class PlaylistService {
 	/**
 	 * This method
 	 * 
-	 * @param <cmdInput> User's input from cmd.
-	 * @param <songs> A Map of Song.
+	 * @param cmdInput User's input from cmd.
+	 * @param songs A Map of Song.
 	 * @return
 	 */
 	public Long selectSongIntoPlaylist(Scanner cmdInput, Map<Long, Song> songs) {

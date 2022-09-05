@@ -54,7 +54,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     /**
      * Song_Factory default constructor.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     private Song_Factory() throws Exception {
     	this.songMap = new HashMap<>();
@@ -75,7 +75,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
      * This method return the istance of the Song_Factory object.
      * 
      * @return The object Song_Factory.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     public static Song_Factory getIstance() throws Exception {
     	if(istance == null){
@@ -86,9 +86,9 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     /**
      * This method create a song and add to the Map.
      * 
-     * @param <song> The object that represents the song.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+     * @param song The object that represents the song.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
      */
 	@Override
 	public void create(Song song) throws Exception, IOException {
@@ -100,9 +100,9 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	/**
      * This method return a Song based on its id.
      * 
-     * @param <id> The song's id.
+     * @param id The song's id.
      * @return The object Song.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	@Override
 	public Song getById(Long id) throws Exception {
@@ -114,9 +114,9 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	/**
 	 * This method replace in the map a Song object with the one passed as a parameter.
 	 * 
-	 * @param <song> The object that represents the song.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+	 * @param song The object that represents the song.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
 	 */
 	@Override
 	public void update(Song song) throws Exception, IOException {
@@ -127,8 +127,8 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	/**
 	 * This method remove a Song from the map.
 	 * 
-	 * @param <song> The object that represents the song.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param song The object that represents the song.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	@Override
 	public void delete(Song song) throws Exception {
@@ -151,7 +151,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	/**
 	 * This method allows to replace a song in the map with the one passed as a parameter.
 	 * 
-	 * @param <song> The new Song to replace the old one with.
+	 * @param song The new Song to replace the old one with.
 	 */
 	public void updateSongInList(Song song) {
 		if(songMap.containsKey(song.getSongId())) {
@@ -163,7 +163,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	 * This method return a List of Song starting from a search of a String.
 	 * Check if the String contains the title or the author or the year of a song and then return the results.
 	 * 
-	 * @param <string> The String to search.
+	 * @param string The String to search.
 	 * @return A List of Song.
 	 */
 	public List<Song> getSongByString(String string){
@@ -181,7 +181,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	
 	/**
 	 * This method return a List of Song starting from a search of a musical genre.
-	 * @param <musicalGenre> The musical genre to search.
+	 * @param musicalGenre The musical genre to search.
 	 * @return A List of Song.
 	 */
 	public List<Song> getByMusicalGenre(String musicalGenre) {
@@ -213,7 +213,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
 	 * If a file with that name already exists, it deletes it and creates a new one.
 	 * 
 	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	private Boolean save() throws Exception{
         prepareDataForWriting();
@@ -256,7 +256,7 @@ public class Song_Factory implements IGeneric_Factory<Song, Long>{
     /**
      * This method after the every update refresh the object Map.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	private void fillList() throws Exception{
         lines.clear();

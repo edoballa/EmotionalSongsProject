@@ -89,7 +89,7 @@ public class Address {
 
     /**
      * address setter method.
-     * @param <address> The address to set.
+     * @param address The address to set.
      */
     public void setAddress(String address) {
         this.address = address;
@@ -105,7 +105,7 @@ public class Address {
 
     /**
      * addressNumber setter method.
-     * @param <addressNumber> The addressNumber to set.
+     * @param addressNumber The addressNumber to set.
      */
     public void setAddressNumber(String addressNumber) {
         this.addressNumber = addressNumber;
@@ -121,7 +121,7 @@ public class Address {
 
     /**
      * cap setter method.
-     * @param <cap> The cap to set.
+     * @param cap The cap to set.
      */
     public void setCap(String cap) {
         this.cap = cap;
@@ -137,7 +137,7 @@ public class Address {
 
     /**
      * city setter method.
-     * @param <city> The city to set.
+     * @param city The city to set.
      */
     public void setCity(String city) {
         this.city = city;
@@ -153,7 +153,7 @@ public class Address {
 
     /**
      * province setter method.
-     * @param <province> The province to set.
+     * @param province The province to set.
      */
     public void setProvince(String province) {
         this.province = province;
@@ -168,7 +168,7 @@ public class Address {
     }
 
      * region setter method.
-     * @param <region> The region to set.
+     * @param region The region to set.
 
     public void setRegion(String region) {
         this.region = region;
@@ -182,7 +182,7 @@ public class Address {
     }
 
      * country setter method.
-     * @param <country> The country to set.
+     * @param country The country to set.
 
     public void setCountry(String country) {
         this.country = country;

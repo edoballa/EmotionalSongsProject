@@ -67,9 +67,9 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
     /**
      * This method add a new emotion felt by an user if it isn't present in the map.
      * 
-     * @param <emotionFelt> The object that represents the emotion felt.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     * @throws <IOException> This exception is thrown if there is any input/output error.
+     * @param emotionFelt The object that represents the emotion felt.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+     * @throws IOException This exception is thrown if there is any input/output error.
      */
 	@Override
 	public void create(EmotionFelt emotionFelt) throws Exception, IOException {
@@ -81,8 +81,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	/**
 	 * This method return the EmotionFelt object based on its id.
 	 * 
-	 * @param <id> The emotion felt's id.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param id The emotion felt's id.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	@Override
 	public EmotionFelt getById(String id) throws Exception {
@@ -92,9 +92,9 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	/**
 	 * This method replace in the map an EmotionFelt object with the one passed as a parameter.
 	 * 
-	 * @param <emotionFelt> The object that represents the emotion felt.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-	 * @throws <IOException> This exception is thrown if there is any input/output error.
+	 * @param emotionFelt The object that represents the emotion felt.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
+	 * @throws IOException This exception is thrown if there is any input/output error.
 	 */
 	@Override
 	public void update(EmotionFelt emotionFelt) throws Exception, IOException {
@@ -106,8 +106,8 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	/**
 	 * This method remove an EmotionFelt object from the map.
 	 * 
-	 * @param <emotionFelt> The object that represents the emotion felt.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @param emotionFelt The object that represents the emotion felt.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	@Override
 	public void delete(EmotionFelt emotionFelt) throws Exception {
@@ -126,7 +126,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	/**
 	 * This method return a map of all the emotions felt by a user.
 	 * 
-	 * @param <userId> The user's id.
+	 * @param userId The user's id.
 	 * @return A list of EmotionFelt.
 	 */
 	public Map<String, EmotionFelt> listAllByUser(Long userId) {
@@ -143,7 +143,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	/**
 	 * This method return a list of all the emotions felt related to a song.
 	 * 
-	 * @param <songId> The song's id.
+	 * @param songId The song's id.
 	 * @return A list of EmotionFelt.
 	 */
 	public List<EmotionFelt> listAllBySongId(Long songId) {
@@ -187,7 +187,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * This method returns a list with all the details of the emotions experienced by users while listening to a song.
 	 * The list contains the emotion felt and the relative score.
 	 * 
-	 * @param <songId> The song's id.
+	 * @param songId The song's id.
 	 * @return A list of EmotionFeltDetails.
 	 */
 	public List<EmotionFeltDetails> getEmotionAndRelativeScoreBySongId(Long songId) {
@@ -243,7 +243,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * If a file with that name already exists, it deletes it and creates a new one.
 	 * 
 	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	private Boolean save() throws Exception{
         prepareDataForWriting();
@@ -287,7 +287,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
      * This method create an EmotioFelt object by taking the fields from the String list by splitting the fields.
      * Then add the object to the map.
      * 
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
 	private void fillList() throws Exception{
         lines.clear();
