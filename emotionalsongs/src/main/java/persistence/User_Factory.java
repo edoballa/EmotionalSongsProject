@@ -31,16 +31,18 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
 	 */
     private static User_Factory istance = null;
     /**
-	 * <code>userMap</code>
+	 * <code>UserMap</code>
 	 * A map of User to store all users who are registered.
 	 */
     private Map<Long, User> userMap;
     /**
 	 * <code>lines</code>
+	 * A List of String that contains the lines of a file.
 	 */
     private List<String> lines;
     /**
 	 * <code>nextKey</code>
+	 * A Long to keep track of the next key of the map.
 	 */
     private Long nextKey = null;
 
@@ -78,7 +80,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-     * This method create an user and add to the list.
+     * This method create an user and add to the map.
      * 
      * @param <user> The object that represents the user.
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -108,7 +110,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-	 * This method replace in the list an User object with the one passed as a parameter.
+	 * This method replace in the map an User object with the one passed as a parameter.
 	 * 
 	 * @param <user> The object that represents the user.
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -122,7 +124,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-	 * This method remove an User from the list.
+	 * This method remove an User from the map.
 	 * 
 	 * @param <user> The object that represents the user.
 	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -138,7 +140,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method return a Map with all the User.
 	 * 
-	 * @return <userMap>
+	 * @return <UserMap> A Map of User.
 	 */
     @Override
     public Map<Long, User> listAll() {
@@ -148,7 +150,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method return a Long that is the next key to save on file.
 	 * 
-	 * @return <nextKey>
+	 * @return <nextKey> A Long that indicate the next key of the map.
 	 */
     public Long getNextKey() {
         while(userMap.containsKey(nextKey)) {
@@ -158,7 +160,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-     * This method returns a user based on the user's username.
+     * This method return a user based on the user's username.
      * 
      * @param <username> The username of the user.
      * @return A User object.
@@ -194,7 +196,6 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
      * 
      * @param <user> The user object to check if it exists.
      * @return True if the user exists, false if the user doesn't exists.
-     * @throws Exception 
      */
     public boolean existUser(User user) throws Exception {
     	userMap.clear(); //refresh user map to get new user
@@ -210,11 +211,12 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-     * This method 
-     * 
-     * @return
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
-     */
+	 * This method creates a new file in which it saves the users.
+	 * If a file with that name already exists, it deletes it and creates a new one.
+	 * 
+	 * @return <strong>True</strong>, if the program successfully saves the file, <strong>False</strong>, if the program throws the exception.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
     private Boolean save() throws Exception {
         prepareDataForWriting();
 
@@ -234,8 +236,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
-     * 
-     */
+	 * This method adds the users to a list of strings.
+	 * The data in the list are divided by a separator.
+	 */
     private void prepareDataForWriting() {
         lines.clear();
         String line = new String();
@@ -261,6 +264,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     }
 
     /**
+     * This method after the every update refresh the object Map.
      * 
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
      */
