@@ -223,7 +223,6 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
     private void prepareDataForWriting() {
         lines.clear();
         String line = new String();
-        String songs = "";
         
         for(Playlist playlist : playlistMap.values()) {
         	//(playlistId, userId, nome, List<canzone>, isPublic)
@@ -231,11 +230,15 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
                     + playlist.getUserId() + ";" 
                     + playlist.getName() + ";"; 
             
+            String songs = "";
             if(playlist.getSongs() != null && !playlist.getSongs().isEmpty()) {
 	            for(Song song : playlist.getSongs().values()) {
 	            	songs += song.getSongId() + ",";
 	            }
-	            //songs = songs.substring(0, songs.length() - 1);
+	            
+	            if(!songs.isBlank()) {
+	            	songs = songs.substring(0, songs.length() - 1);
+	            }
             }
             
             line += songs + ";" + playlist.isPublic();
