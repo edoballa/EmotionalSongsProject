@@ -1,3 +1,9 @@
+/**
+* This package manage the actions by calling the correct method in the correct service.
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package controller;
 
 import java.util.HashMap;
@@ -16,13 +22,37 @@ import services.PlaylistService;
 import services.SongService;
 
 public class ActionController {
+	/**
+	 * <code>cmdInput</code>
+	 * A Scanner object that store the inputs written by the prompt.
+	 */
 	private Scanner cmdInput;
-
+	/**
+	 * <code>authenticator</code>
+	 * An authenticator object.
+	 */
 	private Authenticator authenticator;
+	/**
+	 * <code>songService</code>
+	 * A songService object.
+	 */
 	private SongService songService;
+	/**
+	 * <code>emotionService</code>
+	 * A emotionService object.
+	 */
 	private EmotionService emotionService;
+	/**
+	 * <code>playlistService</code>
+	 * A playlistService object.
+	 */
 	private PlaylistService playlistService;
 	
+	/**
+	 * ActionController default constructor.
+	 * 
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public ActionController() throws Exception {
 		cmdInput = new Scanner(System.in);
 		
@@ -33,6 +63,11 @@ public class ActionController {
 		
 	}
 	
+	/**
+	 * This method allows the user to insert an action via the command line.
+	 * 
+	 * @return an Integer object holding the value of the input String.
+	 */
 	public int insertAction() {
 		String input = "";
         boolean validAction = false;
@@ -95,6 +130,12 @@ public class ActionController {
         return Integer.valueOf(input);
 	}
 	
+	/**
+	 * This method prints an array of all possible actions a user can choose from where it is.
+	 * 
+	 * @param actionId The id of the action.
+	 * @param isLoggedIn A boolean representing if the user is logged in or not.
+	 */
 	public void printActionList(int actionId, boolean isLoggedIn) {
 		int[] possibleActions = Action.possibleActions(actionId, isLoggedIn);
 		
@@ -105,6 +146,14 @@ public class ActionController {
 		}
 	}
 	
+	/**
+	 * This method checks that the action choose by the user is part of the actions that the user could choose from.
+	 * 
+	 * @param actionToCheck The action choose by the user.
+	 * @param previousAction The action previously chosen by the user.
+	 * @param isLoggedIn A boolean representing if the user is logged in or not.
+	 * @return True value, if the actionToCheck is in the array of possible action.
+	 */
 	public boolean checkInsertAction(int actionToCheck, int previusAction, boolean isLoggedIn) {
 		int[] possibleActions = Action.possibleActions(previusAction, isLoggedIn);
 		
@@ -117,6 +166,12 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * This method performs the action choose by the user by making eventual checks.
+	 * 
+	 * @param actionId The id of the action.
+	 * @param session The Session object.
+	 */
 	public void doAction(int actionId, Session session) {
 		boolean canDoNextAction = false;
 		
@@ -185,6 +240,12 @@ public class ActionController {
 		
 	}
 	
+	/**
+	 * Method for logging in a user.
+	 * 
+	 * @param session The Session object.
+	 * @return True, if the user is correctly logged in.
+	 */
 	private boolean login(Session session) {
 		try {
 			User user = authenticator.actionLogin(cmdInput);
@@ -194,7 +255,7 @@ public class ActionController {
 				session.getUser().setEmotionsFelt(emotionService.getUserEmotion(session.getUser().getUserId()));
 				System.out.println("Login effettuata correttamente!");
 				return true;
-			} else System.out.println("La login non è stata effettuata correttamente, si prega di riprovare.");
+			} else System.out.println("La login non Ã¨ stata effettuata correttamente, si prega di riprovare.");
 		} catch (Exception e) {
 			e = new Exception("Something went wrong during login");
 			e.printStackTrace();
@@ -203,12 +264,24 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method for logging out a user.
+	 * 
+	 * @param session The Session object.
+	 * @return True, if the user is correctly logged out.
+	 */
 	private boolean logout(Session session) {
 		session.setUser(authenticator.actionLogout());
 		System.out.println("Logout eseguito con successo!");
 		return true;
 	}
 	
+	/**
+	 * Method for registering a user.
+	 * 
+	 * @param session The Session object.
+	 * @return
+	 */
 	private boolean registrazione(Session session) {
 		try {
 			User user = authenticator.actionRegisterUser(cmdInput);
@@ -227,12 +300,22 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to visualize all the emotions felt of a song.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean visualizzaEmozioneBrano() {
 		Long songId = songService.selectSong(cmdInput);
 		songService.printSongDetails(songId);
 		return true;
 	}
 	
+	/**
+	 * Method to search a song.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean cercaBranoMusicale() {
 		System.out.println("------- RISULTATI RICERCA ---------------------------------------------------------------------");
 		String stringToSearch = songService.getStringToSearch(cmdInput);
@@ -246,6 +329,11 @@ public class ActionController {
 		return true;
 	}
 	
+	/**
+	 * Method to insert an emotion felt while listening to a song.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean inserisciEmozioniBrano(User user) {
 		Long songId = songService.getLastSongSelected();
 		Map<String, EmotionFelt> emotionByUserAndSong = emotionService.getSongUserEmotion(user.getUserId(), songId);
@@ -265,6 +353,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to delete an emotion felt by the user.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean deleteUserEmotion(User user) {
 		String emotionFeltCode = emotionService.selectEmotionFelt(cmdInput, user.getEmotionsFelt());
 		try {
@@ -280,6 +373,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to update an emotion felt by the user.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean updateUserEmotion(User user) {
 		String emotionFeltCode = emotionService.selectEmotionFelt(cmdInput, user.getEmotionsFelt());
 		String[] ids = emotionFeltCode.split("_");
@@ -302,6 +400,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to show all the emotion insert by a user.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean viewUserEmotion(User user) {
 		try {
 			System.out.println("------- ELENCO EMOZIONI INSERITE --------------------------------------------------------------");
@@ -321,6 +424,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to show all the playlist create by a user.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean viewUserPlaylist(User user) {
 		System.out.println("------- ELENCO PLAYLIST -----------------------------------------------------------------------");
 		user.setPlaylists(playlistService.getUserPlaylist(user.getUserId()));
@@ -333,12 +441,22 @@ public class ActionController {
 		return true;
 	}
 	
+	/**
+	 * Method to show all the details about a playlist.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean viewPlaylistDetail(Map<Long, Playlist> playlistMap) {
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, playlistMap);
 		playlistService.printPlaylistDetails(playlistMap.get(playListSelected));
 		return true;
 	}
 	
+	/**
+	 * Method to delete a playlist.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean deletePlaylist(User user) {
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, user.getPlaylists());
 		try {
@@ -354,6 +472,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to update a name of a playlist.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean updatePlaylistName(User user) {
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, user.getPlaylists());
 		String newName = playlistService.insertPlaylistData(cmdInput);
@@ -370,6 +493,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to update the songs that belongs to the playlist.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean updatePlaylistSongs(User user) {
 		Long playListSelected = playlistService.selectPlaylist(cmdInput, user.getPlaylists());
 		Playlist p = user.getPlaylists().get(playListSelected);
@@ -423,6 +551,11 @@ public class ActionController {
 		return false;
 	}
 	
+	/**
+	 * Method to create a new playlist.
+	 * 
+	 * @return True, if the operations have been carried out correctly. False, if something went wrong.
+	 */
 	private boolean registraPlaylist(User user) {
 		Playlist p = new Playlist();
 		String playlistName = playlistService.insertPlaylistData(cmdInput);
