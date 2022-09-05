@@ -62,13 +62,13 @@ public class Address {
     /**
     * Address constructor with all fields as parameters.
     * 
-    * @param <address> The user's address.
-    * @param <addressNumber> The user's number of the address.
-    * @param <cap> The cap of the user's city.
-    * @param <city> The user's city.
-    * @param <province> The user's province.
-    * @param <region> The user's province.
-    * @param <country> The user's country.
+    * @param address The user's address.
+    * @param addressNumber The user's number of the address.
+    * @param cap The cap of the user's city.
+    * @param city The user's city.
+    * @param province The user's province.
+    * @param region The user's province.
+    * @param country The user's country.
     */
     public Address(String address, String addressNumber, String cap, String city, String province) {
         this.address = address;
