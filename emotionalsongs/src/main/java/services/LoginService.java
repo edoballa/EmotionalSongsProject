@@ -10,8 +10,12 @@ import java.util.Scanner;
 
 import objects.User;
 import persistence.User_Factory;
-
-
+/**
+* <p>This class contains the method to chack the data for to do the login and to load the user.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class LoginService {
 	/**
 	 * <code>istance</code>

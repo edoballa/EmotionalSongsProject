@@ -1,8 +1,5 @@
 /**
 * This package contains the busisness logic.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package services;
 
@@ -18,7 +15,13 @@ import objects.Emotions;
 import objects.Song;
 import persistence.EmotionFelt_Factory;
 import persistence.Song_Factory;
-
+/**
+* <p>This class contains the method to get the data insert by the user, 
+* the method to manipulate the data, and the method to call the factory.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class EmotionService {
 	/**
 	 * <code>emotionFeltFactory</code>

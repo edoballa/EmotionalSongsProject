@@ -1,15 +1,17 @@
 /**
 * This package contains the busisness logic.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package services;
 
 import java.util.Scanner;
 
 import objects.User;
-
+/**
+* <p>This class contains the method to authenticate the user during login and registration.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class Authenticator {    
 	/**
 	 * <code>loginService</code>

@@ -11,7 +11,13 @@ import java.util.Scanner;
 import objects.Address;
 import objects.User;
 import persistence.User_Factory;
-
+/**
+* <p>This class contains the method to get and check the data insert by the user, 
+* to register a new user.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class SignUpService {
 	/**
 	 * <code>istance</code>

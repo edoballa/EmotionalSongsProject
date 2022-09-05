@@ -15,7 +15,13 @@ import java.util.Scanner;
 import objects.EmotionFeltDetails;
 import objects.Song;
 import persistence.Song_Factory;
-
+/**
+* <p>This class contains the method to get the data insert by the user, 
+* the method to manipulate the data, and the method to call the factory.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class SongService {
 	/**
 	 * <code>songFactory</code>
@@ -89,10 +95,10 @@ public class SongService {
 	}
 	
 	/**
-	 * 
+	 * This method get and check the data insert by user and give the id of the song to select.
 	 * 
 	 * @param cmdInput User's input from cmd.
-	 * @return
+	 * @return The id of the song to select
 	 */
 	public Long selectSong(Scanner cmdInput) {
 		boolean validValue = false;

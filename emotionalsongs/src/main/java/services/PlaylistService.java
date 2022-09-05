@@ -13,7 +13,13 @@ import java.util.Scanner;
 import objects.Playlist;
 import objects.Song;
 import persistence.Playlist_Factory;
-
+/**
+* <p>This class contains the method to get the data insert by the user, 
+* the method to manipulate the data, and the method to call the factory.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class PlaylistService {
 	/**
 	 * <code>playlistFactory</code>
@@ -128,10 +134,10 @@ public class PlaylistService {
 	}
 	
 	/**
-	 * 
+	 * This method get and check the data insert by user and give the id of the playlist to select.
 	 * @param cmdInput User's input from cmd.
 	 * @param playlistMap A Map of Playlist.
-	 * @return
+	 * @return The id of the playlist to select
 	 */
 	public Long selectPlaylist(Scanner cmdInput, Map<Long, Playlist> playlistMap) {
 		boolean validValue = false;
@@ -215,11 +221,12 @@ public class PlaylistService {
 	}
 	
 	/**
-	 * This method
+	 * This method get and check the data insert by user and give the id of 
+	 * the song into the playlist to select.
 	 * 
 	 * @param cmdInput User's input from cmd.
 	 * @param songs A Map of Song.
-	 * @return
+	 * @return The id of the song into the playlist to select
 	 */
 	public Long selectSongIntoPlaylist(Scanner cmdInput, Map<Long, Song> songs) {
 		boolean validValue = false;
