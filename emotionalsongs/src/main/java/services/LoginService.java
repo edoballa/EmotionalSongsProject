@@ -88,7 +88,13 @@ public class LoginService {
     		return false;
     	}
     	
-        return userFactory.existUser(user);
+        try {
+			return userFactory.existUser(user);
+		} catch (Exception e) {
+			e = new Exception("Something went wrong during login");
+			e.printStackTrace();
+		}
+        return false;
     }
     
     /**
