@@ -1,8 +1,5 @@
 /**
 * This package contains the classes that create and manage the various factory.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package persistence;
 
@@ -19,13 +16,18 @@ import java.util.HashMap;
 import objects.Address;
 
 import objects.User;
-
+/**
+* <p>This class write and read the file with name UtentiRegistrati.csv.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class User_Factory implements IGeneric_Factory<User, Long> {
 	/**
 	 * <code>FILEPATH</code>
 	 * A String to store the path of the file that contains the users.
 	 */
-    private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
+    private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\UtentiRegistrati.csv";
     /**
 	 * <code>istance</code>
 	 */
@@ -140,7 +142,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method return a Map with all the User.
 	 * 
-	 * @return <UserMap> A Map of User.
+	 * @return A Map of User.
 	 */
     @Override
     public Map<Long, User> listAll() {
@@ -150,7 +152,7 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
     /**
 	 * This method return a Long that is the next key to save on file.
 	 * 
-	 * @return <nextKey> A Long that indicate the next key of the map.
+	 * @return A Long that indicate the next key of the map.
 	 */
     public Long getNextKey() {
         while(userMap.containsKey(nextKey)) {

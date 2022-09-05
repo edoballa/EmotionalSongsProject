@@ -1,8 +1,5 @@
 /**
 * This package contains the classes that create and manage the various factory.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package persistence;
 
@@ -20,12 +17,19 @@ import objects.Emotions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+* <p>This class write and read the file with name Emozioni.csv.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
+
 public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String>{
 	/**
 	 * <code>FILEPATH</code>
 	 * A String to store the path of the file that contains the emotions felt by the users.
 	 */
-	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\emotionFelt_data.csv";
+	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\Emozioni.csv.";
 	/**
 	 * <code>istance</code>
 	 * A EmotionFelt_Factory object that allows to instantiate the class only once.
@@ -56,7 +60,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
      * This method return the istance of the EmotionFelt_Factory object.
      * 
      * @return the object EmotionFelt_Factory.
-     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws Exception This class indicate conditions that a reasonable application might want to catch.
      */
     public static EmotionFelt_Factory getIstance() throws Exception {
     	if(istance == null){

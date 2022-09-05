@@ -1,8 +1,5 @@
 /**
 * This package contains the classes that create and manage the various factory.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
 package persistence;
 
@@ -19,12 +16,19 @@ import objects.Song;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+* <p>This class write and read the file with name Playlist.csv.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
+
 public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * <code>FILEPATH</code>
 	 * A String to store the path of the file that contains the playlists create by the users.
 	 */
-	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\playlist_data.csv";
+	private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\Playlist.csv";
 	/**
 	 * <code>instance</code>
 	 * A Playlist_Factory object that allows to instantiate the class only once.
@@ -136,7 +140,7 @@ public class Playlist_Factory implements IGeneric_Factory<Playlist, Long>{
 	/**
 	 * This method return a Map with all the Playlist.
 	 * 
-	 * @return <playlistMap> A Map of Playlist.
+	 * @return A Map of Playlist.
 	 */
 	@Override
 	public Map<Long, Playlist> listAll() {

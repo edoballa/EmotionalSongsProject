@@ -1,20 +1,19 @@
 /**
-* This package contains the classes that create and manage the various factory.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
-*/
+ * This package contains the classes that create and manage the various factory.
+ */
 package persistence;
 
 import java.io.IOException;
 import java.util.Map;
 
 /**
- * This interface contains the CRUD methods.
+ * <p>This interface contains the CRUD methods.
  * It also contains the method to return the entire list of objects.
+ * T Generic object is the Object.
+ * T1 Generic object is Key type of the T1.<p>
  *
- * @param T Generic object.
- * @param T1 Key type of the generic object.
+ * @author Diana Cantaluppi, Matr. 744457 Sede Como.
+ * @author Edoardo Ballabio, Matr. 745115 Sede Como.
  */
 public interface IGeneric_Factory<T, T1> {
     public void create(T t) throws Exception, IOException;
