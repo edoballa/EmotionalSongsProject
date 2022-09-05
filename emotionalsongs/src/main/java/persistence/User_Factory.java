@@ -1,28 +1,56 @@
+/**
+* This package contains the classes that create and manage the various factory.
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package persistence;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import objects.Address;
 
 import objects.User;
 
 public class User_Factory implements IGeneric_Factory<User, Long> {
-
+	/**
+	 * <code>FILEPATH</code>
+	 * A String to store the path of the file that contains the users.
+	 */
     private static final String FILEPATH = System.getProperty("user.dir") + "\\data\\user_data.csv";
+    /**
+	 * <code>istance</code>
+	 */
     private static User_Factory istance = null;
-
-    private Map<Long, User> userMap;
+    /**
+	 * <code>UserList</code>
+	 * A map of User to store all users who are registered.
+	 */
+    private Map<Long, User> UserList;
+    /**
+	 * <code>lines</code>
+	 */
     private List<String> lines;
+    /**
+	 * <code>nextKey</code>
+	 */
     private Long nextKey = null;
 
+    /**
+     * User_Factory default constructor.
+     * 
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
     private User_Factory() throws Exception {
-        this.userMap = new HashMap<>();
+        this.UserList = new HashMap<>();
         this.lines = new ArrayList<>();
         
         //System.out.println(FILEPATH);
@@ -30,13 +58,19 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         fillUserList();
         
         if(nextKey == null) {
-        	nextKey = Long.valueOf(userMap.size());
-        	while(userMap.containsKey(nextKey)) {
+        	nextKey = Long.valueOf(UserList.size());
+        	while(UserList.containsKey(nextKey)) {
         		nextKey++;
         	}
         }
     }
 
+    /**
+     * This method return the istance of the User_Factory object.
+     * 
+     * @return The object User_Factory.
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
     public static User_Factory getIstance() throws Exception {
         if (istance == null) {
             return new User_Factory();
@@ -44,52 +78,84 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
             return istance;
         }
     }
-    
-    public Long getNextKey() {
-    	while(userMap.containsKey(nextKey)) {
-    		nextKey++;
-    	}
-    	return nextKey;
-	}
 
+    /**
+     * This method create an user and add to the list.
+     * 
+     * @param <user> The object that represents the user.
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws <IOException> This exception is thrown if there is any input/output error.
+     */
     @Override
     public void create(User user) throws Exception, IOException {
-        user.setUserId(getNextKey());
-        userMap.putIfAbsent(user.getUserId(), user);
+        user.setUserId(nextKey);
+        nextKey++;
+        UserList.putIfAbsent(user.getUserId(), user);
         save();
     }
 
+    /**
+     * This method return a User based on its id.
+     * 
+     * @param <id> The user's id.
+     * @return The object User.
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
     @Override
     public User getById(Long id) throws Exception {
-        if (userMap.containsKey(id)) {
-            return userMap.get(id);
+        if (UserList.containsKey(id)) {
+            return UserList.get(id);
         } else {
             return null;
         }
     }
 
+    /**
+	 * This method replace in the list an User object with the one passed as a parameter.
+	 * 
+	 * @param <user> The object that represents the user.
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     * @throws <IOException> This exception is thrown if there is any input/output error.
+	 */
     @Override
     public void update(User user) throws Exception, IOException {
-        userMap.remove(user.getUserId());
-        userMap.put(user.getUserId(), user);
+        UserList.remove(user.getUserId());
+        UserList.put(user.getUserId(), user);
         save();
     }
 
+    /**
+	 * This method remove an User from the list.
+	 * 
+	 * @param <user> The object that represents the user.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
     @Override
     public void delete(User user) throws Exception {
-        if (userMap.containsKey(user.getUserId())) {
-            userMap.remove(user.getUserId());
+        if (UserList.containsKey(user.getUserId())) {
+            UserList.remove(user.getUserId());
             save();
         }
     }
 
+    /**
+	 * This method return a Map with all the User.
+	 * 
+	 * @return <UserList>
+	 */
     @Override
     public Map<Long, User> listAll() {
-        return userMap;
+        return UserList;
     }
 
+    /**
+     * This method returns a user based on the user's username.
+     * 
+     * @param <username> The username of the user.
+     * @return A User object.
+     */
     public User getByUsername(String username) {
-        for (User user : userMap.values()) {
+        for (User user : UserList.values()) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
@@ -98,8 +164,14 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         return null;
     }
 
+    /**
+     * This method returns a user based on the user's email.
+     * 
+     * @param <email> The user's email.
+     * @return A User object.
+     */
     public User getByEmail(String email) {
-        for (User user : userMap.values()) {
+        for (User user : UserList.values()) {
             if (user.getEmail().equals(email)) {
                 return user;
             }
@@ -108,8 +180,14 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         return null;
     }
 
+    /**
+     * This method checks if a user exists or doesn't exist.
+     * 
+     * @param <user> The user object to check if it exists.
+     * @return True if the user exists, false if the user doesn't exists.
+     */
     public boolean existUser(User user) {
-        for (User u : userMap.values()) {
+        for (User u : UserList.values()) {
             if (u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
                 return true;
             }
@@ -118,6 +196,12 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         return false;
     }
 
+    /**
+     * This method 
+     * 
+     * @return
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
     private Boolean save() throws Exception {
         prepareDataForWriting();
 
@@ -130,17 +214,20 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
             return false;
         }
 
-        userMap.clear();
+        UserList.clear();
         fillUserList();
 
         return true;
     }
 
+    /**
+     * 
+     */
     private void prepareDataForWriting() {
         lines.clear();
         String line = new String();
 
-        for (User user : userMap.values()) {
+        for (User user : UserList.values()) {
 
             line = user.getUserId() + ";"
                     + user.getUsername() + ";"
@@ -160,6 +247,10 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
         }
     }
 
+    /**
+     * 
+     * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+     */
     private void fillUserList() throws Exception {
         lines.clear();
 
@@ -169,8 +260,10 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
             ex.printStackTrace();
         }
 
-       for (String line : lines) {
-        	User user = new User(); 
+        User user;
+
+        for (String line : lines) {
+            user = new User(); //do this for cache problems
 
             String[] strs = line.split(";");
             if (strs.length > 0) {
@@ -194,8 +287,9 @@ public class User_Factory implements IGeneric_Factory<User, Long> {
                     user.getAddress().setCountry(strs[12]);
                 }*/
                 
-                userMap.putIfAbsent(user.getUserId(), user);
+                UserList.putIfAbsent(user.getUserId(), user);
             }
+            user = null; //do this for cache problems
         }
     }
 
