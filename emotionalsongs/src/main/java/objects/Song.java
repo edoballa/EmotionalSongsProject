@@ -1,14 +1,17 @@
 /**
-* This package contains the classes that instantiate the objects.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+* <p>This package contains the classes that instantiate the objects.</p>
 */
 package objects;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* <p>This class define what is a song</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class Song{
     /**
      * <code>songId</code>
@@ -151,7 +154,7 @@ public class Song{
 
     /**
      * This method return a Map of Emotion.
-     * @return Map<Emotion, Double> the List of Emotions.
+     * @return The List of Emotions.
      */
     public List<EmotionFeltDetails> getEmotionList() {
         return emotionList;

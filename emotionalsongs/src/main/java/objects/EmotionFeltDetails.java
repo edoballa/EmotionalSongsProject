@@ -1,14 +1,17 @@
 /**
-* This package contains the classes that instantiate the objects.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+* <p>This package contains the classes that instantiate the objects.</p>
 */
 package objects;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* <p>This class define what is an emotion felt details</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class EmotionFeltDetails {
 	/**
 	 * <code>emotion</code>
@@ -88,7 +91,7 @@ public class EmotionFeltDetails {
 	
 	/**
      * This method return a List of String that contains the comments relating to an emotion felt while listening to a song.
-     * @return List<String> a List of comments.
+     * @return a List of comments.
      */
 	public List<String> getComments() {
 		return comments;

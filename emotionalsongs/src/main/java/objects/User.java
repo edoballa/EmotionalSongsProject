@@ -1,14 +1,17 @@
 /**
-* This package contains the classes that instantiate the objects.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+* <p>This package contains the classes that instantiate the objects.</p>
 */
 package objects;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* <p>This class define what is an user</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class User{
 	/**
 	 * <code>userId</code>
@@ -240,7 +243,7 @@ public class User{
     
     /**
      * This method return a Map of Playlist.
-     * @return Map<Playlist> the Map of playlists create by a user.
+     * @return The Map of playlists create by a user.
      */
     public Map<Long, Playlist> getPlaylists() {
 		return playlists;
@@ -256,7 +259,7 @@ public class User{
 
 	/**
      * This method return a Map of EmotionsFelt.
-     * @return Map<Playlist> the Map of emotions felt.
+     * @return The Map of emotions felt.
      */
 	public Map<String, EmotionFelt> getEmotionsFelt() {
 		return emotionsFelt;

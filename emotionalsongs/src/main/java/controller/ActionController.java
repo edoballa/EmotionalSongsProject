@@ -1,8 +1,5 @@
 /**
-* This package manage the actions by calling the correct method in the correct service.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+* <p>This package manage the actions calling the correct method in the correct service.</p>
 */
 package controller;
 
@@ -21,6 +18,12 @@ import services.EmotionService;
 import services.PlaylistService;
 import services.SongService;
 
+/**
+* <p>This class manage the actions calling the correct method in the correct service.</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class ActionController {
 	/**
 	 * <code>cmdInput</code>
@@ -51,7 +54,7 @@ public class ActionController {
 	/**
 	 * ActionController default constructor.
 	 * 
-	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 * @throws Exception This class indicate conditions that a reasonable application might want to catch.
 	 */
 	public ActionController() throws Exception {
 		cmdInput = new Scanner(System.in);
@@ -280,7 +283,7 @@ public class ActionController {
 	 * Method for registering a user.
 	 * 
 	 * @param session The Session object.
-	 * @return
+	 * @return True, if the registration happens with no error.
 	 */
 	private boolean registrazione(Session session) {
 		try {

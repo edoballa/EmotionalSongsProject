@@ -1,11 +1,14 @@
 /**
-* This package contains the classes that instantiate the objects.
+* <p>This package contains the classes that instantiate the objects.</p>
+*/
+package objects;
+
+/**
+* <p>This class define what is an emotion felt</p>
 *
 * @author Diana Cantaluppi, Matr. 744457 Sede Como.
 * @author Edoardo Ballabio, Matr. 745115 Sede Como.
 */
-package objects;
-
 public class EmotionFelt  {
 	/**
 	 * <code>emotionFeltId</code>

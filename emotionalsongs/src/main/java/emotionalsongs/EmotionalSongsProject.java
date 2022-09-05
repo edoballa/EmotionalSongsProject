@@ -4,6 +4,12 @@ import controller.ActionController;
 import objects.Action;
 import objects.Session;
 
+/**
+* <p>This class contains the main</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class EmotionalSongsProject {
 	public static void main(String[] args) throws Exception{
 		int action = Action.START_PROGRAM;

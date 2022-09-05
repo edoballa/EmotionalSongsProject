@@ -1,14 +1,17 @@
 /**
-* This package contains the classes that instantiate the objects.
-*
-* @author Diana Cantaluppi, Matr. 744457 Sede Como.
-* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+* <p>This package contains the classes that instantiate the objects.</p>
 */
 package objects;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* <p>This class define what is a palylist</p>
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 public class Playlist {
 	/**
 	 * <code>playlistId</code>
@@ -110,7 +113,7 @@ public class Playlist {
 
     /**
      * This method return a Map of Song.
-     * @return Map<Long, Song> the map of Songs.
+     * @return The map of Songs.
      */
     public Map<Long, Song> getSongs() {
         return songs;
