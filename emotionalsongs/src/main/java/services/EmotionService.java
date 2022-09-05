@@ -1,3 +1,9 @@
+/**
+* This package contains the classes that implements the actions calling the factory. 
+*
+* @author Diana Cantaluppi, Matr. 744457 Sede Como.
+* @author Edoardo Ballabio, Matr. 745115 Sede Como.
+*/
 package services;
 
 import java.io.IOException;
@@ -14,14 +20,34 @@ import persistence.EmotionFelt_Factory;
 import persistence.Song_Factory;
 
 public class EmotionService {
+	/**
+	 * <code>emotionFeltFactory</code>
+	 * A EmotionFelt_Factory object use to invoke the methods of that class.
+	 */
 	private EmotionFelt_Factory emotionFeltFactory;
+	/**
+	 * <code>songFactory</code>
+	 * A Song_Factory object use to invoke the methods of that class.
+	 */
 	private Song_Factory songFactory;
 	
+	/**
+	 *  EmotionService default constructor.
+	 *  
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public EmotionService() throws Exception {
 		this.emotionFeltFactory = EmotionFelt_Factory.getIstance();
 		this.songFactory = Song_Factory.getIstance();
 	}
 	
+	/**
+	 * This method insert a new emotion felt by the user in the list with the other.
+	 * 
+	 * @param <emotionFelt> The emotion felt by a user to insert.
+	 * @throws <IOException> This exception is thrown if there is any input/output error.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public void insertNewEmotion(EmotionFelt emotionFelt) throws IOException, Exception {
 		emotionFelt.calculateEmotionFeltId();
 		emotionFeltFactory.create(emotionFelt);
@@ -31,6 +57,16 @@ public class EmotionService {
 		songFactory.updateSongInList(song);
 	}
 	
+	/**
+	 * This method allows you to insert a new emotion felt by the user with the associated data.
+	 * If the emotion felt by the user already exists, it is possible to update the associated data.
+	 * 
+	 * @param <cmdInput> User's input from cmd.
+	 * @param <newEmotion> A Boolean to check if the emotion is new or already exists.
+	 * @param <songId> The song's id
+	 * @param <emotionByUserAndSong> A Map of EmotionFelt.
+	 * @return A EmotionFelt object.
+	 */
 	public EmotionFelt insertEmotionData(Scanner cmdInput, boolean newEmotion, Long songId, Map<String, EmotionFelt> emotionByUserAndSong) {
 		EmotionFelt ef = new EmotionFelt();
 		
@@ -57,7 +93,7 @@ public class EmotionService {
 						}
 						
 						if(!existEmotionYet) {
-							System.out.println("… gi‡ presente un'emozione uguale per questa canzone, inserirne una diversa.");
+							System.out.println("√â gi√† presente un'emozione uguale per questa canzone, inserirne una diversa.");
 							continue;
 						} 
 					}
@@ -96,6 +132,12 @@ public class EmotionService {
 		return ef;
 	}
 	
+	/**
+	 * This method prints the emotions felt by users associated with a song.
+	 * 
+	 * @param <efMap> A Map of EmotionFelt.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public void printEmotionList(Map<String, EmotionFelt> efMap) throws Exception {
 		for(EmotionFelt ef : efMap.values()) {
 			Song song = songFactory.getById(ef.getSongId());
@@ -107,6 +149,13 @@ public class EmotionService {
 		}
 	}
 	
+	/**
+	 * This method search, in an EmotionFelt map, the emotion corresponding to the emotionFeltCode insert by the user.
+	 * 
+	 * @param <cmdInput> User's input from cmd.
+	 * @param <emotionFeltMap> A Map of EmotionFelt.
+	 * @return A String that contain the code of the emotion felt.
+	 */
 	public String selectEmotionFelt(Scanner cmdInput, Map<String, EmotionFelt> emotionFeltMap) {
 		String emotionFeltCode = "";
         boolean validCode = false;
@@ -128,15 +177,34 @@ public class EmotionService {
         return emotionFeltCode;
 	}
 	
+	/**
+	 * This method delete an EmotionFelt from the map based on its id.
+	 * 
+	 * @param <emotionFeltCode> The id of the emotion felt.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public void deleteEmotionFelt(String emotionFeltCode) throws Exception {
 		EmotionFelt ef = emotionFeltFactory.getById(emotionFeltCode);
 		emotionFeltFactory.delete(ef);
 	}
 	
+	/**
+	 * This method return a Map with all the emotions felt by the user.
+	 * 
+	 * @param <userId> The user's id.
+	 * @return A map of EmotionFelt.
+	 */
 	public Map<String, EmotionFelt> getUserEmotion(Long userId){
 		return emotionFeltFactory.listAllByUser(userId);
 	}
 	
+	/**
+	 * This method returns a map containing the emotions felt based on the user and song id.
+	 * 
+	 * @param <userId> The user's id.
+	 * @param <songId> The song's id.
+	 * @return A Map of EmotionFelt.
+	 */
 	public Map<String, EmotionFelt> getSongUserEmotion(Long userId, Long songId){
 		Map<String, EmotionFelt> emotionByUserAndSong = new HashMap<String, EmotionFelt>();
 		for(EmotionFelt ef : emotionFeltFactory.listAllByUser(userId).values()) {
@@ -148,6 +216,12 @@ public class EmotionService {
 		return emotionByUserAndSong;
 	}
 	
+	/**
+	 * This method update an emotion felt by the user in the map.
+	 * 
+	 * @param <ef> The emotion felt by the user to update.
+	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
+	 */
 	public void updateEmotionFelt(EmotionFelt ef) throws Exception {
 		emotionFeltFactory.update(ef);
 	}
