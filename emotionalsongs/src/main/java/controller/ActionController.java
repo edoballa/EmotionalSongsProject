@@ -157,8 +157,8 @@ public class ActionController {
 	 * @param isLoggedIn A boolean representing if the user is logged in or not.
 	 * @return True value, if the actionToCheck is in the array of possible action.
 	 */
-	public boolean checkInsertAction(int actionToCheck, int previusAction, boolean isLoggedIn) {
-		int[] possibleActions = Action.possibleActions(previusAction, isLoggedIn);
+	public boolean checkInsertAction(int actionToCheck, int previousAction, boolean isLoggedIn) {
+		int[] possibleActions = Action.possibleActions(previousAction, isLoggedIn);
 		
 		for(int i = 0; i < possibleActions.length; i++) {
 			if(possibleActions[i] == actionToCheck) {

@@ -10,7 +10,7 @@ import java.util.Map;
  * <p>This interface contains the CRUD methods.
  * It also contains the method to return the entire list of objects.
  * T Generic object is the Object.
- * T1 Generic object is Key type of the T1.<p>
+ * T1 Generic object is Key type of the T1.</p>
  *
  * @author Diana Cantaluppi, Matr. 744457 Sede Como.
  * @author Edoardo Ballabio, Matr. 745115 Sede Como.
