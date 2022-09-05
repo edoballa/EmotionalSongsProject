@@ -65,7 +65,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
     }
 
     /**
-     * This method add a new emotion felt by an user if it isn't present in the list.
+     * This method add a new emotion felt by an user if it isn't present in the map.
      * 
      * @param <emotionFelt> The object that represents the emotion felt.
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -90,7 +90,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 
 	/**
-	 * This method replace in the list an EmotionFelt object with the one passed as a parameter.
+	 * This method replace in the map an EmotionFelt object with the one passed as a parameter.
 	 * 
 	 * @param <emotionFelt> The object that represents the emotion felt.
 	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -104,7 +104,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 
 	/**
-	 * This method remove an EmotionFelt object from the list.
+	 * This method remove an EmotionFelt object from the map.
 	 * 
 	 * @param <emotionFelt> The object that represents the emotion felt.
 	 * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
@@ -124,10 +124,10 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	}
 	
 	/**
-	 * This method return a list of all the emotions felt by a user.
+	 * This method return a map of all the emotions felt by a user.
 	 * 
 	 * @param <userId> The user's id.
-	 * @return A map of EmotionFelt.
+	 * @return A list of EmotionFelt.
 	 */
 	public Map<String, EmotionFelt> listAllByUser(Long userId) {
 		Map<String, EmotionFelt> userEmotions = new HashMap<>();
@@ -267,7 +267,7 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
 	 * This method adds the emotions felt with the related data to a list of strings.
 	 * The data in the list are divided by a separator.
 	 */
-    private void prepareDataForWriting() {
+	private void prepareDataForWriting() {
         lines.clear();
         String line = new String();
         
@@ -284,10 +284,12 @@ public class EmotionFelt_Factory implements IGeneric_Factory<EmotionFelt, String
     }
     
     /**
+     * This method create an EmotioFelt object by taking the fields from the String list by splitting the fields.
+     * Then add the object to the map.
      * 
      * @throws <Exception> This class indicate conditions that a reasonable application might want to catch.
      */
-    private void fillList() throws Exception{
+	private void fillList() throws Exception{
         lines.clear();
         
         try {
